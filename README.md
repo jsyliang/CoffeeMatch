@@ -19,6 +19,7 @@ questions of interest:
 the goal for the project output (what are you going to produce?): 
 - A tool that will first give users a list of questions to build a profile of their coffee preference.
 - A recommendation is then given for a bag of coffee produced by Washington roasters that best matches their preferences.
+- May be possible to incorporate prior user reviews of bean/brand and/or roastery location and/or mission, for user's tasting and/or site visit.
 
 the data sources you will use:
 

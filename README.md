@@ -24,3 +24,9 @@ the data sources you will use:
 
 1. Washington coffee analysis csv (uploaded to the repo)
 2. https://developer.kroger.com/api-products/api/product-api-public
+
+potential additional data sources
+
+1. https://www.tripadvisor.com/developers
+2. https://docs.developer.yelp.com/docs/getting-started
+3. https://www.mealme.ai/

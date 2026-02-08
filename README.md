@@ -23,3 +23,4 @@ the goal for the project output (what are you going to produce?):
 the data sources you will use:
 
 1. Washington coffee analysis csv (uploaded to the repo)
+2. https://developer.kroger.com/api-products/api/product-api-public

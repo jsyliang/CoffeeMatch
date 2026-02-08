@@ -21,3 +21,5 @@ the goal for the project output (what are you going to produce?):
 - Then a recommendation is made of a local roaster that matches their preference and a local Kroger's that sell the coffee. 
 
 the data sources you will use:
+
+1. Washington coffee analysis csv (uploaded to the repo)

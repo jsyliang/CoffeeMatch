@@ -12,13 +12,13 @@ the project type:
 Tool
 
 questions of interest: 
-- What is someone's coffee profile? Their preferred roast, bean type, etc.
-- Which local roasters match their coffee roast preference?
-- Are these coffees available in Krogers and the user can go get it?
+- What is someone's coffee profile? Their preferred roast, grind type, etc.
+- What product from Washinton roasters best matches the user's preferences?
+- Are these coffees easy to purchase from a local QFC?
   
 the goal for the project output (what are you going to produce?): 
 - A tool that will first give users a list of questions to build a profile of their coffee preference.
-- Then a recommendation is made of a local roaster that matches their preference and a local Kroger's that sell the coffee. 
+- A recommendation is then given for a bag of coffee produced by Washington roasters that best matches their preferences.
 
 the data sources you will use:
 

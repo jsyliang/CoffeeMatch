@@ -13,7 +13,7 @@ Tool
 
 questions of interest: 
 - What is someone's coffee profile? Their preferred roast, grind type, etc.
-- What product from Washinton roasters best matches the user's preferences?
+- What product from Washington roasters best matches the user's preferences?
 - Are these coffees easy to purchase from a local QFC?
   
 the goal for the project output (what are you going to produce?): 

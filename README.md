@@ -3,7 +3,7 @@ A coffee profile app that connects people's preference to local roasters
 
 
 the project title: 
-Coffe Match
+Coffee Match
 
 the names of all project group members: 
 Alvin Alias, Julia Glaser, Johnny Liang, Jeremy Wise

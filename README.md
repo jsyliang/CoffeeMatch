@@ -6,7 +6,7 @@ the project title:
 Coffee Match
 
 the names of all project group members: 
-Alvin Alias, Julia Glaser, Johnny Liang, Jeremy Wise
+Alvin Alias, Julia Glasser, Johnny Liang, Jeremy Wise
 
 the project type: 
 Tool
@@ -23,7 +23,7 @@ the goal for the project output (what are you going to produce?):
 
 the data sources you will use:
 
-1. Washington coffee analysis csv (uploaded to the repo)
+1. Washington coffee roasters/bean producers file, scraped with potential manual additions 
 2. https://developer.kroger.com/api-products/api/product-api-public
 
 potential additional data sources

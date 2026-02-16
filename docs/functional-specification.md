@@ -17,7 +17,7 @@ Consumers who want to purchase **local Washington coffee** face a fragmented and
 - Whole bean vs ground availability
 - Popularity or review ratings
 
-Currently, there is no centralized, structured system that:
+Although there does exist qualitative local coffee information aggregators such as [Seattle Coffee Scene](https://seattlecoffeescene.com/), currently, there is no structured system that:
 
 - Aggregates Washington roaster offerings
 - Connects user taste preferences to specific blends
@@ -148,10 +148,15 @@ This dataset supports potential natural language processing (NLP) enhancements s
 - Sentiment validation
 - Flavor profile clustering
 
+### 3.3 Potential Expanded Datasets 
+
+Data sources such as surveys and APIs (governmental websites or grocers) are being considered.
+
 ---
 
 
 ## 4. Use Cases
+(For distinction between implicit and explicit system responses, refer to use-cases.md)
 
 ---
 

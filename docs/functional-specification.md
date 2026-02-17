@@ -1,7 +1,6 @@
 # Functional Specification  
 ## Coffee Match – Washington Local Coffee Recommendation System
 
----
 
 ## 1. Background
 
@@ -41,7 +40,6 @@ The Coffee Match system will:
 
 The system aims to simplify the local coffee discovery process using structured data and transparent ranking logic.
 
----
 
 ## 2. User Profile
 
@@ -61,7 +59,6 @@ The system aims to simplify the local coffee discovery process using structured 
 - Comfortable using dropdown filters and buttons
 - No programming knowledge required
 
----
 
 ### Secondary Users – Project Maintainers
 
@@ -78,7 +75,6 @@ The system aims to simplify the local coffee discovery process using structured 
 - Can manage structured tabular data
 - Can run the application locally and update data sources when needed
 
----
 
 ## 3. Data Sources
 
@@ -126,7 +122,6 @@ Structure: One row per coffee product (bag).
 
 Internal identifiers such as `product_id` will not be exposed to end users.
 
----
 
 ### 3.2 Review Text Dataset  
 (Source: Scraped review pages from Bottomless)
@@ -152,13 +147,10 @@ This dataset supports potential natural language processing (NLP) enhancements s
 
 Data sources such as surveys and APIs (governmental websites or grocers) are being considered.
 
----
-
 
 ## 4. Use Cases
 (For distinction between implicit and explicit system responses, refer to use-cases.md)
 
----
 
 ## Use Case 1A – Single Coffee Match
 
@@ -187,7 +179,6 @@ User wants to receive one best coffee recommendation based on their preferences.
 - If zero coffees remain → notify user and allow relaxing constraints.
 - User may step backward at any time.
 
----
 
 ## Use Case 1B – Multiple Coffee Matches
 
@@ -212,8 +203,6 @@ User wants several recommended coffees instead of a single match.
 - If many coffees remain → rank and display top N.
 - If none remain → suggest relaxing filters.
 - Filtering continues until user stops or attributes are exhausted.
-
----
 
 ## Use Case 2A – Add New Coffee (Admin)
 
@@ -244,27 +233,6 @@ Administrator adds a new coffee entry to the system.
 - Prevent duplicate entries.
 - Display confirmation summary.
 
----
-
-## Use Case 2B – Match History Review (Admin)
-
-### Objective
-
-Administrator reviews anonymized matching history.
-
-### Interaction Steps
-
-1. Admin selects "View Match History."
-2. System retrieves stored interaction logs.
-3. Admin views summary dashboard or downloads report.
-
-### Notes
-
-- Logs must remain anonymous.
-- No personally identifiable information is stored.
-- Used for aggregate trend analysis only.
-
----
 
 ## 5. System Constraints
 
@@ -273,8 +241,6 @@ Administrator reviews anonymized matching history.
 - System must gracefully handle empty result sets.
 - User must be able to step backward.
 - Seasonal products may optionally be excluded.
-
----
 
 ## 6. Success Criteria
 

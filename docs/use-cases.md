@@ -114,8 +114,4 @@ System Explicit: loads the information and perhaps shows a “receipt” summary
 
 ##---
 
-## User #2B Admin reviews historical sequence of choices made for exclusively matches (this assumes that such information doesn’t uniquely identify the users and it’s meaningful information)
 
-Admin-user: Seeks access to file of accumulated single matches and these respective user’s adventure path to review.
-
-System Implicit: System retains these past occurrences for audit and review.  

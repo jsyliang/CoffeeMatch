@@ -1,38 +1,71 @@
-# CoffeeMatch
-A coffee profile app that connects people's preference to local roasters
+# Coffee Match
 
+A coffee profile tool that connects people’s preferences to local Washington roasters.
 
-the project title: 
+---
+
+## Project Information
+
+**Project Title:**  
 Coffee Match
 
-the names of all project group members: 
-Alvin Alias, Julia Glasser, Johnny Liang, Jeremy Wise
-
-the project type: 
+**Project Type:**  
 Tool
 
-questions of interest: 
-- What is someone's coffee profile? Their preferred roast, grind type, etc.
-- What product from Washington roasters best matches the user's preferences?
+**Project Group Members:**  
+- Julia Glasser  
+- Johnny Liang  
+- Jeremy Wise  
+- Alvin Alias  
+
+---
+
+## Questions of Interest
+
+- What is someone's coffee profile (preferred roast, grind type, etc.)?
+- What product from Washington roasters best matches a user’s preferences?
 - Are these coffees easy to purchase from a local QFC?
-  
-the goal for the project output (what are you going to produce?): 
-- A tool that will first give users a list of questions to build a profile of their coffee preference.
-- A recommendation is then given for a bag of coffee produced by Washington roasters that best matches their preferences.
-- May be possible to incorporate prior user reviews of bean/brand and/or roastery location and/or mission, for user's tasting and/or site visit.
 
-the data sources you will use:
+---
 
-<<<<<<< HEAD
-1. Washington coffee analysis csv (uploaded to the repo)
-2. https://developer.kroger.com/api-products/api/product-api-public
-=======
-1. Washington coffee roasters/bean producers file, scraped with potential manual additions 
-2. https://developer.kroger.com/api-products/api/product-api-public
+## Project Goals
 
-potential additional data sources
+The project will produce:
 
-1. https://www.tripadvisor.com/developers
-2. https://docs.developer.yelp.com/docs/getting-started
-3. https://www.mealme.ai/
->>>>>>> 1af08a96eb9664553a099f01c9fbbb7297a729fd
+- A tool that asks users a series of questions to build a profile of their coffee preferences.
+- A recommendation for a bag of coffee produced by Washington roasters that best matches those preferences.
+- Potential integration of:
+  - Prior user reviews of beans/brands
+  - Roastery location information
+  - Roastery mission statements
+  - Information to support tasting or site visits
+
+---
+
+## Data Sources
+
+### Primary Data Sources
+
+1. Washington coffee roasters / bean producers dataset  
+   (Scraped and cleaned, with potential manual additions)
+
+2. Washington coffee analysis CSV  
+   (Uploaded to this repository)
+
+3. Kroger Product API  
+   https://developer.kroger.com/api-products/api/product-api-public
+
+---
+
+### Potential Additional Data Sources
+
+- TripAdvisor Developer API  
+  https://www.tripadvisor.com/developers
+
+- Yelp Developer API  
+  https://docs.developer.yelp.com/docs/getting-started
+
+- MealMe API  
+  https://www.mealme.ai/
+
+---

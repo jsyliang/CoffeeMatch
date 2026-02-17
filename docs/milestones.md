@@ -1,5 +1,6 @@
 Milestones
 
+
 Core:
     1. Finalize data selection
 
@@ -27,6 +28,4 @@ Stretch goals:
     3. Scrutinize comapny registration to make sure they are truly registered in the state of Washington. 
 
     4. User more complex statistical analysis to give a percentage match of a particular coffee, so user know how close they are to match the coffee bean. 
-
-    
 

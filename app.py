@@ -169,7 +169,7 @@ else:
     prefs["max_price"] = None
 
 prefs["tags"] = st.multiselect(
-    "Flavor tags (optional)",
+    "Tags (optional)",
     sorted({tag for tags in products["tags_clean"] for tag in tags})
 )
 

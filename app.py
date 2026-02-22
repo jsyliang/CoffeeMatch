@@ -205,4 +205,4 @@ if st.button("Find Coffee"):
             st.divider()
 
 st.markdown("---")
-st.caption("Coffee Match — DATA 515 MVP Demo")
+st.caption("Coffee Match — DATA 515 Demo")

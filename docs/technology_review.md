@@ -20,8 +20,7 @@ This creates a clear technology requirement:
 The chosen framework must:
 
 1. Support structured user input and dynamic output updates  
-2. Allow explainable recommendation rendering  
-3. Be compatible with Python 3.12 and pandas-based pipelines  
+2. Allow explainable recommendation rendering
 4. Be computationally efficient for small-to-medium datasets  
 5. Support future expansion (admin workflows, additional views)  
 6. Be maintainable by a data science–focused development team  
@@ -190,26 +189,6 @@ Appending directly to CSV files may create corruption risks in concurrent enviro
 - Use downloadable submission rows for demonstration  
 - Store user additions in a separate file (`user_added.csv`)  
 - Migrate to SQLite if multi-user writes become necessary  
-
----
-
-## 7. Demo Plan
-
-During the First Project Demo:
-
-1. Run the Streamlit CoffeeMatch application.  
-2. Demonstrate:
-   - Preference quiz  
-   - Ranked recommendations  
-   - Explanation breakdown  
-   - Adjustable scoring weights  
-3. Show admin submission workflow.  
-4. Briefly describe the reproducible data pipeline and how updated scraped data flows into the application.  
-
-Artifacts:
-
-- `docs/technology_review/technology_review.md`
-- `docs/technology_review/demo/coffee_match_demo.mp4`
 
 ---
 

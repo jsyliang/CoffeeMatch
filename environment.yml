@@ -9,4 +9,10 @@ dependencies:
   - pandas
   - openpyxl
   - numpy
+  - dash
+  - flask
+  - werkzeug
+  - pip
+  - pip:
+      - dash-bootstrap-components
 

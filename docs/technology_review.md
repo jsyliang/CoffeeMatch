@@ -192,7 +192,7 @@ Appending directly to CSV files may create corruption risks in concurrent enviro
 
 ---
 
-## 8. Conclusion
+## 7. Conclusion
 
 Both Streamlit and Dash are mature, capable frameworks for building data-centric web applications. After hands-on evaluation, Streamlit was selected as the final framework due to its simplicity, strong alignment with data science workflows, and superior development velocity for this product’s scope.
 

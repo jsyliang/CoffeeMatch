@@ -106,6 +106,9 @@ Dash uses a reactive callback architecture. UI components are defined explicitly
 
 ## 3. Side-by-Side Comparison
 
+We belive both Streamlit and Dash could address our project needs with their function and compatibility. A larger endeavor might demand Dash for computational efficiency though, and both seem to have examples available.
+
+
 | Criterion | Streamlit | Dash |
 |------------|-----------|------|
 | Ease of MVP build | Excellent | Moderate |
@@ -120,9 +123,41 @@ Dash uses a reactive callback architecture. UI components are defined explicitly
 | Customization flexibility | Moderate | High |
 | High-traffic optimization | Moderate | Strong |
 
+### Open Issues on Github
+
+### Qualitativly (Open Issues)
+
+** Streamlit **
+Due to rerun of the script upon interaction procedures like st.cache_resource and st.cache_data seem to provide developers a loophole looking for snappy apps. Occasionally, such workarounds might have unforeseen consequences other places such as “First streamlit widget vanish when used above a @st.fragment that calls a @st.cache_resource function.”.
+(https://github.com/streamlit/streamlit/issues/13634)
+
+** Dash **
+Some recent bugs listed for dash include quirks with interacting visual effects such as “Dropdown reopens when switching back from another window” “Slider - Marker overlapped on the slider.” It would be important to keep a look out for these things, but there often seems to be work arounds or fixes.
+(https://github.com/plotly/dash/issues/1934)
+(https://github.com/plotly/dash/issues/3474)
+
+### Quantiatively (Open Issues)
+
+From the quantitative standpoint, open issues on GitHub suggest the two packages are relatively evenly matched in some of the ways we might use them, with the number of issues marked as “bugs” over the past year about the same for the keywords: buttons, slider, and filter. When we search on the word “pandas,” we can see that although it appears that Streamlit more frequently encounters pandas in issues 729 vs. Dash’s 198, the proportion outstanding for Streamlit is 15% vs. Dash’s 29%. This might suggest that Steamlit is more tested in this important arena. This actually seems consistent with UI Bakery’s comment’s as they highlight “[Streamlit] offers pre-built components and integrations with popular Python libraries like Pandas, NumPy, and Matplotlib” and no comparable plug for dash. But it also could be a result of more frequent entry level users.
+
+** Streamlit **
+- 1 ea “bugs” reported regarding “buttons” over the past year 
+- 1 ea “bugs” reported over the past year including the word “slider” 
+- 0 ea “bug”  reported regarding “filter” over the past year 
+- 113 open issues including “pandas” on Dash and 616 closed, means that 15% are outstanding. 
+(https://github.com/streamlit/streamlit/issues?q=is%3Aissue%20state%3Aopen%20sort%3Aupdated-desc)
+
+** Dash **
+- 2 ea “bugs” reported regarding “buttons” over the past year 
+- 1 ea “bugs” reported over the past year including the word “slider” 
+- 0 ea “bug”  reported regarding “filter” over the past year 
+- 58 open issues including “pandas” on Dash and 140 closed, means that 29% are outstanding.
+(https://github.com/plotly/dash/issues?q=is%3Aissue%20state%3Aopen%20sort%3Aupdated-desc)
 ---
 
 ## 4. Final Technology Choice
+
+## 4.1 Final Choice: Streamlit 
 
 **Final Choice: Streamlit**
 
@@ -151,7 +186,7 @@ For the current product scope and foreseeable expansion, Streamlit provides the 
 
 ---
 
-## 5. Why Not Dash as Final Choice?
+## 4.2 Why Not Dash as Final Choice?
 
 Dash is particularly strong for:
 
@@ -170,7 +205,7 @@ Dash remains a viable future alternative if CoffeeMatch evolves into a larger mu
 
 ---
 
-## 6. Areas of Concern and Risk Mitigation
+## 5. Areas of Concern and Risk Mitigation
 
 ### Scalability
 
@@ -192,7 +227,7 @@ Appending directly to CSV files may create corruption risks in concurrent enviro
 
 ---
 
-## 8. Conclusion
+## 6. Conclusion
 
 Both Streamlit and Dash are mature, capable frameworks for building data-centric web applications. After hands-on evaluation, Streamlit was selected as the final framework due to its simplicity, strong alignment with data science workflows, and superior development velocity for this product’s scope.
 

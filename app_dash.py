@@ -14,7 +14,7 @@ except Exception:
     dbc = None
     BOOTSTRAP = None
 
-DATA_PATH = "data/washington_coffee_analysis.csv"
+DATA_PATH = "data/Product_Information.xlsx"
 
 # -----------------------------
 # Data loading + light cleaning
@@ -39,7 +39,7 @@ def clean_tags(val):
     return sorted({p for p in parts if p})
 
 def load_products() -> pd.DataFrame:
-    df = pd.read_csv(DATA_PATH)
+    df = pd.read_excel(DATA_PATH)
     df.columns = [c.strip() for c in df.columns]
 
     # Ensure key columns exist

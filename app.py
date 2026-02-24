@@ -8,8 +8,8 @@ import streamlit as st
 st.set_page_config(page_title="Coffee Match", layout="wide")
 st.title("Coffee Match — Washington Roasters")
 
-PRODUCTS_PATH = "data/washington_coffee_analysis.csv"
-REVIEWS_PATH = "data/Bottomless_coffee_complete.xlsx"
+PRODUCTS_PATH = "data/Product_Information.xlsx"
+REVIEWS_PATH = "data/Reviews_and_Tasting_Notes.xlsx"
 REVIEWS_SHEET = "Reviews with Tasting Notes"
 
 ROAST_POINTS = 3.0
@@ -21,7 +21,7 @@ VALUE_WEIGHT = 2.0
 # -----------------------------
 @st.cache_data
 def load_products():
-    df = pd.read_csv(PRODUCTS_PATH)
+    df = pd.read_excel(PRODUCTS_PATH)
 
     df["tags_clean"] = df["tags"].fillna("").apply(
         lambda x: [t.strip().lower() for t in str(x).split(",") if t.strip()]

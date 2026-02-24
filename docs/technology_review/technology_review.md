@@ -106,7 +106,7 @@ Dash uses a reactive callback architecture. UI components are defined explicitly
 
 ## 3. Side-by-Side Comparison
 
-We belive both Streamlit and Dash could address our project needs with their function and compatibility. A larger endeavor might demand Dash for computational efficiency though, and both seem to have examples available.
+We believe both Streamlit and Dash could address our project needs with their function and compatibility. A larger endeavor might demand Dash for computational efficiency though, and both seem to have examples available.
 
 
 | Criterion | Streamlit | Dash |
@@ -132,7 +132,7 @@ Due to rerun of the script upon interaction procedures like st.cache_resource an
 (https://github.com/streamlit/streamlit/issues/13634)
 
 ** Dash **
-Some recent bugs listed for dash include quirks with interacting visual effects such as “Dropdown reopens when switching back from another window” “Slider - Marker overlapped on the slider.” It would be important to keep a look out for these things, but there often seems to be work arounds or fixes.
+Some recent bugs listed for dash include quirks with interacting visual effects such as “Dropdown reopens when switching back from another window” & “Slider - Marker overlapped on the slider.” It would be important to keep a look out for these things, but there often seems to be work arounds or fixes.
 (https://github.com/plotly/dash/issues/1934)
 (https://github.com/plotly/dash/issues/3474)
 

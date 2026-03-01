@@ -12,6 +12,7 @@ PRODUCTS_PATH = "data/Product_Information.xlsx"
 REVIEWS_PATH = "data/Reviews_and_Tasting_Notes.xlsx"
 REVIEWS_SHEET = "Reviews with Tasting Notes"
 
+#Set defautls from survey data in class. 
 ROAST_POINTS = 3.0
 TAG_POINTS_PER_MATCH = 1.0
 VALUE_WEIGHT = 2.0
@@ -93,6 +94,8 @@ def score_products(df, prefs):
     df["reason"] = ""
 
     # Roast match
+    ROAST_POINTS = (prefs["roastImportance"] * 100)/ (prefs["roastImportance"] + prefs["costImportance"] + prefs["tagImportance"])
+    print("ROAST_POINTS:", ROAST_POINTS)
     if prefs["roast"] != "No preference":
         mask = df["roast_type"].str.contains(prefs["roast"], case=False, na=False)
         df.loc[mask, "score"] += ROAST_POINTS
@@ -110,6 +113,8 @@ def score_products(df, prefs):
             .reindex(df.index, fill_value=0)
         )
 
+        TAG_POINTS_PER_MATCH = (prefs["tagImportance"] * 100)/ (prefs["roastImportance"] + prefs["costImportance"] + prefs["tagImportance"])
+        print("TAG_POINTS_PER_MATCH:", TAG_POINTS_PER_MATCH)
         tag_bonus = TAG_POINTS_PER_MATCH * overlaps
         df["score"] += tag_bonus
         df.loc[tag_bonus > 0, "reason"] += (
@@ -117,6 +122,9 @@ def score_products(df, prefs):
         )
 
     # Cheaper per oz gets slight boost
+    VALUE_WEIGHT = (prefs["costImportance"] * 100)/ (prefs["roastImportance"] + prefs["costImportance"] + prefs["tagImportance"])
+    print("VALUE_WEIGHT:", VALUE_WEIGHT)
+    
     if df["price_per_oz"].notna().any():
         max_p = df["price_per_oz"].max()
         min_p = df["price_per_oz"].min()
@@ -138,45 +146,78 @@ def score_products(df, prefs):
 # -----------------------------
 # QUESTIONNAIRE UI
 # -----------------------------
-st.header("Find Your Coffee")
 
-prefs = {}
+col1, col2 = st.columns(2)
 
-prefs["decaf"] = st.radio(
-    "Decaf preference",
-    ["Either", "Decaf only", "Caffeinated only"]
-)
+with col1:
 
-prefs["roast"] = st.selectbox(
-    "Roast preference",
-    ["No preference"] + sorted(products["roast_type"].unique())
-)
+    st.header("Find Your Coffee")
 
-prefs["grind"] = st.radio(
-    "Need ground coffee available?",
-    ["Either", "Ground required"]
-)
+    prefs = {}
 
-set_budget = st.checkbox("Set max bag price?")
-if set_budget:
-    prefs["max_price"] = st.slider(
-        "Max price ($)",
-        5.0,
-        float(products["price_numeric"].max()),
-        20.0
+    prefs["decaf"] = st.radio(
+        "Decaf preference",
+        ["Either", "Decaf only", "Caffeinated only"]
     )
-else:
-    prefs["max_price"] = None
 
-prefs["tags"] = st.multiselect(
-    "Tags (optional)",
-    sorted({tag for tags in products["tags_clean"] for tag in tags})
-)
+    prefs["roast"] = st.selectbox(
+        "Roast preference",
+        ["No preference"] + sorted(products["roast_type"].unique())
+    )
+
+    prefs["grind"] = st.radio(
+        "Need ground coffee available?",
+        ["Either", "Ground required"]
+    )
+
+    set_budget = st.checkbox("Set max bag price?")
+    if set_budget:
+        prefs["max_price"] = st.slider(
+            "Max price ($)",
+            5.0,
+            float(products["price_numeric"].max()),
+            20.0
+        )
+    else:
+        prefs["max_price"] = None
+
+    prefs["tags"] = st.multiselect(
+        "Tags (optional)",
+        sorted({tag for tags in products["tags_clean"] for tag in tags})
+    )
+
+    with col2:
+        st.subheader("How important is this to you?")
+
+        # prefs2 = {}
+
+        st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
+        prefs["roastImportance"] = st.slider(
+            "Roast preference: 1 = Not important, 5 = Most important",
+            1,
+            5,
+        )
+
+        st.markdown("<br>", unsafe_allow_html=True)
+        prefs["costImportance"] = st.slider(
+            "Cost: 1 = Not important, 5 = Most important",
+            1,
+            5,
+        )
+
+        # st.markdown("<br><br>", unsafe_allow_html=True)
+        prefs["tagImportance"] = st.slider(
+            "These tags: 1 = Not important, 5 = Most important",
+            1,
+            5,
+        )
 
 match_mode = st.radio(
     "Recommendation type",
     ["Single Best Match", "Top 5 Matches"]
 )
+
+
 
 # -----------------------------
 # RUN MATCH
@@ -206,3 +247,7 @@ if st.button("Find Coffee"):
 
 st.markdown("---")
 st.caption("Coffee Match — DATA 515 Demo")
+
+print("ROAST_POINTS:", ROAST_POINTS)
+print("TAG_POINTS_PER_MATCH:", TAG_POINTS_PER_MATCH)
+print("VALUE_WEIGHT:", VALUE_WEIGHT)

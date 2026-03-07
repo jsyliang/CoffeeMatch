@@ -9,6 +9,7 @@ dependencies:
   # Shared libraries
   - pandas
   - numpy
+  - matplotlib
   - openpyxl
   - pylint
 

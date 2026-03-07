@@ -1,0 +1,249 @@
+roaster,product_name,origin,roast_type,size,price,hearts,total_reviews,heart_percentage,decaf,blend,available_ground,single_origin,url,has_reviews,price_numeric,size_oz,price_per_oz,product_key
+Ladro Roasting,Diablo,Unspecified,Dark Roast,12oz,20.98,446,574,77.7,False,True,True,False,/products/diablo,True,20.98,12,1.75,Ladro Roasting | Diablo
+Ladro Roasting,Diablo,Unspecified,Dark Roast,80oz,92.13,446,574,77.7,False,True,True,False,/products/diablo,True,92.13,80,1.15,Ladro Roasting | Diablo
+Tony's Coffee,Cafe Carmelita,Unspecified,Medium Roast,12oz,12.32,370,493,75.1,False,True,True,False,/products/cafe-carmelita,True,12.32,12,1.03,Tony's Coffee | Cafe Carmelita
+Tony's Coffee,Cafe Carmelita,Unspecified,Medium Roast,24oz,25.2,370,493,75.1,False,True,True,False,/products/cafe-carmelita,True,25.2,24,1.05,Tony's Coffee | Cafe Carmelita
+Tony's Coffee,Cafe Carmelita,Unspecified,Medium Roast,80oz,63.0,370,493,75.1,False,True,True,False,/products/cafe-carmelita,True,63.0,80,0.79,Tony's Coffee | Cafe Carmelita
+Stamp Act Coffee,Milk Money - Seasonal Espresso,Unspecified,Light-Medium Roast,12oz,15.3,362,470,77.0,False,True,False,False,/products/milk-money--seasonal-espresso,True,15.3,12,1.28,Stamp Act Coffee | Milk Money - Seasonal Espresso
+Stamp Act Coffee,Milk Money - Seasonal Espresso,Unspecified,Light-Medium Roast,32oz,41.4,362,470,77.0,False,True,False,False,/products/milk-money--seasonal-espresso,True,41.4,32,1.29,Stamp Act Coffee | Milk Money - Seasonal Espresso
+Stamp Act Coffee,Milk Money - Seasonal Espresso,Unspecified,Light-Medium Roast,80oz,99.45,362,470,77.0,False,True,False,False,/products/milk-money--seasonal-espresso,True,99.45,80,1.24,Stamp Act Coffee | Milk Money - Seasonal Espresso
+Blossom Coffee Roasters,Ethiopia - Ardi - Natural,Ethiopia,Light Roast,32oz,40.5,315,384,82.0,False,False,True,True,/products/ethiopia--ardi--natural,True,40.5,32,1.27,Blossom Coffee Roasters | Ethiopia - Ardi - Natural
+Blossom Coffee Roasters,Ethiopia - Ardi - Natural,Ethiopia,Light Roast,80oz,94.5,315,384,82.0,False,False,True,True,/products/ethiopia--ardi--natural,True,94.5,80,1.18,Blossom Coffee Roasters | Ethiopia - Ardi - Natural
+Camber Coffee,Big Joy,Guatemala,Medium Roast,12oz,16.2,245,310,79.0,False,False,True,True,/products/big-joy,True,16.2,12,1.35,Camber Coffee | Big Joy
+Camber Coffee,Big Joy,Guatemala,Medium Roast,32oz,31.5,245,310,79.0,False,False,True,True,/products/big-joy,True,31.5,32,0.98,Camber Coffee | Big Joy
+Camber Coffee,Big Joy,Guatemala,Medium Roast,80oz,76.5,245,310,79.0,False,False,True,True,/products/big-joy,True,76.5,80,0.96,Camber Coffee | Big Joy
+Ladro Roasting,Fremont,Unspecified,Medium Roast,12oz,20.98,214,303,70.6,False,True,True,False,/products/fremont,True,20.98,12,1.75,Ladro Roasting | Fremont
+Ladro Roasting,Fremont,Unspecified,Medium Roast,80oz,92.13,214,303,70.6,False,True,True,False,/products/fremont,True,92.13,80,1.15,Ladro Roasting | Fremont
+Caffe Vita,Theo Blend,Unspecified,Medium-Dark Roast,12oz,16.2,154,215,71.6,False,True,True,False,/products/theo-blend,True,16.2,12,1.35,Caffe Vita | Theo Blend
+Caffe Vita,Theo Blend,Unspecified,Medium-Dark Roast,80oz,85.5,154,215,71.6,False,True,True,False,/products/theo-blend,True,85.5,80,1.07,Caffe Vita | Theo Blend
+Olympia Coffee Roasting Co.,Big Truck,Unspecified,Medium-Dark Roast,12oz,16.65,148,200,74.0,False,True,False,False,/products/big-truck-organic,True,16.65,12,1.39,Olympia Coffee Roasting Co. | Big Truck
+Olympia Coffee Roasting Co.,Big Truck,Unspecified,Medium-Dark Roast,32oz,42.12,148,200,74.0,False,True,False,False,/products/big-truck-organic,True,42.12,32,1.32,Olympia Coffee Roasting Co. | Big Truck
+Olympia Coffee Roasting Co.,Big Truck,Unspecified,Medium-Dark Roast,80oz,99.54,148,200,74.0,False,True,False,False,/products/big-truck-organic,True,99.54,80,1.24,Olympia Coffee Roasting Co. | Big Truck
+Caffe Vita,Caffe Luna,Unspecified,Dark Roast,12oz,16.2,136,172,79.1,False,True,True,False,/products/caffe-luna,True,16.2,12,1.35,Caffe Vita | Caffe Luna
+Caffe Vita,Caffe Luna,Unspecified,Dark Roast,80oz,85.5,136,172,79.1,False,True,True,False,/products/caffe-luna,True,85.5,80,1.07,Caffe Vita | Caffe Luna
+Blossom Coffee Roasters,Dark Side of the Moon,Unspecified,Dark Roast,12oz,15.75,126,162,77.8,False,True,True,False,/products/dark-side-of-the-moon,True,15.75,12,1.31,Blossom Coffee Roasters | Dark Side of the Moon
+Blossom Coffee Roasters,Dark Side of the Moon,Unspecified,Dark Roast,32oz,35.1,126,162,77.8,False,True,True,False,/products/dark-side-of-the-moon,True,35.1,32,1.1,Blossom Coffee Roasters | Dark Side of the Moon
+Blossom Coffee Roasters,Dark Side of the Moon,Unspecified,Dark Roast,80oz,79.65,126,162,77.8,False,True,True,False,/products/dark-side-of-the-moon,True,79.65,80,1.0,Blossom Coffee Roasters | Dark Side of the Moon
+Camber Coffee,Skyline Espresso,Unspecified,Medium Roast,12oz,16.2,121,154,78.6,False,True,True,False,/products/skyline-espresso,True,16.2,12,1.35,Camber Coffee | Skyline Espresso
+Camber Coffee,Skyline Espresso,Unspecified,Medium Roast,32oz,31.5,121,154,78.6,False,True,True,False,/products/skyline-espresso,True,31.5,32,0.98,Camber Coffee | Skyline Espresso
+Camber Coffee,Skyline Espresso,Unspecified,Medium Roast,80oz,76.5,121,154,78.6,False,True,True,False,/products/skyline-espresso,True,76.5,80,0.96,Camber Coffee | Skyline Espresso
+Ladro Roasting,Queen Anne,Unspecified,Light Roast,12oz,20.98,120,182,65.9,False,True,True,False,/products/queen-anne,True,20.98,12,1.75,Ladro Roasting | Queen Anne
+Ladro Roasting,Queen Anne,Unspecified,Light Roast,80oz,92.13,120,182,65.9,False,True,True,False,/products/queen-anne,True,92.13,80,1.15,Ladro Roasting | Queen Anne
+Blossom Coffee Roasters,Nectar,Unspecified,Light-Medium Roast,12oz,16.65,108,146,74.0,False,True,True,False,/products/nectar,True,16.65,12,1.39,Blossom Coffee Roasters | Nectar
+Blossom Coffee Roasters,Nectar,Unspecified,Light-Medium Roast,32oz,39.15,108,146,74.0,False,True,True,False,/products/nectar,True,39.15,32,1.22,Blossom Coffee Roasters | Nectar
+Blossom Coffee Roasters,Nectar,Unspecified,Light-Medium Roast,80oz,81.0,108,146,74.0,False,True,True,False,/products/nectar,True,81.0,80,1.01,Blossom Coffee Roasters | Nectar
+Seven Coffee Roasters,Guatemala Trapichitos,Guatemala,Light-Medium Roast,12oz,15.27,106,147,72.1,False,False,True,True,/products/guatemala-trapichitos,True,15.27,12,1.27,Seven Coffee Roasters | Guatemala Trapichitos
+Caffe Vita,Caffe Del Sol,Unspecified,Medium Roast,12oz,15.3,103,134,76.9,False,True,True,False,/products/caffe-del-sol,True,15.3,12,1.28,Caffe Vita | Caffe Del Sol
+Caffe Vita,Caffe Del Sol,Unspecified,Medium Roast,80oz,85.5,103,134,76.9,False,True,True,False,/products/caffe-del-sol,True,85.5,80,1.07,Caffe Vita | Caffe Del Sol
+Tony's Coffee,Upland,Unspecified,Medium Roast,12oz,19.66,95,140,67.9,False,True,True,False,/products/upland,True,19.66,12,1.64,Tony's Coffee | Upland
+Caffe Vita,Bistro Blend,Unspecified,Medium Roast,12oz,15.3,92,123,74.8,False,True,True,False,/products/bistro-blend,True,15.3,12,1.28,Caffe Vita | Bistro Blend
+Caffe Vita,Bistro Blend,Unspecified,Medium Roast,80oz,90.0,92,123,74.8,False,True,True,False,/products/bistro-blend,True,90.0,80,1.12,Caffe Vita | Bistro Blend
+Seven Coffee Roasters,Mexico Santa Fe,Mexico,Medium Roast,12oz,15.27,90,113,79.6,False,False,True,True,/products/mexico-santa-fe,True,15.27,12,1.27,Seven Coffee Roasters | Mexico Santa Fe
+Olympia Coffee Roasting Co.,Sweetheart Single Origin Espresso Rotation,Unspecified,Medium Roast,12oz,18.0,90,117,76.9,False,False,False,True,/products/sweetheart,True,18.0,12,1.5,Olympia Coffee Roasting Co. | Sweetheart Single Origin Espresso Rotation
+Olympia Coffee Roasting Co.,Sweetheart Single Origin Espresso Rotation,Unspecified,Medium Roast,32oz,45.45,90,117,76.9,False,False,False,True,/products/sweetheart,True,45.45,32,1.42,Olympia Coffee Roasting Co. | Sweetheart Single Origin Espresso Rotation
+Olympia Coffee Roasting Co.,Sweetheart Single Origin Espresso Rotation,Unspecified,Medium Roast,80oz,107.1,90,117,76.9,False,False,False,True,/products/sweetheart,True,107.1,80,1.34,Olympia Coffee Roasting Co. | Sweetheart Single Origin Espresso Rotation
+Stamp Act Coffee,Old School - Seasonal Espresso,Unspecified,Medium Roast,12oz,14.85,85,112,75.9,False,True,False,False,/products/old-school--seasonal-espresso,True,14.85,12,1.24,Stamp Act Coffee | Old School - Seasonal Espresso
+Stamp Act Coffee,Old School - Seasonal Espresso,Unspecified,Medium Roast,32oz,37.8,85,112,75.9,False,True,False,False,/products/old-school--seasonal-espresso,True,37.8,32,1.18,Stamp Act Coffee | Old School - Seasonal Espresso
+Stamp Act Coffee,Old School - Seasonal Espresso,Unspecified,Medium Roast,80oz,94.95,85,112,75.9,False,True,False,False,/products/old-school--seasonal-espresso,True,94.95,80,1.19,Stamp Act Coffee | Old School - Seasonal Espresso
+Tony's Coffee,Songbird Blend,Unspecified,Medium-Dark Roast,12oz,12.32,84,128,65.6,False,True,True,False,/products/songbird-blend,True,12.32,12,1.03,Tony's Coffee | Songbird Blend
+Tony's Coffee,Songbird Blend,Unspecified,Medium-Dark Roast,24oz,25.2,84,128,65.6,False,True,True,False,/products/songbird-blend,True,25.2,24,1.05,Tony's Coffee | Songbird Blend
+Tony's Coffee,Songbird Blend,Unspecified,Medium-Dark Roast,80oz,63.0,84,128,65.6,False,True,True,False,/products/songbird-blend,True,63.0,80,0.79,Tony's Coffee | Songbird Blend
+Tony's Coffee,Sugar Bee Espresso,Unspecified,Medium Roast,12oz,20.52,82,115,71.3,False,True,True,False,/products/sugar-bee-espresso,True,20.52,12,1.71,Tony's Coffee | Sugar Bee Espresso
+Caffe Vita,Queen City,Unspecified,Medium-Dark Roast,12oz,15.75,79,107,73.8,False,True,True,False,/products/queen-city,True,15.75,12,1.31,Caffe Vita | Queen City
+Caffe Vita,Queen City,Unspecified,Medium-Dark Roast,80oz,85.5,79,107,73.8,False,True,True,False,/products/queen-city,True,85.5,80,1.07,Caffe Vita | Queen City
+Seven Coffee Roasters,Espresso Huli,Unspecified,Dark Roast,12oz,14.37,75,118,63.6,False,True,True,False,/products/espresso-huli,True,14.37,12,1.2,Seven Coffee Roasters | Espresso Huli
+Seven Coffee Roasters,Ethiopia Yirgachefe,Ethiopia,Medium Roast,12oz,15.27,73,99,73.7,False,False,True,True,/products/ethiopia-yirgachefe,True,15.27,12,1.27,Seven Coffee Roasters | Ethiopia Yirgachefe
+Seven Coffee Roasters,Brazil Carmo De Minas,Brazil,Medium Roast,12oz,15.27,71,99,71.7,False,False,True,True,/products/brazil-carmo-de-minas-1,True,15.27,12,1.27,Seven Coffee Roasters | Brazil Carmo De Minas
+Blossom Coffee Roasters,Espresso Velluto Organic,Unspecified,Light-Medium Roast,12oz,15.53,69,100,69.0,False,True,True,False,/products/espresso-velluto-organic,True,15.53,12,1.29,Blossom Coffee Roasters | Espresso Velluto Organic
+Blossom Coffee Roasters,Espresso Velluto Organic,Unspecified,Light-Medium Roast,32oz,34.2,69,100,69.0,False,True,True,False,/products/espresso-velluto-organic,True,34.2,32,1.07,Blossom Coffee Roasters | Espresso Velluto Organic
+Blossom Coffee Roasters,Espresso Velluto Organic,Unspecified,Light-Medium Roast,80oz,79.65,69,100,69.0,False,True,True,False,/products/espresso-velluto-organic,True,79.65,80,1.0,Blossom Coffee Roasters | Espresso Velluto Organic
+Blossom Coffee Roasters,First Light Breakfast Blend,Unspecified,Medium Roast,12oz,15.75,69,92,75.0,False,True,True,False,/products/first-light-breakfast-blend,True,15.75,12,1.31,Blossom Coffee Roasters | First Light Breakfast Blend
+Blossom Coffee Roasters,First Light Breakfast Blend,Unspecified,Medium Roast,32oz,34.2,69,92,75.0,False,True,True,False,/products/first-light-breakfast-blend,True,34.2,32,1.07,Blossom Coffee Roasters | First Light Breakfast Blend
+Blossom Coffee Roasters,First Light Breakfast Blend,Unspecified,Medium Roast,80oz,79.2,69,92,75.0,False,True,True,False,/products/first-light-breakfast-blend,True,79.2,80,0.99,Blossom Coffee Roasters | First Light Breakfast Blend
+Olympia Coffee Roasting Co.,Morning Sun,El Salvador,Medium-Dark Roast,12oz,15.75,68,94,72.3,False,False,False,True,/products/morning-sun-organic,True,15.75,12,1.31,Olympia Coffee Roasting Co. | Morning Sun
+Olympia Coffee Roasting Co.,Morning Sun,El Salvador,Medium-Dark Roast,32oz,39.87,68,94,72.3,False,False,False,True,/products/morning-sun-organic,True,39.87,32,1.25,Olympia Coffee Roasting Co. | Morning Sun
+Olympia Coffee Roasting Co.,Morning Sun,El Salvador,Medium-Dark Roast,80oz,94.14,68,94,72.3,False,False,False,True,/products/morning-sun-organic,True,94.14,80,1.18,Olympia Coffee Roasting Co. | Morning Sun
+Olympia Coffee Roasting Co.,Morning Sun,El Salvador,Medium-Dark Roast,80oz,94.14,68,94,72.3,False,False,False,True,/products/morning-sun-organic,True,94.14,80,1.18,Olympia Coffee Roasting Co. | Morning Sun
+Tony's Coffee,Espresso Noir,Unspecified,Dark Roast,12oz,12.32,63,93,67.7,False,True,True,False,/products/espresso-noir,True,12.32,12,1.03,Tony's Coffee | Espresso Noir
+Tony's Coffee,Espresso Noir,Unspecified,Dark Roast,24oz,25.2,63,93,67.7,False,True,True,False,/products/espresso-noir,True,25.2,24,1.05,Tony's Coffee | Espresso Noir
+Tony's Coffee,Espresso Noir,Unspecified,Dark Roast,80oz,63.0,63,93,67.7,False,True,True,False,/products/espresso-noir,True,63.0,80,0.79,Tony's Coffee | Espresso Noir
+Olympia Coffee Roasting Co.,Little Buddy,Unspecified,Light Roast,12oz,19.8,60,97,61.9,False,True,False,False,/products/little-buddy,True,19.8,12,1.65,Olympia Coffee Roasting Co. | Little Buddy
+Olympia Coffee Roasting Co.,Little Buddy,Unspecified,Light Roast,32oz,49.23,60,97,61.9,False,True,False,False,/products/little-buddy,True,49.23,32,1.54,Olympia Coffee Roasting Co. | Little Buddy
+Olympia Coffee Roasting Co.,Little Buddy,Unspecified,Light Roast,80oz,114.03,60,97,61.9,False,True,False,False,/products/little-buddy,True,114.03,80,1.43,Olympia Coffee Roasting Co. | Little Buddy
+Tonys Coffee,Coffeehouse Blend,Unspecified,Dark Roast,12oz,12.32,56,74,75.7,False,True,True,False,/products/coffeehouse-blend,True,12.32,12,1.03,Tonys Coffee | Coffeehouse Blend
+Tonys Coffee,Coffeehouse Blend,Unspecified,Dark Roast,80oz,59.39,56,74,75.7,False,True,True,False,/products/coffeehouse-blend,True,59.39,80,0.74,Tonys Coffee | Coffeehouse Blend
+Anchorhead Coffee,Narwhal Blend,Unspecified,Medium Roast,10oz,13.5,50,74,67.6,False,True,False,False,/products/narwhal-blend,True,13.5,10,1.35,Anchorhead Coffee | Narwhal Blend
+Anchorhead Coffee,Narwhal Blend,Unspecified,Medium Roast,32oz,36.0,50,74,67.6,False,True,False,False,/products/narwhal-blend,True,36.0,32,1.12,Anchorhead Coffee | Narwhal Blend
+Camber Coffee,Moonrise Blend,Unspecified,Light Roast,12oz,19.8,43,58,74.1,False,True,True,False,/products/moonrise-blend,True,19.8,12,1.65,Camber Coffee | Moonrise Blend
+Camber Coffee,Moonrise Blend,Unspecified,Light Roast,32oz,41.4,43,58,74.1,False,True,True,False,/products/moonrise-blend,True,41.4,32,1.29,Camber Coffee | Moonrise Blend
+Camber Coffee,Moonrise Blend,Unspecified,Light Roast,80oz,99.0,43,58,74.1,False,True,True,False,/products/moonrise-blend,True,99.0,80,1.24,Camber Coffee | Moonrise Blend
+Stamp Act Coffee,Regina - A Custom Blend,Unspecified,Light-Medium Roast,12oz,16.65,43,54,79.6,False,True,False,False,/products/base-layers--holiday-blend,True,16.65,12,1.39,Stamp Act Coffee | Regina - A Custom Blend
+Kuma Coffee Roasters,Ethiopia Guji,Ethiopia,Light-Medium Roast,12oz,22.07,39,53,73.6,False,False,False,True,/products/ethiopia-guji-1,True,22.07,12,1.84,Kuma Coffee Roasters | Ethiopia Guji
+Caffe Vita,Organic French,Unspecified,Unspecified,12oz,17.1,38,48,79.2,False,True,True,False,/products/organic-french-roast,True,17.1,12,1.43,Caffe Vita | Organic French
+Caffe Vita,Organic French,Unspecified,Unspecified,80oz,85.5,38,48,79.2,False,True,True,False,/products/organic-french-roast,True,85.5,80,1.07,Caffe Vita | Organic French
+Tonys Coffee,Snow Joe,Unspecified,Medium Roast,12oz,22.75,38,51,74.5,False,True,True,False,/products/snow-joe-winter-blend,True,22.75,12,1.9,Tonys Coffee | Snow Joe
+Tonys Coffee,Snow Joe,Unspecified,Medium Roast,80oz,103.75,38,51,74.5,False,True,True,False,/products/snow-joe-winter-blend,True,103.75,80,1.3,Tonys Coffee | Snow Joe
+Blossom Coffee Roasters,French Roast Blend,Unspecified,Unspecified,12oz,16.2,37,66,56.1,False,True,True,False,/products/french-roast-blend,True,16.2,12,1.35,Blossom Coffee Roasters | French Roast Blend
+Blossom Coffee Roasters,French Roast Blend,Unspecified,Unspecified,32oz,33.75,37,66,56.1,False,True,True,False,/products/french-roast-blend,True,33.75,32,1.05,Blossom Coffee Roasters | French Roast Blend
+Blossom Coffee Roasters,French Roast Blend,Unspecified,Unspecified,80oz,79.2,37,66,56.1,False,True,True,False,/products/french-roast-blend,True,79.2,80,0.99,Blossom Coffee Roasters | French Roast Blend
+Tonys Coffee,Peru Pangoa,Peru,Medium Roast,12oz,12.6,36,46,78.3,False,False,True,True,/products/peru-pangoa,True,12.6,12,1.05,Tonys Coffee | Peru Pangoa
+Tonys Coffee,Peru Pangoa,Peru,Medium Roast,80oz,67.5,36,46,78.3,False,False,True,True,/products/peru-pangoa,True,67.5,80,0.84,Tonys Coffee | Peru Pangoa
+Anchorhead Coffee,Costa Rica El Cedral,Costa Rica,Light-Medium Roast,10oz,21.6,36,44,81.8,False,False,False,True,/products/costa-rica-el-cedral-natural,True,21.6,10,2.16,Anchorhead Coffee | Costa Rica El Cedral
+Anchorhead Coffee,Costa Rica El Cedral,Costa Rica,Light-Medium Roast,32oz,58.5,36,44,81.8,False,False,False,True,/products/costa-rica-el-cedral-natural,True,58.5,32,1.83,Anchorhead Coffee | Costa Rica El Cedral
+Blossom Coffee Roasters,Deja Vu,Unspecified,Medium-Dark Roast,12oz,15.3,35,49,71.4,False,True,True,False,/products/deja-vu,True,15.3,12,1.28,Blossom Coffee Roasters | Deja Vu
+Blossom Coffee Roasters,Deja Vu,Unspecified,Medium-Dark Roast,32oz,33.75,35,49,71.4,False,True,True,False,/products/deja-vu,True,33.75,32,1.05,Blossom Coffee Roasters | Deja Vu
+Blossom Coffee Roasters,Deja Vu,Unspecified,Medium-Dark Roast,80oz,79.2,35,49,71.4,False,True,True,False,/products/deja-vu,True,79.2,80,0.99,Blossom Coffee Roasters | Deja Vu
+Anchorhead Coffee,Leviathan (Espresso Blend),Unspecified,Light Roast,10oz,13.5,33,53,62.3,False,True,False,False,/products/leviathan-espresso-blend,True,13.5,10,1.35,Anchorhead Coffee | Leviathan (Espresso Blend)
+Anchorhead Coffee,Leviathan (Espresso Blend),Unspecified,Light Roast,32oz,36.0,33,53,62.3,False,True,False,False,/products/leviathan-espresso-blend,True,36.0,32,1.12,Anchorhead Coffee | Leviathan (Espresso Blend)
+Caffe Vita,Organic Espresso,Unspecified,Medium Roast,12oz,16.2,33,49,67.3,False,True,True,False,/products/organic-espresso,True,16.2,12,1.35,Caffe Vita | Organic Espresso
+Caffe Vita,Organic Espresso,Unspecified,Medium Roast,80oz,85.5,33,49,67.3,False,True,True,False,/products/organic-espresso,True,85.5,80,1.07,Caffe Vita | Organic Espresso
+Tonys Coffee,Espresso Classico,Unspecified,Medium Roast,12oz,12.32,32,45,71.1,False,True,True,False,/products/espresso-classico,True,12.32,12,1.03,Tonys Coffee | Espresso Classico
+Tonys Coffee,Espresso Classico,Unspecified,Medium Roast,80oz,58.5,32,45,71.1,False,True,True,False,/products/espresso-classico,True,58.5,80,0.73,Tonys Coffee | Espresso Classico
+Tonys Coffee,Cafe Carmelita Decaf,Unspecified,Medium Roast,12oz,14.39,32,39,82.1,True,True,True,False,/products/cafe-carmelita-decaf,True,14.39,12,1.2,Tonys Coffee | Cafe Carmelita Decaf
+Tonys Coffee,Cafe Carmelita Decaf,Unspecified,Medium Roast,24oz,26.1,32,39,82.1,True,True,True,False,/products/cafe-carmelita-decaf,True,26.1,24,1.09,Tonys Coffee | Cafe Carmelita Decaf
+Tonys Coffee,Cafe Carmelita Decaf,Unspecified,Medium Roast,80oz,67.5,32,39,82.1,True,True,True,False,/products/cafe-carmelita-decaf,True,67.5,80,0.84,Tonys Coffee | Cafe Carmelita Decaf
+Tony's Coffee,French Royale,Unspecified,Dark Roast,12oz,12.32,31,41,75.6,False,True,True,False,/products/french-royale,True,12.32,12,1.03,Tony's Coffee | French Royale
+Tony's Coffee,French Royale,Unspecified,Dark Roast,80oz,63.0,31,41,75.6,False,True,True,False,/products/french-royale,True,63.0,80,0.79,Tony's Coffee | French Royale
+Stamp Act Coffee,Mwendi Wega AA - Kenya,Kenya,Light Roast,32oz,53.46,29,35,82.9,False,False,False,True,/products/mwendi-wega-aa--kenya,True,53.46,32,1.67,Stamp Act Coffee | Mwendi Wega AA - Kenya
+Stamp Act Coffee,Mwendi Wega AA - Kenya,Kenya,Light Roast,80oz,126.23,29,35,82.9,False,False,False,True,/products/mwendi-wega-aa--kenya,True,126.23,80,1.58,Stamp Act Coffee | Mwendi Wega AA - Kenya
+Blossom Coffee Roasters,Ratu Ketiara Women's Cooperative,Unspecified,Medium Roast,12oz,17.55,27,38,71.1,False,False,True,True,/products/ratu-ketiara-womens-cooperative,True,17.55,12,1.46,Blossom Coffee Roasters | Ratu Ketiara Women's Cooperative
+Blossom Coffee Roasters,Ratu Ketiara Women's Cooperative,Unspecified,Medium Roast,32oz,37.8,27,38,71.1,False,False,True,True,/products/ratu-ketiara-womens-cooperative,True,37.8,32,1.18,Blossom Coffee Roasters | Ratu Ketiara Women's Cooperative
+Blossom Coffee Roasters,Ratu Ketiara Women's Cooperative,Unspecified,Medium Roast,80oz,82.8,27,38,71.1,False,False,True,True,/products/ratu-ketiara-womens-cooperative,True,82.8,80,1.03,Blossom Coffee Roasters | Ratu Ketiara Women's Cooperative
+Seven Coffee Roasters,Sumatra Mandheling Old School,Unspecified,Medium Roast,12oz,15.27,24,37,64.9,False,False,True,True,/products/sumatra-mandheling-old-school,True,15.27,12,1.27,Seven Coffee Roasters | Sumatra Mandheling Old School
+Tonys Coffee,Sumatra,Unspecified,Medium Roast,12oz,12.59,22,30,73.3,False,False,True,True,/products/sumatra,True,12.59,12,1.05,Tonys Coffee | Sumatra
+Tonys Coffee,Sumatra,Unspecified,Medium Roast,80oz,63.0,22,30,73.3,False,False,True,True,/products/sumatra,True,63.0,80,0.79,Tonys Coffee | Sumatra
+Kuma Coffee Roasters,Classic,Unspecified,Medium Roast,12oz,20.86,22,29,75.9,False,True,False,False,/products/classic,True,20.86,12,1.74,Kuma Coffee Roasters | Classic
+Victrola,Triborough Blend,Unspecified,Medium-Dark Roast,12oz,13.95,21,27,77.8,False,True,False,False,/products/triborough-blend,True,13.95,12,1.16,Victrola | Triborough Blend
+Caffe Vita,Novacella Decaf,Colombia,Medium-Dark Roast,12oz,16.2,19,22,86.4,True,False,True,True,/products/novacella-decaf,True,16.2,12,1.35,Caffe Vita | Novacella Decaf
+Caffe Vita,Novacella Decaf,Colombia,Medium-Dark Roast,80oz,85.5,19,22,86.4,True,False,True,True,/products/novacella-decaf,True,85.5,80,1.07,Caffe Vita | Novacella Decaf
+Blossom Coffee Roasters,Decaf Ethiopia,Ethiopia,Medium Roast,12oz,19.35,19,22,86.4,True,False,True,True,/products/decaf-ethiopia,True,19.35,12,1.61,Blossom Coffee Roasters | Decaf Ethiopia
+Blossom Coffee Roasters,Decaf Ethiopia,Ethiopia,Medium Roast,32oz,43.2,19,22,86.4,True,False,True,True,/products/decaf-ethiopia,True,43.2,32,1.35,Blossom Coffee Roasters | Decaf Ethiopia
+Blossom Coffee Roasters,Decaf Ethiopia,Ethiopia,Medium Roast,80oz,94.5,19,22,86.4,True,False,True,True,/products/decaf-ethiopia,True,94.5,80,1.18,Blossom Coffee Roasters | Decaf Ethiopia
+Victrola,Streamline Espresso Blend,Unspecified,Medium Roast,12oz,13.46,17,26,65.4,False,True,False,False,/products/streamline-espresso-blend,True,13.46,12,1.12,Victrola | Streamline Espresso Blend
+Camber Coffee,Goodnight Moon Decaf,Unspecified,Medium Roast,12oz,17.1,16,27,59.3,True,False,True,True,/products/goodnight-moon-decaf,True,17.1,12,1.43,Camber Coffee | Goodnight Moon Decaf
+Camber Coffee,Goodnight Moon Decaf,Unspecified,Medium Roast,32oz,31.5,16,27,59.3,True,False,True,True,/products/goodnight-moon-decaf,True,31.5,32,0.98,Camber Coffee | Goodnight Moon Decaf
+Camber Coffee,Goodnight Moon Decaf,Unspecified,Medium Roast,80oz,76.5,16,27,59.3,True,False,True,True,/products/goodnight-moon-decaf,True,76.5,80,0.96,Camber Coffee | Goodnight Moon Decaf
+Tonys Coffee,Mexico Chiapas,Mexico,Medium Roast,12oz,16.2,15,23,65.2,False,False,True,True,/products/mexico-chiapas-2,True,16.2,12,1.35,Tonys Coffee | Mexico Chiapas
+Tonys Coffee,Mexico Chiapas,Mexico,Medium Roast,80oz,74.7,15,23,65.2,False,False,True,True,/products/mexico-chiapas-2,True,74.7,80,0.93,Tonys Coffee | Mexico Chiapas
+Victrola,Empire Blend,Unspecified,Medium Roast,12oz,13.46,15,24,62.5,False,True,False,False,/products/empire-blend,True,13.46,12,1.12,Victrola | Empire Blend
+Kuma Coffee Roasters,Bright Blend,Unspecified,Light-Medium Roast,12oz,20.86,15,19,78.9,False,True,False,False,/products/bright-blend,True,20.86,12,1.74,Kuma Coffee Roasters | Bright Blend
+Seven Coffee Roasters,Pano Hawaiian Blend,Unspecified,Dark Roast,12oz,17.98,14,20,70.0,False,True,True,False,/products/copy-of-pano-hawaiian-blend,True,17.98,12,1.5,Seven Coffee Roasters | Pano Hawaiian Blend
+Kuma Coffee Roasters,Sun Bear,Unspecified,Light-Medium Roast,12oz,20.86,14,20,70.0,False,True,False,False,/products/sun-bear,True,20.86,12,1.74,Kuma Coffee Roasters | Sun Bear
+Caffe Vita,Organic Sumatra Gayo River,Unspecified,Medium-Dark Roast,12oz,16.2,13,29,44.8,False,False,True,True,/products/organic-sumatra-gayo-river,True,16.2,12,1.35,Caffe Vita | Organic Sumatra Gayo River
+Caffe Vita,Organic Sumatra Gayo River,Unspecified,Medium-Dark Roast,80oz,85.5,13,29,44.8,False,False,True,True,/products/organic-sumatra-gayo-river,True,85.5,80,1.07,Caffe Vita | Organic Sumatra Gayo River
+Tonys Coffee,Pacific Decaf,Unspecified,Dark Roast,12oz,14.39,13,21,61.9,True,True,True,False,/products/pacific-decaf,True,14.39,12,1.2,Tonys Coffee | Pacific Decaf
+Tonys Coffee,Pacific Decaf,Unspecified,Dark Roast,80oz,67.5,13,21,61.9,True,True,True,False,/products/pacific-decaf,True,67.5,80,0.84,Tonys Coffee | Pacific Decaf
+Seven Coffee Roasters,Roasters Choice,Unspecified,Dark Roast,12oz,14.37,13,25,52.0,False,True,True,False,/products/roasters-choice,True,14.37,12,1.2,Seven Coffee Roasters | Roasters Choice
+Stamp Act Coffee,"Santiago Atitlan - Oaxaca, Mexico",Mexico,Light-Medium Roast,12oz,19.8,13,16,81.2,False,False,False,True,/products/santiago-atitlan--oaxaca-mexico,True,19.8,12,1.65,"Stamp Act Coffee | Santiago Atitlan - Oaxaca, Mexico"
+Stamp Act Coffee,"Santiago Atitlan - Oaxaca, Mexico",Mexico,Light-Medium Roast,32oz,44.55,13,16,81.2,False,False,False,True,/products/santiago-atitlan--oaxaca-mexico,True,44.55,32,1.39,"Stamp Act Coffee | Santiago Atitlan - Oaxaca, Mexico"
+Stamp Act Coffee,"Santiago Atitlan - Oaxaca, Mexico",Mexico,Light-Medium Roast,80oz,121.5,13,16,81.2,False,False,False,True,/products/santiago-atitlan--oaxaca-mexico,True,121.5,80,1.52,"Stamp Act Coffee | Santiago Atitlan - Oaxaca, Mexico"
+Victrola Coffee Roasters,Big Band Blend,Unspecified,Dark Roast,12oz,13.46,12,18,66.7,False,True,False,False,/products/big-band-blend,True,13.46,12,1.12,Victrola Coffee Roasters | Big Band Blend
+Seven Coffee Roasters,Diner Blend,Unspecified,Medium Roast,12oz,15.27,11,19,57.9,False,True,True,False,/products/diner-blend,True,15.27,12,1.27,Seven Coffee Roasters | Diner Blend
+Olympia Coffee Roasting Co.,Decaf Asterisk,Colombia,Unspecified,12oz,19.8,10,12,83.3,True,False,False,True,/products/decaf-asterisk,True,19.8,12,1.65,Olympia Coffee Roasting Co. | Decaf Asterisk
+Olympia Coffee Roasting Co.,Decaf Asterisk,Colombia,Unspecified,32oz,50.49,10,12,83.3,True,False,False,True,/products/decaf-asterisk,True,50.49,32,1.58,Olympia Coffee Roasting Co. | Decaf Asterisk
+Olympia Coffee Roasting Co.,Decaf Asterisk,Colombia,Unspecified,80oz,120.02,10,12,83.3,True,False,False,True,/products/decaf-asterisk,True,120.02,80,1.5,Olympia Coffee Roasting Co. | Decaf Asterisk
+Stamp Act Coffee,"Kayon Mountain, Guji Ethiopia - Natural",Ethiopia,Light Roast,12oz,19.35,10,10,100.0,False,False,False,True,/products/kayon-mountain-guji-ethiopia--natural,True,19.35,12,1.61,"Stamp Act Coffee | Kayon Mountain, Guji Ethiopia - Natural"
+Stamp Act Coffee,"Kayon Mountain, Guji Ethiopia - Natural",Ethiopia,Light Roast,32oz,44.1,10,10,100.0,False,False,False,True,/products/kayon-mountain-guji-ethiopia--natural,True,44.1,32,1.38,"Stamp Act Coffee | Kayon Mountain, Guji Ethiopia - Natural"
+Stamp Act Coffee,"Kayon Mountain, Guji Ethiopia - Natural",Ethiopia,Light Roast,80oz,111.6,10,10,100.0,False,False,False,True,/products/kayon-mountain-guji-ethiopia--natural,True,111.6,80,1.4,"Stamp Act Coffee | Kayon Mountain, Guji Ethiopia - Natural"
+Caffe Vita,Organic Decaf,Unspecified,Medium-Dark Roast,12oz,17.1,7,10,70.0,True,False,True,True,/products/organic-decaf,True,17.1,12,1.43,Caffe Vita | Organic Decaf
+Caffe Vita,Organic Decaf,Unspecified,Medium-Dark Roast,80oz,90.0,7,10,70.0,True,False,True,True,/products/organic-decaf,True,90.0,80,1.12,Caffe Vita | Organic Decaf
+Anchorhead Coffee,Decaf Colombia Excelso,Colombia,Medium Roast,10oz,13.5,7,8,87.5,True,False,False,True,/products/decaf-colombia-excelso,True,13.5,10,1.35,Anchorhead Coffee | Decaf Colombia Excelso
+Anchorhead Coffee,Decaf Colombia Excelso,Colombia,Medium Roast,32oz,36.0,7,8,87.5,True,False,False,True,/products/decaf-colombia-excelso,True,36.0,32,1.12,Anchorhead Coffee | Decaf Colombia Excelso
+Seven Coffee Roasters,Decaf Brazil Cerrado,Unspecified,Medium Roast,12oz,15.27,7,12,58.3,True,True,True,False,/products/decaf-brazil-cerrado,True,15.27,12,1.27,Seven Coffee Roasters | Decaf Brazil Cerrado
+Blossom Coffee Roasters,Dilworth Decaf,Unspecified,Medium-Dark Roast,12oz,16.65,6,11,54.5,True,True,True,False,/products/dilworth-decaf,True,16.65,12,1.39,Blossom Coffee Roasters | Dilworth Decaf
+Blossom Coffee Roasters,Dilworth Decaf,Unspecified,Medium-Dark Roast,32oz,39.15,6,11,54.5,True,True,True,False,/products/dilworth-decaf,True,39.15,32,1.22,Blossom Coffee Roasters | Dilworth Decaf
+Blossom Coffee Roasters,Dilworth Decaf,Unspecified,Medium-Dark Roast,80oz,81.0,6,11,54.5,True,True,True,False,/products/dilworth-decaf,True,81.0,80,1.01,Blossom Coffee Roasters | Dilworth Decaf
+Caffe Vita,Nor'Wester,Unspecified,Light-Medium Roast,12oz,17.1,6,11,54.5,False,True,True,False,/products/norwester,True,17.1,12,1.43,Caffe Vita | Nor'Wester
+Caffe Vita,Nor'Wester,Unspecified,Light-Medium Roast,80oz,90.0,6,11,54.5,False,True,True,False,/products/norwester,True,90.0,80,1.12,Caffe Vita | Nor'Wester
+Stamp Act Coffee,"Mafafas - Veracruz, Mexico",Mexico,Light-Medium Roast,12oz,18.0,6,8,75.0,False,False,False,True,/products/mafafas--veracruz-mexico,True,18.0,12,1.5,"Stamp Act Coffee | Mafafas - Veracruz, Mexico"
+Stamp Act Coffee,"Mafafas - Veracruz, Mexico",Mexico,Light-Medium Roast,32oz,43.88,6,8,75.0,False,False,False,True,/products/mafafas--veracruz-mexico,True,43.88,32,1.37,"Stamp Act Coffee | Mafafas - Veracruz, Mexico"
+Stamp Act Coffee,"Mafafas - Veracruz, Mexico",Mexico,Light-Medium Roast,80oz,106.88,6,8,75.0,False,False,False,True,/products/mafafas--veracruz-mexico,True,106.88,80,1.34,"Stamp Act Coffee | Mafafas - Veracruz, Mexico"
+Olympia Coffee Roasting Co,Northwesterly Blend,Unspecified,Medium-Dark Roast,12oz,18.0,5,8,62.5,False,True,False,False,/products/undefined,True,18.0,12,1.5,Olympia Coffee Roasting Co | Northwesterly Blend
+Olympia Coffee Roasting Co,Northwesterly Blend,Unspecified,Medium-Dark Roast,32oz,43.99,5,8,62.5,False,True,False,False,/products/undefined,True,43.99,32,1.37,Olympia Coffee Roasting Co | Northwesterly Blend
+Olympia Coffee Roasting Co,Northwesterly Blend,Unspecified,Medium-Dark Roast,80oz,94.14,5,8,62.5,False,True,False,False,/products/undefined,True,94.14,80,1.18,Olympia Coffee Roasting Co | Northwesterly Blend
+Victrola Coffee Roasters,Peru Chirinos,Peru,Light Roast,12oz,21.6,4,4,100.0,False,False,False,True,/products/vietnam-dung-kno-anaerobic,True,21.6,12,1.8,Victrola Coffee Roasters | Peru Chirinos
+Victrola Coffee Roasters,Deco Decaf Blend,Unspecified,Medium-Dark Roast,12oz,14.36,3,4,75.0,True,True,False,False,/products/deco-decaf,True,14.36,12,1.2,Victrola Coffee Roasters | Deco Decaf Blend
+Camber Coffee,Struttura,Unspecified,Medium Roast,12oz,21.6,3,4,75.0,False,True,True,False,/products/struttura,True,21.6,12,1.8,Camber Coffee | Struttura
+Camber Coffee,Struttura,Unspecified,Medium Roast,32oz,50.4,3,4,75.0,False,True,True,False,/products/struttura,True,50.4,32,1.57,Camber Coffee | Struttura
+Camber Coffee,Struttura,Unspecified,Medium Roast,80oz,112.5,3,4,75.0,False,True,True,False,/products/struttura,True,112.5,80,1.41,Camber Coffee | Struttura
+Stamp Act Coffee,"Diego Ramirez - Huehuetenango, Guatemala",Guatemala,Light-Medium Roast,12oz,21.6,3,4,75.0,False,False,False,True,/products/diego-ramirez--huehuetenango-guatemala,True,21.6,12,1.8,"Stamp Act Coffee | Diego Ramirez - Huehuetenango, Guatemala"
+Stamp Act Coffee,"Diego Ramirez - Huehuetenango, Guatemala",Guatemala,Light-Medium Roast,32oz,51.84,3,4,75.0,False,False,False,True,/products/diego-ramirez--huehuetenango-guatemala,True,51.84,32,1.62,"Stamp Act Coffee | Diego Ramirez - Huehuetenango, Guatemala"
+Stamp Act Coffee,"Diego Ramirez - Huehuetenango, Guatemala",Guatemala,Light-Medium Roast,80oz,129.6,3,4,75.0,False,False,False,True,/products/diego-ramirez--huehuetenango-guatemala,True,129.6,80,1.62,"Stamp Act Coffee | Diego Ramirez - Huehuetenango, Guatemala"
+Tonys Coffee,Half Calf,Unspecified,Medium Roast,12oz,17.1,2,4,50.0,True,True,True,False,/products/half-calf,True,17.1,12,1.43,Tonys Coffee | Half Calf
+Tonys Coffee,Half Calf,Unspecified,Medium Roast,80oz,63.0,2,4,50.0,True,True,True,False,/products/half-calf,True,63.0,80,0.79,Tonys Coffee | Half Calf
+Tonys Coffee,Small Farms,Unspecified,Light-Medium Roast,12oz,16.2,2,5,40.0,False,True,True,False,/products/small-farms,True,16.2,12,1.35,Tonys Coffee | Small Farms
+Tonys Coffee,Small Farms,Unspecified,Light-Medium Roast,80oz,76.5,2,5,40.0,False,True,True,False,/products/small-farms,True,76.5,80,0.96,Tonys Coffee | Small Farms
+Blossom Coffee Roasters,Kenya - Gatugi AA - Washed,Kenya,Light Roast,12oz,20.7,2,3,66.7,False,False,True,True,/products/kenya-othaya-kiruga-aa,True,20.7,12,1.72,Blossom Coffee Roasters | Kenya - Gatugi AA - Washed
+Blossom Coffee Roasters,Kenya - Gatugi AA - Washed,Kenya,Light Roast,32oz,46.8,2,3,66.7,False,False,True,True,/products/kenya-othaya-kiruga-aa,True,46.8,32,1.46,Blossom Coffee Roasters | Kenya - Gatugi AA - Washed
+Blossom Coffee Roasters,Kenya - Gatugi AA - Washed,Kenya,Light Roast,80oz,103.5,2,3,66.7,False,False,True,True,/products/kenya-othaya-kiruga-aa,True,103.5,80,1.29,Blossom Coffee Roasters | Kenya - Gatugi AA - Washed
+Stamp Act Coffee,"Kolla Bolcha - Agaro, Ethiopia",Ethiopia,Light Roast,12oz,21.6,2,3,66.7,False,False,False,True,/products/kolla-bolcha--lot--agaro-ethiopia,True,21.6,12,1.8,"Stamp Act Coffee | Kolla Bolcha - Agaro, Ethiopia"
+Stamp Act Coffee,"Kolla Bolcha - Agaro, Ethiopia",Ethiopia,Light Roast,32oz,51.84,2,3,66.7,False,False,False,True,/products/kolla-bolcha--lot--agaro-ethiopia,True,51.84,32,1.62,"Stamp Act Coffee | Kolla Bolcha - Agaro, Ethiopia"
+Stamp Act Coffee,"Kolla Bolcha - Agaro, Ethiopia",Ethiopia,Light Roast,80oz,124.2,2,3,66.7,False,False,False,True,/products/kolla-bolcha--lot--agaro-ethiopia,True,124.2,80,1.55,"Stamp Act Coffee | Kolla Bolcha - Agaro, Ethiopia"
+Stamp Act Coffee,Base Layers - A Winter Blend 2025/26,Unspecified,Light-Medium Roast,12oz,21.15,2,2,100.0,False,True,False,False,/products/base-layers--a-winter-blend-,True,21.15,12,1.76,Stamp Act Coffee | Base Layers - A Winter Blend 2025/26
+Stamp Act Coffee,Base Layers - A Winter Blend 2025/26,Unspecified,Light-Medium Roast,32oz,49.41,2,2,100.0,False,True,False,False,/products/base-layers--a-winter-blend-,True,49.41,32,1.54,Stamp Act Coffee | Base Layers - A Winter Blend 2025/26
+Stamp Act Coffee,Base Layers - A Winter Blend 2025/26,Unspecified,Light-Medium Roast,80oz,121.95,2,2,100.0,False,True,False,False,/products/base-layers--a-winter-blend-,True,121.95,80,1.52,Stamp Act Coffee | Base Layers - A Winter Blend 2025/26
+Blossom Coffee Roasters,Guatemala - Antonio Martinez  - Washed,Guatemala,Light Roast,12oz,20.7,2,2,100.0,False,False,True,True,/products/guatemala--antonio-martinez---washed,True,20.7,12,1.72,Blossom Coffee Roasters | Guatemala - Antonio Martinez  - Washed
+Blossom Coffee Roasters,Guatemala - Antonio Martinez  - Washed,Guatemala,Light Roast,16oz,23.85,2,2,100.0,False,False,True,True,/products/guatemala--antonio-martinez---washed,True,23.85,16,1.49,Blossom Coffee Roasters | Guatemala - Antonio Martinez  - Washed
+Blossom Coffee Roasters,Guatemala - Antonio Martinez  - Washed,Guatemala,Light Roast,32oz,45.0,2,2,100.0,False,False,True,True,/products/guatemala--antonio-martinez---washed,True,45.0,32,1.41,Blossom Coffee Roasters | Guatemala - Antonio Martinez  - Washed
+Blossom Coffee Roasters,Guatemala - Antonio Martinez  - Washed,Guatemala,Light Roast,80oz,99.0,2,2,100.0,False,False,True,True,/products/guatemala--antonio-martinez---washed,True,99.0,80,1.24,Blossom Coffee Roasters | Guatemala - Antonio Martinez  - Washed
+Kuma Coffee Roasters,Momma Bear 50/50 Decaf-Regular Blend,Unspecified,Light-Medium Roast,12oz,21.47,1,2,50.0,True,True,False,False,/products/momma-bear--decafregular-blend,True,21.47,12,1.79,Kuma Coffee Roasters | Momma Bear 50/50 Decaf-Regular Blend
+Olympia Coffee Roasting Co,Colombia Taita,Colombia,Light Roast,12oz,23.4,1,1,100.0,False,False,False,True,/products/taita-reserva,True,23.4,12,1.95,Olympia Coffee Roasting Co | Colombia Taita
+Olympia Coffee Roasting Co,Colombia Taita,Colombia,Light Roast,32oz,57.35,1,1,100.0,False,False,False,True,/products/taita-reserva,True,57.35,32,1.79,Olympia Coffee Roasting Co | Colombia Taita
+Olympia Coffee Roasting Co,Colombia Taita,Colombia,Light Roast,80oz,132.12,1,1,100.0,False,False,False,True,/products/taita-reserva,True,132.12,80,1.65,Olympia Coffee Roasting Co | Colombia Taita
+Tonys Coffee,Trail Breaker,Unspecified,Dark Roast,12oz,20.11,1,1,100.0,False,True,True,False,/products/trail-breaker,True,20.11,12,1.68,Tonys Coffee | Trail Breaker
+Victrola Coffee Roasters,Mexico Teddy Kim,Mexico,Light Roast,12oz,22.5,1,1,100.0,False,False,False,True,/products/ethiopia-shantawene-station,True,22.5,12,1.88,Victrola Coffee Roasters | Mexico Teddy Kim
+Camber Coffee,Colombia Aponte Village,Colombia,Light Roast,12oz,22.5,1,1,100.0,False,False,True,True,/products/colombia-aponte-village-1,True,22.5,12,1.88,Camber Coffee | Colombia Aponte Village
+Camber Coffee,Colombia Aponte Village,Colombia,Light Roast,32oz,53.1,1,1,100.0,False,False,True,True,/products/colombia-aponte-village-1,True,53.1,32,1.66,Camber Coffee | Colombia Aponte Village
+Camber Coffee,Colombia Aponte Village,Colombia,Light Roast,80oz,117.0,1,1,100.0,False,False,True,True,/products/colombia-aponte-village-1,True,117.0,80,1.46,Camber Coffee | Colombia Aponte Village
+Blossom Coffee Roasters,Ethiopia Uraga Suke - Natural,Ethiopia,Light-Medium Roast,12oz,20.25,1,1,100.0,False,False,True,True,/products/ethiopia-uraga-suke--natural,True,20.25,12,1.69,Blossom Coffee Roasters | Ethiopia Uraga Suke - Natural
+Blossom Coffee Roasters,Ethiopia Uraga Suke - Natural,Ethiopia,Light-Medium Roast,32oz,45.0,1,1,100.0,False,False,True,True,/products/ethiopia-uraga-suke--natural,True,45.0,32,1.41,Blossom Coffee Roasters | Ethiopia Uraga Suke - Natural
+Blossom Coffee Roasters,Ethiopia Uraga Suke - Natural,Ethiopia,Light-Medium Roast,80oz,99.0,1,1,100.0,False,False,True,True,/products/ethiopia-uraga-suke--natural,True,99.0,80,1.24,Blossom Coffee Roasters | Ethiopia Uraga Suke - Natural
+Caffe Vita,KEXP Blend,Unspecified,Medium Roast,12oz,17.1,0,0,0.0,False,True,True,False,/products/undefined,False,17.1,12,1.43,Caffe Vita | KEXP Blend
+Caffe Vita,KEXP Blend,Unspecified,Medium Roast,80oz,90.0,0,0,0.0,False,True,True,False,/products/undefined,False,90.0,80,1.12,Caffe Vita | KEXP Blend
+Anchorhead Coffee,Megalodon Blend,Unspecified,Medium-Dark Roast,10oz,18.9,0,0,0.0,False,True,False,False,/products/megalodon-blend,False,18.9,10,1.89,Anchorhead Coffee | Megalodon Blend
+Anchorhead Coffee,Megalodon Blend,Unspecified,Medium-Dark Roast,32oz,51.08,0,0,0.0,False,True,False,False,/products/megalodon-blend,False,51.08,32,1.6,Anchorhead Coffee | Megalodon Blend
+Olympia Coffee Roasting Co,Colombia Clinton Ossa Micro Lot,Colombia,Light Roast,12oz,26.55,0,0,0.0,False,False,False,True,/products/clinton-ossa-arusi-heirloom-ethiopia,False,26.55,12,2.21,Olympia Coffee Roasting Co | Colombia Clinton Ossa Micro Lot
+Olympia Coffee Roasting Co,Colombia Clinton Ossa Micro Lot,Colombia,Light Roast,32oz,66.26,0,0,0.0,False,False,False,True,/products/clinton-ossa-arusi-heirloom-ethiopia,False,66.26,32,2.07,Olympia Coffee Roasting Co | Colombia Clinton Ossa Micro Lot
+Olympia Coffee Roasting Co,Colombia Clinton Ossa Micro Lot,Colombia,Light Roast,80oz,154.4,0,0,0.0,False,False,False,True,/products/clinton-ossa-arusi-heirloom-ethiopia,False,154.4,80,1.93,Olympia Coffee Roasting Co | Colombia Clinton Ossa Micro Lot
+Victrola Coffee Roasters,Colombia Jose Gomez,Colombia,Light Roast,12oz,21.6,0,0,0.0,False,False,False,True,/products/colombia-buenos-aries-natural,False,21.6,12,1.8,Victrola Coffee Roasters | Colombia Jose Gomez
+Victrola Coffee Roasters,Paramount Blend,Unspecified,Dark Roast,12oz,16.2,0,0,0.0,False,True,False,False,/products/paramount-blend,False,16.2,12,1.35,Victrola Coffee Roasters | Paramount Blend
+Victrola Coffee Roasters,Space Blend,Unspecified,Medium Roast,12oz,17.1,0,0,0.0,False,True,False,False,/products/space-blend,False,17.1,12,1.43,Victrola Coffee Roasters | Space Blend
+Olympia Coffee Roasting Co,Ethiopia Buncho Honey,Ethiopia,Light Roast,12oz,23.4,0,0,0.0,False,False,False,True,/products/buncho-honey,False,23.4,12,1.95,Olympia Coffee Roasting Co | Ethiopia Buncho Honey
+Olympia Coffee Roasting Co,Ethiopia Buncho Honey,Ethiopia,Light Roast,32oz,60.75,0,0,0.0,False,False,False,True,/products/buncho-honey,False,60.75,32,1.9,Olympia Coffee Roasting Co | Ethiopia Buncho Honey
+Olympia Coffee Roasting Co,Ethiopia Buncho Honey,Ethiopia,Light Roast,80oz,124.88,0,0,0.0,False,False,False,True,/products/buncho-honey,False,124.88,80,1.56,Olympia Coffee Roasting Co | Ethiopia Buncho Honey
+Ladro Roasting,Ladro Blend,Unspecified,Medium Roast,12oz,20.98,0,0,0.0,False,True,True,False,/products/ladro-blend,False,20.98,12,1.75,Ladro Roasting | Ladro Blend
+Ladro Roasting,Ladro Blend,Unspecified,Medium Roast,80oz,92.13,0,0,0.0,False,True,True,False,/products/ladro-blend,False,92.13,80,1.15,Ladro Roasting | Ladro Blend
+Olympia Coffee Roasting Co,Peru EspÃ­ritu Wari Reserva,Peru,Light Roast,12oz,21.6,0,0,0.0,False,False,False,True,/products/undefined,False,21.6,12,1.8,Olympia Coffee Roasting Co | Peru EspÃ­ritu Wari Reserva
+Olympia Coffee Roasting Co,Peru EspÃ­ritu Wari Reserva,Peru,Light Roast,32oz,52.92,0,0,0.0,False,False,False,True,/products/undefined,False,52.92,32,1.65,Olympia Coffee Roasting Co | Peru EspÃ­ritu Wari Reserva
+Olympia Coffee Roasting Co,Peru EspÃ­ritu Wari Reserva,Peru,Light Roast,80oz,121.05,0,0,0.0,False,False,False,True,/products/undefined,False,121.05,80,1.51,Olympia Coffee Roasting Co | Peru EspÃ­ritu Wari Reserva
+Tonys Coffee,Morning Tide,Unspecified,Light-Medium Roast,12oz,21.02,0,0,0.0,False,True,True,False,/products/morning-tide,False,21.02,12,1.75,Tonys Coffee | Morning Tide
+Victrola Coffee Roasters,Nicaragua Luis Alberto,Nicaragua,Light Roast,12oz,21.6,0,0,0.0,False,False,False,True,/products/nicaragua-luis-alberto-catimore,False,21.6,12,1.8,Victrola Coffee Roasters | Nicaragua Luis Alberto
+Victrola Coffee Roasters,Guatemala Patzun Chimaltenango,Guatemala,Light Roast,12oz,22.5,0,0,0.0,False,False,False,True,/products/guatemala-fredy-morales-1,False,22.5,12,1.88,Victrola Coffee Roasters | Guatemala Patzun Chimaltenango
+Anchorhead Coffee,Peru Valle Sandia Reserve,Peru,Light-Medium Roast,10oz,21.6,0,0,0.0,False,False,False,True,/products/peru-valle-sandia-reserve,False,21.6,10,2.16,Anchorhead Coffee | Peru Valle Sandia Reserve
+Anchorhead Coffee,Peru Valle Sandia Reserve,Peru,Light-Medium Roast,32oz,58.5,0,0,0.0,False,False,False,True,/products/peru-valle-sandia-reserve,False,58.5,32,1.83,Anchorhead Coffee | Peru Valle Sandia Reserve
+Camber Coffee,Kenya Kii,Kenya,Light Roast,12oz,23.4,0,0,0.0,False,False,True,True,/products/kenya-kii-1,False,23.4,12,1.95,Camber Coffee | Kenya Kii
+Camber Coffee,Kenya Kii,Kenya,Light Roast,32oz,55.8,0,0,0.0,False,False,True,True,/products/kenya-kii-1,False,55.8,32,1.74,Camber Coffee | Kenya Kii
+Camber Coffee,Kenya Kii,Kenya,Light Roast,80oz,123.3,0,0,0.0,False,False,True,True,/products/kenya-kii-1,False,123.3,80,1.54,Camber Coffee | Kenya Kii
+Olympia Coffee Roasting Co,20th Anniversary Blend,Unspecified,Light Roast,12oz,23.4,0,0,0.0,False,True,False,False,/products/th-anniversary-blend,False,23.4,12,1.95,Olympia Coffee Roasting Co | 20th Anniversary Blend
+Olympia Coffee Roasting Co,20th Anniversary Blend,Unspecified,Light Roast,32oz,57.73,0,0,0.0,False,True,False,False,/products/th-anniversary-blend,False,57.73,32,1.8,Olympia Coffee Roasting Co | 20th Anniversary Blend
+Olympia Coffee Roasting Co,20th Anniversary Blend,Unspecified,Light Roast,80oz,133.07,0,0,0.0,False,True,False,False,/products/th-anniversary-blend,False,133.07,80,1.66,Olympia Coffee Roasting Co | 20th Anniversary Blend
+Kuma Coffee Roasters,Decaf Ethiopia Natural Suke Quto,Ethiopia,Medium Roast,12oz,25.69,0,0,0.0,True,False,False,True,/products/decaf-ethiopia-natural-suke-quto-new,False,25.69,12,2.14,Kuma Coffee Roasters | Decaf Ethiopia Natural Suke Quto
+Victrola Coffee Roasters,Guatemala David Solano,Guatemala,Light Roast,12oz,21.6,0,0,0.0,False,False,False,True,/products/guatemala-david-solano,False,21.6,12,1.8,Victrola Coffee Roasters | Guatemala David Solano
+Camber Coffee,Ethiopia Taaroo,Ethiopia,Light Roast,32oz,66.6,0,0,0.0,False,False,True,True,/products/ethiopia-taaroo,False,66.6,32,2.08,Camber Coffee | Ethiopia Taaroo
+Camber Coffee,Ethiopia Taaroo,Ethiopia,Light Roast,80oz,142.2,0,0,0.0,False,False,True,True,/products/ethiopia-taaroo,False,142.2,80,1.78,Camber Coffee | Ethiopia Taaroo
+Blossom Coffee Roasters,Colombia - Bourbon Sidra - Washed,Colombia,Light-Medium Roast,12oz,21.6,0,0,0.0,False,False,True,True,/products/colombia--bourbon-sidra--washed,False,21.6,12,1.8,Blossom Coffee Roasters | Colombia - Bourbon Sidra - Washed
+Blossom Coffee Roasters,Colombia - Bourbon Sidra - Washed,Colombia,Light-Medium Roast,32oz,46.8,0,0,0.0,False,False,True,True,/products/colombia--bourbon-sidra--washed,False,46.8,32,1.46,Blossom Coffee Roasters | Colombia - Bourbon Sidra - Washed
+Camber Coffee,Ethiopia Biloya,Ethiopia,Light Roast,12oz,23.4,0,0,0.0,False,False,True,True,/products/ethiopia-biloya,False,23.4,12,1.95,Camber Coffee | Ethiopia Biloya
+Camber Coffee,Ethiopia Biloya,Ethiopia,Light Roast,32oz,55.8,0,0,0.0,False,False,True,True,/products/ethiopia-biloya,False,55.8,32,1.74,Camber Coffee | Ethiopia Biloya
+Camber Coffee,Ethiopia Biloya,Ethiopia,Light Roast,80oz,122.4,0,0,0.0,False,False,True,True,/products/ethiopia-biloya,False,122.4,80,1.53,Camber Coffee | Ethiopia Biloya
+Anchorhead Coffee,Colombia Cauca Cosurca,Colombia,Light-Medium Roast,10oz,21.6,0,0,0.0,False,False,False,True,/products/colombia-cauca-cosurca,False,21.6,10,2.16,Anchorhead Coffee | Colombia Cauca Cosurca
+Anchorhead Coffee,Colombia Cauca Cosurca,Colombia,Light-Medium Roast,32oz,58.5,0,0,0.0,False,False,False,True,/products/colombia-cauca-cosurca,False,58.5,32,1.83,Anchorhead Coffee | Colombia Cauca Cosurca
+Olympia Coffee Roasting Co,Ethiopia Kokose Natural,Ethiopia,Light Roast,12oz,24.3,0,0,0.0,False,False,False,True,/products/ethiopia-kokose-natural,False,24.3,12,2.02,Olympia Coffee Roasting Co | Ethiopia Kokose Natural
+Olympia Coffee Roasting Co,Ethiopia Kokose Natural,Ethiopia,Light Roast,32oz,59.89,0,0,0.0,False,False,False,True,/products/ethiopia-kokose-natural,False,59.89,32,1.87,Olympia Coffee Roasting Co | Ethiopia Kokose Natural
+Olympia Coffee Roasting Co,Ethiopia Kokose Natural,Ethiopia,Light Roast,80oz,138.47,0,0,0.0,False,False,False,True,/products/ethiopia-kokose-natural,False,138.47,80,1.73,Olympia Coffee Roasting Co | Ethiopia Kokose Natural
+Olympia Coffee Roasting Co,Ethiopia Bochesa,Ethiopia,Light Roast,12oz,24.75,0,0,0.0,False,False,False,True,/products/ethiopia-bochesa,False,24.75,12,2.06,Olympia Coffee Roasting Co | Ethiopia Bochesa
+Olympia Coffee Roasting Co,Ethiopia Bochesa,Ethiopia,Light Roast,32oz,61.4,0,0,0.0,False,False,False,True,/products/ethiopia-bochesa,False,61.4,32,1.92,Olympia Coffee Roasting Co | Ethiopia Bochesa
+Olympia Coffee Roasting Co,Ethiopia Bochesa,Ethiopia,Light Roast,80oz,142.25,0,0,0.0,False,False,False,True,/products/ethiopia-bochesa,False,142.25,80,1.78,Olympia Coffee Roasting Co | Ethiopia Bochesa
+Olympia Coffee Roasting Co,Kenya Boma AA Micro Lot 12,Kenya,Light Roast,12oz,22.5,0,0,0.0,False,False,False,True,/products/kenya-boma-aa-micro-lot-,False,22.5,12,1.88,Olympia Coffee Roasting Co | Kenya Boma AA Micro Lot 12
+Olympia Coffee Roasting Co,Kenya Boma AA Micro Lot 12,Kenya,Light Roast,32oz,55.51,0,0,0.0,False,False,False,True,/products/kenya-boma-aa-micro-lot-,False,55.51,32,1.73,Olympia Coffee Roasting Co | Kenya Boma AA Micro Lot 12
+Olympia Coffee Roasting Co,Kenya Boma AA Micro Lot 12,Kenya,Light Roast,80oz,127.53,0,0,0.0,False,False,False,True,/products/kenya-boma-aa-micro-lot-,False,127.53,80,1.59,Olympia Coffee Roasting Co | Kenya Boma AA Micro Lot 12

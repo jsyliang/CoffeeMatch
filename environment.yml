@@ -10,17 +10,10 @@ dependencies:
   - pandas
   - numpy
   - openpyxl
-  - emoji
+  - pylint
 
   # Streamlit stack
   - streamlit>=1.18
   - altair>=4.2,<5
 
-  # Dash stack
-  - dash
-  - flask
-  - werkzeug
-  - pip
-  - pip:
-      - dash-bootstrap-components
 

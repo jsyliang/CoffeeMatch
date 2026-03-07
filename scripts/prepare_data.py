@@ -91,6 +91,28 @@ def remove_unused_columns(df: pd.DataFrame) -> pd.DataFrame:
 
     return cleaned_df
 
+def create_product_key(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Create a stable product key using roaster and product_name.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Products DataFrame.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with product_key column added.
+    """
+    cleaned_df = df.copy()
+    cleaned_df["product_key"] = (
+        cleaned_df["roaster"].astype(str).str.strip()
+        + " | "
+        + cleaned_df["product_name"].astype(str).str.strip()
+    )
+    return cleaned_df
+
 
 def save_csv(df: pd.DataFrame, output_path: Path) -> None:
     """
@@ -117,6 +139,7 @@ def main() -> None:
     reviews_df = standardize_column_names(reviews_df)
 
     products_df = remove_unused_columns(products_df)
+    products_df = create_product_key(products_df)
 
     save_csv(products_df, PRODUCTS_OUTPUT)
     save_csv(reviews_df, REVIEWS_OUTPUT)

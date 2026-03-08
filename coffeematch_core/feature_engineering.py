@@ -78,7 +78,6 @@ def validate_feature_columns(products_df: pd.DataFrame) -> None:
         )
 
 
-
 def encode_roast_membership(products_df: pd.DataFrame) -> pd.DataFrame:
     """
     Add overlapping roast membership features.
@@ -127,7 +126,6 @@ def encode_roast_membership(products_df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-
 def classify_size_tier(size_oz: float) -> str:
     """
     Classify a bag size into a size tier.
@@ -151,7 +149,6 @@ def classify_size_tier(size_oz: float) -> str:
     return "other"
 
 
-
 def add_size_tier(products_df: pd.DataFrame) -> pd.DataFrame:
     """
     Add a size_tier column derived from size_oz.
@@ -169,8 +166,6 @@ def add_size_tier(products_df: pd.DataFrame) -> pd.DataFrame:
     df = products_df.copy()
     df["size_tier"] = df["size_oz"].apply(classify_size_tier)
     return df
-
-
 
 def compute_tier_medians(products_df: pd.DataFrame) -> dict[str, float]:
     """
@@ -192,7 +187,6 @@ def compute_tier_medians(products_df: pd.DataFrame) -> dict[str, float]:
         .dropna()
         .to_dict()
     )
-
 
 
 def compute_adjustment_factors(tier_medians: dict[str, float]) -> dict[str, float]:
@@ -234,7 +228,6 @@ def compute_adjustment_factors(tier_medians: dict[str, float]) -> dict[str, floa
             adjustment_factors[tier] = standard_median / median_price
 
     return adjustment_factors
-
 
 
 def _select_reference_row_for_product(product_rows: pd.DataFrame) -> pd.Series:
@@ -293,7 +286,6 @@ def _select_reference_row_for_product(product_rows: pd.DataFrame) -> pd.Series:
     return fallback_rows.iloc[0]
 
 
-
 def select_reference_rows(products_df: pd.DataFrame) -> pd.DataFrame:
     """
     Select one reference row per product.
@@ -308,13 +300,14 @@ def select_reference_rows(products_df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         One selected reference row per product.
     """
-    reference_rows = (
-        products_df.groupby("product_key", group_keys=False)
-        .apply(_select_reference_row_for_product)
-        .reset_index(drop=True)
-    )
-    return reference_rows
+    selected_rows = []
 
+    for _, product_rows in products_df.groupby("product_key"):
+        selected_row = _select_reference_row_for_product(product_rows)
+        selected_rows.append(selected_row)
+
+    reference_rows = pd.DataFrame(selected_rows).reset_index(drop=True)
+    return reference_rows
 
 
 def apply_reference_adjustment(reference_rows: pd.DataFrame,
@@ -342,7 +335,6 @@ def apply_reference_adjustment(reference_rows: pd.DataFrame,
         df["price_per_oz"] * df["reference_adjustment_factor"]
     )
     return df
-
 
 
 def build_reference_features(reference_rows: pd.DataFrame) -> pd.DataFrame:
@@ -383,7 +375,6 @@ def build_reference_features(reference_rows: pd.DataFrame) -> pd.DataFrame:
     )
 
     return reference_features
-
 
 
 def aggregate_product_features(products_df: pd.DataFrame) -> pd.DataFrame:
@@ -428,7 +419,6 @@ def aggregate_product_features(products_df: pd.DataFrame) -> pd.DataFrame:
     return product_features.reset_index()
 
 
-
 def add_derived_product_features(product_features: pd.DataFrame) -> pd.DataFrame:
     """
     Add numeric features useful for downstream recommendation scoring.
@@ -460,7 +450,6 @@ def add_derived_product_features(product_features: pd.DataFrame) -> pd.DataFrame
     return df
 
 
-
 def build_feature_table(products_df: pd.DataFrame) -> pd.DataFrame:
     """
     Build the final product-level feature table for recommendation.
@@ -480,10 +469,21 @@ def build_feature_table(products_df: pd.DataFrame) -> pd.DataFrame:
     size_level_df = encode_roast_membership(products_df)
     size_level_df = add_size_tier(size_level_df)
 
+    ########
+    print("SIZE LEVEL COLUMNS:", size_level_df.columns.tolist())
+    ########
+
     tier_medians = compute_tier_medians(size_level_df)
     adjustment_factors = compute_adjustment_factors(tier_medians)
 
     reference_rows = select_reference_rows(size_level_df)
+
+    #################### 
+    print("REFERENCE ROW COLUMNS:", reference_rows.columns.tolist())
+    print(reference_rows.head())
+    ######################
+    
+
     reference_rows = apply_reference_adjustment(
         reference_rows,
         adjustment_factors,

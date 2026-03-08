@@ -13,6 +13,7 @@ from typing import List, Optional
 
 
 PRODUCT_REQUIRED_COLUMNS = [
+    "product_key",
     "roaster",
     "product_name",
     "origin",

@@ -1,42 +1,37 @@
 import streamlit as st
-import emoji 
-import pandas as pd 
-import numpy as np
+import pandas as pd
 
 # Paths to data 
-PRODUCTS_PATH = "data/Product_Information.xlsx"
-REVIEWS_PATH = "data/Reviews_and_Tasting_Notes.xlsx"
+PRODUCTS_PATH = "data/raw/Product_Information.xlsx"
+REVIEWS_PATH = "data/raw/Reviews_and_Tasting_Notes.xlsx"
 REVIEWS_SHEET = "Reviews with Tasting Notes"
 
-# Set up styling classes for use in the website 
+# Set up styling for use in the website 
 st.markdown("""
         <style>
             /*Page Background Colors*/
-            
             .stApp {
                 background: linear-gradient(to bottom, #ffe4b5, #8b4513);
             }
 
             /*Page Titles*/
-
             .page-title {
                 font-size: 116px;
                 font-family: 'Brush Script MT', cursive, sans-serif;
                 color: #a0522d;
                 text-align: center;
-                margin-bottom: 0 !important
+                margin-bottom: 0 !important;
                 gap: 0 !important;
             }
             
             /*Page Subtitles*/
-
             .page-subtitle {
                 font-size: 44px;
                 color: #a0522d;
                 font-family: 'Brush Script MT', cursive, sans-serif;
                 text-align: center;
-                margin-bottom: 1.5rem !important;
-                margin-top: 0 !important;
+                margin-bottom: 1.5rem;
+                margin-top: 0;
             }
 
             /*Survey Box*/
@@ -44,19 +39,46 @@ st.markdown("""
             background-color: #ffe4b5 !important;
             }
 
-            /*Formatting for the text to go above questions in the survey*/
+            /* Align slider vertically to center of its column */
+            [data-testid="stSlider"] {
+                margin-top: auto;
+                margin-bottom: auto;
+                padding-top: 1rem;
+            }
 
+            /* Make paired columns stretch to match each other's height */
+            [data-testid="stHorizontalBlock"] {
+                align-items: center !important;  /* vertically center column contents */
+            }
+
+            /* Visual divider between question rows */
+            .survey-row-divider {
+                border-top: 1px solid #c49a6c;
+                margin: 1rem 0;
+                width: 100%;
+            }
+
+            /*Formatting for the text to go above questions in the survey*/
             .survey-question {
                 font-size: 24px;
                 color: #a0522d ; 
                 font-weight: bold;
-                margin: 0 !important;
-                padding: 0 !important;
-                margin-bottom: 0.2rem !important;
+                margin: 0;
+                padding: 0;
+                margin-bottom: 0.2rem;
+            }
+
+            /*Formatting for the text to go above sliders*/
+            .slider-question {
+                font-size: 24px;
+                color: #BF4064 ; 
+                font-weight: bold;
+                margin: 0;
+                padding: 0;
+                margin-bottom: 0.2rem;
             }
             
             /*Formatting for the question boxes */
-
             .stRadio {
                 margin-top: 0 !important;
                 margin-bottom: 0.5rem !important;
@@ -64,22 +86,156 @@ st.markdown("""
             }
 
             .stRadio [role="radiogroup"] label p {
-                font-size: 18px !important;
-                line-height: 1.6 !important;
-                color: #bb6528 !important;
-                font-weight: bold !important;
+                font-size: 18px;
+                line-height: 1.6;
+                color: #bb6528;
+                font-weight: bold;
+            }
+            
+            /* Slider */
+
+            /* Nuke ALL backgrounds inside slider */
+            [data-testid="stSlider"] * {
+                background: transparent !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+            }
+
+            /* Repaint the track — target by height (the thin bar) */
+            [data-baseweb="slider"] div[style*="height: 0.2"] {
+                background: #D6859C !important;
+                background-color: #D6859C !important;
+            }
+
+            /* Target ALL st-c* track class divs inside slider */
+            [data-baseweb="slider"] div[class*="st-c"] {
+                background: #D6859C !important;
+                background-color: #D6859C !important;
+            }
+
+            /* NOT the outer flex container or thumb */
+            [data-baseweb="slider"] > div[class*="st-c"] {
+                background: transparent !important;
+                background-color: transparent !important;
+            }
+
+            /* Hide default thumb */
+            [data-testid="stSlider"] [role="slider"] {
+                background: transparent !important;
+                background-color: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                width: 30px !important;
+                height: 30px !important;
+                top: -6px !important;
+                position: relative !important;
+            }
+
+            /* Heart thumb */
+            [data-testid="stSlider"] [role="slider"]::before {
+                content: "♥";
+                font-size: 28px;
+                color: #D6859C;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                line-height: 1;
+            }
+
+            /* Current value above thumb */
+            [data-testid="stSlider"] [role="slider"] div,
+            [data-testid="stSlider"] [role="slider"] div * {
+                color: #D6859C !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                font-weight: bold;
+            }
+
+            /* Tick bar container */
+            [data-testid="stSliderTickBar"] {
+                background: transparent !important;
+                background-color: transparent !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+            }
+
+            /* Position tick labels */
+            [data-testid="stSliderTickBar"] [data-testid="stMarkdownContainer"]:first-child {
+                text-align: left !important;
+                order: 1;
+            }
+
+            [data-testid="stSliderTickBar"] [data-testid="stMarkdownContainer"]:last-child {
+                text-align: right !important;
+                order: 2;
+            }
+
+            /* The actual "1" and "5" text */
+            [data-testid="stSliderTickBar"] [data-testid="stMarkdownContainer"] p {
+                color: #D6859C !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                margin: 0 !important;
+                font-weight: bold;
             }
 
             /* Results Box*/
-
             .results-box {
-            background-color: #ffe4b5 !important;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 15px;
+            justify-content: space-between;
+            background-color: #ffe4b5;
             color: #a0522d ;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 5px;
+            margin: 15px 0;
             font-size: 18px;
-            
-        }
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 12px;
+            }
+
+            [data-testid="stMarkdownContainer"] {
+                width: 100%;
+            }
+
+            /* Results Box Children*/
+            .result-sub-box{
+            flex: 1 1 150px;  /* grow | shrink | start min width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffe4b5;
+            color: #a0522d;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            box-sizing: border-box;
+            min-height: 100px;
+            border-radius: 8px;
+            }
+
+            .sub-box-label {
+                font-size: 1.4rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #6B3920;
+                margin-bottom: 4px;
+            }
+
+            .sub-box-value {
+                font-size: 1.2 rem;
+                font-weight: 700;
+                color: #a0522d;
+            }
+
         </style>
         """, unsafe_allow_html=True)
 
@@ -121,14 +277,12 @@ def load_reviews():
 
     return reviews_df
 
-
 products = load_products()
 reviews = load_reviews()
 
 # Matching Algorithm 
 
-# Points awarded for matching certain criterea (TODO: tune based on user survey if we do it)
-ROAST_POINTS = 3.0
+# Points awarded for matching certain criterea
 VALUE_WEIGHT = 2.0
 
 def apply_filters(df, survey_results):
@@ -157,11 +311,13 @@ def score_products(df, survey_results):
     df["score"] = 0
     df["reason"] = ""
 
+    roast_pref_points = survey_results.get("roast_pref_points", 3)
+
     # Roast match
     if survey_results["roast"] != "No preference / I'm not sure":
         mask = df["roast_type"].str.contains(survey_results["roast"], case=False, na=False)
-        df.loc[mask, "score"] += ROAST_POINTS
-        df.loc[mask, "reason"] += f"Roast match (+{ROAST_POINTS}). "
+        df.loc[mask, "score"] += roast_pref_points
+        df.loc[mask, "reason"] += f"Roast match (+{roast_pref_points}). "
 
     # Cheaper per oz gets slight boost
     if df["price_per_oz"].notna().any():
@@ -195,49 +351,94 @@ if "step" not in st.session_state:
 
 # Survey Page 
 if st.session_state["step"] == "survey":
+    
     st.set_page_config(page_title="Coffee Match", layout="wide")
     st.markdown("<div class='page-title'>Coffee Match</div>",unsafe_allow_html=True)
     st.markdown("<div class='page-subtitle'>☕ Find the Washington Bean of your Dreams ☕</div>",unsafe_allow_html=True)
+    
     with st.form("survey_form"):
 
-        #Caffeine content 
+        # Caffeine
         st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
-        q1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
+        q1 = st.radio("", ["Caffeinated!⚡", "Decaf 😌"], label_visibility="collapsed")
 
-        #Roast preference
-        st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
-        q2 = st.radio("",["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility = "collapsed")
+        st.markdown("<div class='survey-row-divider'></div>", unsafe_allow_html=True)
 
-        #Ground or Whole
-        st.markdown("<div class='survey-question'>Ground or whole beans (do you have a coffee grinder)?</div>", unsafe_allow_html=True)
-        q3 = st.radio("",["Whole beans (yes)", "Pre-ground (no)"], label_visibility = "collapsed")
-        
+        # Roast Level
+        col_q2, col_s2 = st.columns([1, 1])
+        with col_q2:
+            st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
+            q2 = st.radio("Roast", ["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility="collapsed")
+        with col_s2:
+            st.markdown("<div class='slider-question'>How important is roast for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            q4 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
+
+        st.markdown("<div class='survey-row-divider'></div>", unsafe_allow_html=True)
+
+        # Ground/Whole
+        col_q3, col_s3 = st.columns([1, 1])
+        with col_q3:
+            st.markdown("<div class='survey-question'>Ground or whole beans (do you have a grinder)?</div>", unsafe_allow_html=True)
+            q3 = st.radio("Ground", ["Whole beans (yes)", "Pre-ground (no)"], label_visibility="collapsed")
+        with col_s3:
+            st.markdown("<div class='slider-question'>How important is ground status for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            q5 = st.slider("Ground importance", 1, 5, 2, label_visibility="collapsed")
+
+        st.markdown("<div class='survey-row-divider'></div>", unsafe_allow_html=True)
+
         submitted = st.form_submit_button("Find your match!")
+
+        # make sure that after when the user submits, the data is in the cals form UserPreferences and then we apply the filters 
+        # and scoring to get the results page to display the matches based on the survey results.
+        # then the class recommendations can be used to display the results in a nice format 
+        # (with the reason for the score and all that fun stuff)
+       
         if submitted:
-            survey_results = {"caffeine": q1, "roast": q2, "ground": q3,}
+
+            survey_results = {
+                "caffeine": q1,
+                "roast": q2,
+                "roast_pref_points": q4,
+                "ground": q3,
+                "grind_pref_points": q5,
+            }
             st.session_state["survey_results"] = survey_results
             filtered = apply_filters(products, survey_results)
-            st.session_state["scored"] =  score_products(filtered, survey_results)
+            st.session_state["scored"] = score_products(filtered, survey_results)
             st.session_state["step"] = "results"
             st.rerun()
 
 # Results Page!
 if st.session_state["step"] == "results":
+    st.set_page_config(page_title="Match Results")
     scored = st.session_state.get("scored")
     if scored.empty:
         st.warning("No products match your filters :(")
     else:
         st.set_page_config(page_title="Match Results", layout="wide")
         st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
-    
+
         #Top 3 (for now)
         top_3 = scored.head(3)
+        match = 0
         
         # Display each match
         for idx, row in top_3.iterrows():
-            st.markdown(f"""
-            <div class='results-box'>
-                <h3>{row['product_name']}</h3>
-                <p><b>Score:</b> {row['score']:.2f}</p>
-            </div>
-            """, unsafe_allow_html=True)
+            match += 1
+            result_html = (
+                f"<div class='results-box'>"                          # open parent
+                    f"<div class='result-sub-box'>"                   # open child 1
+                        f"<span class='sub-box-label'>Match #{match}</span>"
+                        f"<span class='sub-box-value'>{row['product_name']}</span>"
+                    f"</div>"                                         # close child 1
+                    f"<div class='result-sub-box'>"                   # open child 2
+                        f"<span class='sub-box-label'>Match Score</span>"
+                        f"<span class='sub-box-value'>{row['score']:.2f}/5</span>"
+                    f"</div>"                                         # close child 2
+                    f"<div class='result-sub-box'>"                   # open child 3
+                        f"<span class='sub-box-label'>Price per oz</span>"
+                        f"<span class='sub-box-value'>${row['price_per_oz']:.2f}</span>"
+                    f"</div>"                                         # close child 3
+                f"</div>"                                             # close parent
+            )
+            st.markdown(result_html, unsafe_allow_html=True)

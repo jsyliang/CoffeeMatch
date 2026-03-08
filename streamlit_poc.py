@@ -1,11 +1,13 @@
 import streamlit as st
-import emoji 
+#import emoji 
 import pandas as pd 
 import numpy as np
 
+st.set_page_config(page_title="Coffee Match", layout="wide")
+
 # Paths to data 
-PRODUCTS_PATH = "data/Product_Information.xlsx"
-REVIEWS_PATH = "data/Reviews_and_Tasting_Notes.xlsx"
+PRODUCTS_PATH = "data/raw/Product_Information.xlsx"
+REVIEWS_PATH = "data/raw/Reviews_and_Tasting_Notes.xlsx"
 REVIEWS_SHEET = "Reviews with Tasting Notes"
 
 # Set up styling classes for use in the website 
@@ -154,17 +156,20 @@ def apply_filters(df, survey_results):
 
 def score_products(df, survey_results):
     df = df.copy()
-    df["score"] = 0
+    df["score"] = 0.0
     df["reason"] = ""
 
     # Roast match
     if survey_results["roast"] != "No preference / I'm not sure":
+        ROAST_POINTS = survey_results["roast_pref_points"] / (survey_results["roast_pref_points"] + survey_results["cost_pref_points"]) # Get points from survey
+        print("ROAST_POINTS inside Roast match function:", ROAST_POINTS)
         mask = df["roast_type"].str.contains(survey_results["roast"], case=False, na=False)
         df.loc[mask, "score"] += ROAST_POINTS
         df.loc[mask, "reason"] += f"Roast match (+{ROAST_POINTS}). "
 
     # Cheaper per oz gets slight boost
     if df["price_per_oz"].notna().any():
+        VALUE_WEIGHT = survey_results["cost_pref_points"] / (survey_results["roast_pref_points"] + survey_results["cost_pref_points"]) # Get points from survey
         max_p = df["price_per_oz"].max()
         min_p = df["price_per_oz"].min()
         if max_p > min_p:
@@ -195,26 +200,53 @@ if "step" not in st.session_state:
 
 # Survey Page 
 if st.session_state["step"] == "survey":
-    st.set_page_config(page_title="Coffee Match", layout="wide")
+    # st.set_page_config(page_title="Coffee Match", layout="wide")
     st.markdown("<div class='page-title'>Coffee Match</div>",unsafe_allow_html=True)
     st.markdown("<div class='page-subtitle'>☕ Find the Washington Bean of your Dreams ☕</div>",unsafe_allow_html=True)
     with st.form("survey_form"):
 
-        #Caffeine content 
-        st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
-        q1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
+        col1, col2 = st.columns(2)
 
-        #Roast preference
-        st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
-        q2 = st.radio("",["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility = "collapsed")
+        with col1:
+            #Caffeine content 
+            st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
+            q1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
 
-        #Ground or Whole
-        st.markdown("<div class='survey-question'>Ground or whole beans (do you have a coffee grinder)?</div>", unsafe_allow_html=True)
-        q3 = st.radio("",["Whole beans (yes)", "Pre-ground (no)"], label_visibility = "collapsed")
+            #Roast preference
+            st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
+            q2 = st.radio("",["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility = "collapsed")
+
+            #Ground or Whole
+            st.markdown("<div class='survey-question'>Ground or whole beans (do you have a coffee grinder)?</div>", unsafe_allow_html=True)
+            q3 = st.radio("",["Whole beans (yes)", "Pre-ground (no)"], label_visibility = "collapsed")
         
-        submitted = st.form_submit_button("Find your match!")
+            # submitted = st.form_submit_button("Find your match!")
+
+        with col2:
+            st.markdown("<div class='survey-question'>How important is this to you? ☕💕</div>", unsafe_allow_html=True)
+            #st.image("https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif", width=400)
+
+            st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
+            q4 = st.slider(
+                "Roast preference: 1 = Not important, 5 = Most important",
+                1,
+                5,
+                3
+            )
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            q5 = st.slider(
+                "Cost: 1 = Not important, 5 = Most important",
+                1,
+                5,
+                2
+            )
+
+            submitted = st.form_submit_button("Find your match!")
+        # make sure that after when the user submits, the datat is in the cals form UserPreferences and then we apply the filters and scoring to get the results page to display the matches based on the survey results.
+        # then the class recommendations can be used to display the results in a nice format (with the reason for the score and all that fun stuff)
         if submitted:
-            survey_results = {"caffeine": q1, "roast": q2, "ground": q3,}
+            survey_results = {"caffeine": q1, "roast": q2, "ground": q3, "roast_pref_points": q4, "cost_pref_points": q5}
             st.session_state["survey_results"] = survey_results
             filtered = apply_filters(products, survey_results)
             st.session_state["scored"] =  score_products(filtered, survey_results)
@@ -227,7 +259,7 @@ if st.session_state["step"] == "results":
     if scored.empty:
         st.warning("No products match your filters :(")
     else:
-        st.set_page_config(page_title="Match Results", layout="wide")
+        #st.set_page_config(page_title="Match Results", layout="wide")
         st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
     
         #Top 3 (for now)
@@ -241,3 +273,6 @@ if st.session_state["step"] == "results":
                 <p><b>Score:</b> {row['score']:.2f}</p>
             </div>
             """, unsafe_allow_html=True)
+
+print("ROAST_POINTS end of the program:", ROAST_POINTS)
+print("VALUE_WEIGHT:", VALUE_WEIGHT)

@@ -10,7 +10,6 @@ serve as a shared contract between backend modules and the Streamlit UI.
 
 from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import List, Optional
 
 
 PRODUCT_REQUIRED_COLUMNS = [

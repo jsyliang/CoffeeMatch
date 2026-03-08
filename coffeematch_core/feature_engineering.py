@@ -469,21 +469,10 @@ def build_feature_table(products_df: pd.DataFrame) -> pd.DataFrame:
     size_level_df = encode_roast_membership(products_df)
     size_level_df = add_size_tier(size_level_df)
 
-    ########
-    print("SIZE LEVEL COLUMNS:", size_level_df.columns.tolist())
-    ########
-
     tier_medians = compute_tier_medians(size_level_df)
     adjustment_factors = compute_adjustment_factors(tier_medians)
 
     reference_rows = select_reference_rows(size_level_df)
-
-    #################### 
-    print("REFERENCE ROW COLUMNS:", reference_rows.columns.tolist())
-    print(reference_rows.head())
-    ######################
-    
-
     reference_rows = apply_reference_adjustment(
         reference_rows,
         adjustment_factors,

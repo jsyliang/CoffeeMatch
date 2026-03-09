@@ -42,11 +42,11 @@ def check_price_type(df):
     Sometimes strings are converted to NaNs on the upload, so we
     check that both are not contained in the column. No return."""
     for i in range(0,len(df)):
-        if type(df['price'][i])==str:
+        if isinstance(df['price'][i],str):
             raise TypeError("price column cannot have string.")
-        if type(df['price_numeric'][i])==str:
+        if isinstance(df['price_numeric'][i],str):
             raise TypeError("price_numeric column cannot have string.")
-        if type(df['price_per_oz'][i])==str:
+        if isinstance(df['price_per_oz'][i],str):
             raise TypeError("price_per_oz column cannot have string.")
         if pd.isna(df['price'][i]):
             raise TypeError("price column contains a NaN or string")
@@ -76,7 +76,7 @@ def check_size_type(df):
     """This checks for strings or NaNs in the size_oz column.
     No return."""
     for i in range(0,len(df)):
-        if type(df['size_oz'][i])==str:
+        if isinstance(df['size_oz'][i],str):
             raise TypeError("size_oz column cannot have string.")
         if pd.isna(df['size_oz'][i]):
             raise TypeError("size_oz column contains a NaN or string")
@@ -95,6 +95,7 @@ def take_two(string):
                 int(char) #attempt conversion
                 link = char
                 count=count+1
+            # pylint: disable=W0707
             except:
                 raise TypeError("First character is not an integer.")
         elif count==1:
@@ -102,6 +103,7 @@ def take_two(string):
                 int(char)
                 link = link + char
                 count=count+1
+            # pylint: disable=W0702
             except:
                 count=count+1
         elif count==2:
@@ -109,6 +111,7 @@ def take_two(string):
                 int(char)
                 link = link + char
                 count=count+1
+            # pylint: disable=W0702
             except:
                 count=count+1
     link = int(link)
@@ -136,11 +139,11 @@ def check_reviews_type(df):
     """This function checks quantitiative review results for type errors.
     No retrun."""
     for i in range(0,len(df)):
-        if type(df['hearts'][i])==str:
+        if isinstance(df['hearts'][i],str):
             raise TypeError("hearts column cannot have string.")
-        if type(df['total_reviews'][i])==str:
+        if isinstance(df['total_reviews'][i],str):
             raise TypeError("total_reviews column cannot have string.")
-        if type(df['heart_percentage'][i])==str:
+        if isinstance(df['heart_percentage'][i],str):
             raise TypeError("heart_percentage column cannot have string.")
         if pd.isna(df['hearts'][i]):
             raise TypeError("hearts column contains a NaN or string")

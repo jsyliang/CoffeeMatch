@@ -1,12 +1,14 @@
 """Script taps King County health inspections API for addresses of recently
 inspected caffes where specific coffees may be found. More elegent and automated
 string methods could eliminate the need for hard coding some caffes such as 
-CAFFE LADRO for "Ladro Roasting. Output file is address_out.csv"""
+CAFFE LADRO for "Ladro Roasting. Output file is address_out.csv a table of 
+caffes to sample coffees and product_information_archive.csv which is a table 
+of products using product_key as defined by scripts/prepare_data.py"""
 ################################################################################
 from sodapy import Socrata
 import pandas as pd
 
-PRODUCTS_PATH = "data/Product_Information.xlsx"
+PRODUCTS_PATH = "data/raw/Product_Information_archive.xlsx"
 
 def load_products():
     """This is lifted from the draft app.y streamlit test that uploads and 
@@ -27,24 +29,24 @@ def load_products():
     for col in ["decaf", "blend", "single_origin", "available_ground", "has_reviews"]:
         if col in df.columns:
             df[col] = df[col].fillna(False).astype(bool)
-
     return df
 
 def freq_roasters(df):
     """ This function takes the products df of coffees produced by app.py and 
     produces a list of roasteries named in the file and the number of coffees sold."""
-    products_roaster=products[['roaster']]
-    df=products_roaster.groupby(['roaster']).agg({'roaster': 'count'})
-    df['name']=df.index
-    df=df.reset_index(drop=True)
-    df=df[['name','roaster']]
-    df['roaster_no_of_coffees']=df['roaster']
-    df=df.drop(columns=['roaster'])
-    return df # some duplicates exist: Tonys vs. Tony's
+    products_roaster=df[['roaster']] #*changed to df
+    df_roaster1=products_roaster.groupby(['roaster']).agg({'roaster': 'count'})
+    df_roaster1['name']=df_roaster1.index
+    df_roaster2=df_roaster1.reset_index(drop=True)
+    df_roaster2['no_of_roasters'] =df_roaster2['roaster']
+    df_roaster3=df_roaster2[['no_of_roasters','name']]
+    df_roaster3['roaster'] =df_roaster3['name']
+    df_roaster4=df_roaster3[['roaster','no_of_roasters']]
+    return df_roaster4 # some duplicates exist: Tonys vs. Tony's
 
 def county_api_call(list_of_roasteries):
     """This function makes loops a simple single api call of king county health
-    inspections snagging address and city of the most recent health inspection
+    inspections snagging address, city, zip, lat, long of the most recent inspection
     the cafe has had. Comments mark where expansions could be made to return
     multiple address. Key sources listed below, starter sql code from socrata
     tutorials"""
@@ -52,12 +54,14 @@ def county_api_call(list_of_roasteries):
     #https://dev.socrata.com/foundry/data.kingcounty.gov/f29f-zza5
     #https://kingcounty.gov/en/dept/dph/health-safety/food-safety/search-restaurant-safety-ratings#/
     #https://github.com/mebauer/sodapy-tutorial-nyc-opendata/blob/main/socrata-query-language.ipynb
-    #https://mharty3.github.io/til/SQL/create-in-statement-with-python/#:~:text=When%20performing%20data%20analysis%20with,pd%20import%20pyodbc%20conn%20=%20pyodbc.
+    #https://mharty3.github.io/til/SQL/create-in-statement-with-python/#:~:
+    #text=When%20performing%20data%20analysis%20with,pd%20import%20pyodbc%20conn%20=%20pyodbc.
 
     #intitializations
     row=[]
     rows=[]
     row_nan=[]
+    no_fnd_msg='No_cafe_identified_in_King'
 
     for i in list_of_roasteries:
         check=f"'{i}'"
@@ -84,34 +88,47 @@ def county_api_call(list_of_roasteries):
             #other locations.
             results = client.get(socrata_dataset_identifier, query=query)
             df = pd.DataFrame.from_records(results)
-            row=df[['name','name', 'address', 'city']].values.tolist()[0]
+            row=df[['name','name', 'address', 'city', 'zip_code', 'longitude',
+                     'latitude']].values.tolist()[0]
             row[0]=check #shift first name to search name
             rows.append(row)
         # name not found in query
+        # pylint: disable=W0702
         except:
-            row_nan=[check,'NaN','NaN','NaN']
+            row_nan=[check,no_fnd_msg,no_fnd_msg,no_fnd_msg,no_fnd_msg,no_fnd_msg,no_fnd_msg]
             rows.append(row_nan)
-    api_results=pd.DataFrame(rows,columns=['search_name','cafe_name', 'cafe_address', 'cafe_city'])
+    # pylint: disable=W0621
+    api_results=pd.DataFrame(rows,columns=['search_name','cafe_name',
+                                            'cafe_address', 'cafe_city',
+                                            'zip_code', 'longitude', 'latitude'])
     return api_results
 
 def cafe_override(df):
     """Takes a df list of roasteries and allows manual override of the names
     because cafes serving the roastery's coffee often have different names.
     Checks length of output list is the same as input df"""
+    # pylint: disable=W0621
     cafes = ['ANCHORHEAD COFFEE', 'Blossom Coffee Roasters','CAFFE VITA',
              'Camber Coffee', 'Kuma Coffee', 'CAFFE LADRO', 'OLYMPIA COFFEE', 
              'OLYMPIA COFFEE', 'SEVEN COFFEE ROASTERS MARKET & CAFE', 'LITTLE JAYE',
              "Tony's Coffee", 'Tonys Coffee','VICTROLA COFFEE','VICTROLA COFFEE']    
     if len(cafes)!=df.shape[0]:
         raise TypeError("Override roastery list doesn't match WA roasteries in products?")
-    if [cafes[10]]!=df[10:11]['name'].values.tolist():
+    if [cafes[10]]!=df[10:11]['roaster'].values.tolist():
         raise ValueError("WA roasters file has changed.")
     return cafes
 
-#function calls
 products = load_products()
 df_roaster=freq_roasters(products)
-cafes_list=cafe_override(df_roaster)
-api_roasteries=county_api_call(cafes_list)
-address_out=pd.concat([df_roaster,api_roasteries],axis=1) #combines dfs side by side
-address_out.to_csv('./data/address_out.csv', index=False)
+cafes=cafe_override(df_roaster)
+api_results=county_api_call(cafes)
+address_out=pd.concat([df_roaster,api_results],axis=1) #combines dfs side by side
+address_out.to_csv('data/processed/address_out.csv', index=False)
+new_products=pd.merge(products, address_out, on="roaster", how="left")
+# from scripts/prepare_data.py
+right=new_products["product_name"].astype(str).str.strip()
+new_products['product_key']=new_products["roaster"].astype(str).str.strip() + " | " +right
+new_products=new_products[['product_key','search_name','cafe_name',
+                           'cafe_address', 'cafe_city',	'zip_code',
+                               'longitude','latitude']]
+new_products.to_csv('data/processed/product_information_archive.csv', index=False)

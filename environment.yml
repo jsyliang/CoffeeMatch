@@ -12,6 +12,8 @@ dependencies:
   - matplotlib
   - openpyxl
   - pylint=4.0.5
+  - seaborn
+  - sodapy=2.2.0
 
   # Streamlit stack
   - streamlit>=1.18

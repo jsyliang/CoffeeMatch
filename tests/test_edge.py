@@ -10,7 +10,9 @@ The load.py file can be used to load Product_Information.xlsx by calling upon
 the run_edge_tests(PATH) function where PATH is the path to an xlsx file.
 For use in project the run_edge_tests function returns a dataframe of product
 information. However, for the edge tests we use an unassigned
-function call."""
+function call.
+
+Some assistance from exceptions_in_python_key.ipynb workbook."""
 
 import unittest
 from load import run_edge_tests
@@ -27,8 +29,8 @@ class EdgeTest1(unittest.TestCase):
     def test_check_price_type_ounce(self):
         """Check that price_per_oz column not contains NaN or string."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/price/Product_Information_Price_Ounce_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/price/Product_Information_Price_Ounce_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest1)
 _ = unittest.TextTestRunner().run(suite)
@@ -39,8 +41,8 @@ class EdgeTest2(unittest.TestCase):
     def test_check_price_type_numeric(self):
         """Check that price_numeric column not contains a NaN or string."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/price/Product_Information_Price_Numeric_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/price/Product_Information_Price_Numeric_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest2)
 _ = unittest.TextTestRunner().run(suite)
@@ -51,8 +53,8 @@ class EdgeTest3(unittest.TestCase):
     def test_check_price_type(self):
         """Check that price column cannot have string."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/price/Product_Information_Price_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/price/Product_Information_Price_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest3)
 _ = unittest.TextTestRunner().run(suite)
@@ -64,8 +66,8 @@ class EdgeTest4(unittest.TestCase):
         """Check price_per_oz 'column - and perhaps other price
         columns - cannot be 0 or less than 0."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/price/Product_Information_Price_Ounce_Negative.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/price/Product_Information_Price_Ounce_Negative.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest4)
 _ = unittest.TextTestRunner().run(suite)
@@ -77,8 +79,8 @@ class EdgeTest5(unittest.TestCase):
         """Check price 'column - and perhaps other price
         columns - cannot be 0 or less than 0."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/price/Product_Information_Price_Negative.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/price/Product_Information_Price_Negative.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest5)
 _ = unittest.TextTestRunner().run(suite)
@@ -90,8 +92,8 @@ class EdgeTest6(unittest.TestCase):
         """Check price_numeric column - and perhaps other price
         columns - cannot be 0 or less than 0."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/price/Product_Information_Price_Numeric.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/price/Product_Information_Price_Numeric.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest6)
 _ = unittest.TextTestRunner().run(suite)
@@ -108,8 +110,8 @@ class EdgeTest7(unittest.TestCase):
     def test_check_size_type_numeric(self):
         """Check first size character is not an integer."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/size/Product_Information_Size_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/size/Product_Information_Size_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest7)
 _ = unittest.TextTestRunner().run(suite)
@@ -120,8 +122,8 @@ class EdgeTest8(unittest.TestCase):
     def test_check_size_type_ounce(self):
         """Check size_oz column cannot have string."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/size/Product_Information_Size_Ounce_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/size/Product_Information_Size_Ounce_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest8)
 _ = unittest.TextTestRunner().run(suite)
@@ -132,8 +134,8 @@ class EdgeTest9(unittest.TestCase):
     def test_check_size_value_ounce(self):
         """Check size column cannot equal zero."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/size/Product_Information_Size_Zero.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/size/Product_Information_Size_Zero.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest9)
 _ = unittest.TextTestRunner().run(suite)
@@ -144,8 +146,8 @@ class EdgeTest10(unittest.TestCase):
     def test_check_size_value_ounce(self):
         """Check size_oz column cannot be less than or equal to zero."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/size/Product_Information_Size_Ounce_Zero.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/size/Product_Information_Size_Ounce_Zero.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest10)
 _ = unittest.TextTestRunner().run(suite)
@@ -161,8 +163,8 @@ class EdgeTest11(unittest.TestCase):
     def test_check_reviews_type_hearts(self):
         """Check hearts column cannot have string data"""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/reviews/Product_Information_Hearts_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/reviews/Product_Information_Hearts_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest11)
 _ = unittest.TextTestRunner().run(suite)
@@ -172,8 +174,9 @@ class EdgeTest12(unittest.TestCase):
     def test_check_reviews_type_hearts_percentage(self):
         """Check heart_percentage column cannot have string."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/reviews/Product_Information_Hearts_Percentage_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/reviews/" \
+            "Product_Information_Hearts_Percentage_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest12)
 _ = unittest.TextTestRunner().run(suite)
@@ -183,8 +186,8 @@ class EdgeTest13(unittest.TestCase):
     def test_check_reviews_type(self):
         """Check total_reviews column cannot have string."""
         with self.assertRaises(TypeError):
-            PRODUCTS_PATH = "tests/data/reviews/Product_Information_Reviews_String.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/reviews/Product_Information_Reviews_String.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest13)
 _ = unittest.TextTestRunner().run(suite)
@@ -195,8 +198,8 @@ class EdgeTest14(unittest.TestCase):
     def test_check_numeric_reviews(self):
         """Check total_reviews column cannot be 0 or less than 0."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/reviews/Product_Information_Reviews_Zero.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/reviews/Product_Information_Reviews_Zero.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest14)
 _ = unittest.TextTestRunner().run(suite)
@@ -207,8 +210,9 @@ class EdgeTest15(unittest.TestCase):
     def test_check_numeric_reviews_hearts_percentage(self):
         """Check heart_percentage column cannot be 0 or less than 0."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/reviews/Product_Information_Hearts_Percentage_Zero.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/reviews/" \
+            "Product_Information_Hearts_Percentage_Zero.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest15)
 _ = unittest.TextTestRunner().run(suite)
@@ -219,16 +223,15 @@ class EdgeTest16(unittest.TestCase):
     def test_check_numeric_reviews_hearts(self):
         """Chech hearts column cannot be 0 or less than 0."""
         with self.assertRaises(ValueError):
-            PRODUCTS_PATH = "tests/data/reviews/Product_Information_Hearts_Zero.xlsx"
-            run_edge_tests(PRODUCTS_PATH)
+            product_path = "tests/mock_data/reviews/Product_Information_Hearts_Zero.xlsx"
+            run_edge_tests(product_path)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(EdgeTest16)
 _ = unittest.TextTestRunner().run(suite)
 
 
-
-
 print('End of testing')
+
 
 if __name__ == '__main__':
     unittest.main()

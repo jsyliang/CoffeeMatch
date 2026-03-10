@@ -25,6 +25,7 @@ Tool
 - What is someone's coffee profile (preferred roast, grind type, etc.)?
 - What product from Washington roasters best matches a user’s preferences?
 - Are these coffees easy to purchase from a local QFC?
+- Could a user travel to try these local cofees?
 
 ---
 
@@ -38,7 +39,7 @@ The project will produce:
   - Prior user reviews of beans/brands
   - Roastery location information
   - Roastery mission statements
-  - Information to support tasting or site visits
+  - Information to support tasting or site visits to associated cafes
 
 ---
 
@@ -46,26 +47,29 @@ The project will produce:
 
 ### Primary Data Sources
 
-1. Washington coffee roasters / bean producers dataset  
-   (Scraped and cleaned, with potential manual additions)
+1. Washington coffee roasters / bean producers dataset 
+/data/raw/Product_Information.xlsx
+   (Scraped and cleaned with potential manual additions)
 
-2. Washington coffee analysis CSV  
-   (Uploaded to this repository)
+2. Reviews of Washington coffees / tasting notes, brew method, etc.
+/data/raw/Reviews_and_Tasting_Notes.xlsx
+...(Scraped cleaned)
 
-3. Kroger Product API  
+### Supporting Data Sources
+
+1. Class survey of about 50 people.
+/assets/survey
+https://docs.google.com/forms/d/1an5dfDEH4OAza_Z0BzkKt5Qr7qmnjg3V2XM2tcnHINw/closedform
+
+2. King County restaurant search safety rating API containing cafes and locations.
+/data/processed/address_out.csv
+https://kingcounty.gov/en/dept/dph/health-safety/food-safety/search-restaurant-safety-ratings#/
+
+### Unused Data Sources
+
+1. Kroger Product API (desktop QFC query suggested data for only 3 roasters present in primary data: Tony's, Vita, and Ladro).
    https://developer.kroger.com/api-products/api/product-api-public
 
----
-
-### Potential Additional Data Sources
-
-- TripAdvisor Developer API  
-  https://www.tripadvisor.com/developers
-
-- Yelp Developer API  
-  https://docs.developer.yelp.com/docs/getting-started
-
-- MealMe API  
-  https://www.mealme.ai/
+2. Washington Department of Revenue API business address lookup, “. . . cannot be queried using the Socrata Open Data API” https://dev.socrata.com/foundry/data.wa.gov/4wur-kfnr.
 
 ---

@@ -351,8 +351,6 @@ if st.session_state["step"] == "survey":
                 price_weight= float(a6),
                 popularity_weight= float(a7) 
             )
-
-            print(survey_results)
             
             recommendations = recommend_products(
             feature_table=feature_table,
@@ -393,7 +391,6 @@ if st.session_state["step"] == "results":
         
         # Display each match
         for rank, rec in enumerate(survey_results):
-            print(rec)
             result_html = (
                 f"<div class='results-box'>"                          # open parent
                     f"<div class='result-sub-box'>"                   # open child 1

@@ -329,7 +329,7 @@ if st.session_state["step"] == "survey":
             if a1 == 'Decaf 😌':
                 a1 = True
             else:
-                al = False
+                a1 = False
 
             if a2 == 'Single origin only':
                 a2 = True
@@ -351,6 +351,8 @@ if st.session_state["step"] == "survey":
                 price_weight= float(a6),
                 popularity_weight= float(a7) 
             )
+
+            print(survey_results)
             
             recommendations = recommend_products(
             feature_table=feature_table,
@@ -391,12 +393,12 @@ if st.session_state["step"] == "results":
         
         # Display each match
         for rank, rec in enumerate(survey_results):
-            match += 1
+            print(rec)
             result_html = (
                 f"<div class='results-box'>"                          # open parent
                     f"<div class='result-sub-box'>"                   # open child 1
                         f"<span class='sub-box-label'>Match #{rank}</span>"
-                        f"<span class='sub-box-value'>{rec.product_name }</span>"
+                        f"<span class='sub-box-value'>{rec.product_name}</span>"
                     f"</div>"                                         # close child 1
                     f"<div class='result-sub-box'>"                   # open child 2
                         f"<span class='sub-box-label'>Match Score</span>"

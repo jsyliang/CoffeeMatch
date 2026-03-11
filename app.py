@@ -1,5 +1,9 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
+from coffeematch_core.schemas import UserPreferences
+from coffeematch_core.feature_engineering import build_feature_table
+from coffeematch_core.recommendation_engine import recommend_products
 
 # Paths to data 
 PRODUCTS_PATH = "data/raw/Product_Information.xlsx"
@@ -244,102 +248,21 @@ st.markdown("""
 #When you call a function decorated with @st.cache_data, Streamlit stores its result.
 #If you call the function again with the same arguments, Streamlit returns the cached result instead of re-running the function.
 #This helps speed things up and keep things responsive
+@st.cache_data
+def load_products() -> pd.DataFrame:
+    """Load the cleaned products dataset."""
+    data_path = Path("data/processed/products_clean.csv")
+    return pd.read_csv(data_path)
+
 
 @st.cache_data
-def load_products():
-    product_df = pd.read_excel(PRODUCTS_PATH)
+def load_feature_table(products_df: pd.DataFrame) -> pd.DataFrame:
+    """Build the product-level feature table once per app session."""
+    return build_feature_table(products_df)
 
-    product_df["tags_clean"] = product_df["tags"].fillna("").apply(
-        lambda x: [t.strip().lower() for t in str(x).split(",") if t.strip()]
-    )
 
-    product_df["roast_type"] = product_df["roast_type"].fillna("Unknown")
-    product_df["origin"] = product_df["origin"].fillna("Unspecified")
-
-    product_df["price_numeric"] = pd.to_numeric(product_df["price_numeric"], errors="coerce")
-    product_df["price_per_oz"] = pd.to_numeric(product_df["price_per_oz"], errors="coerce")
-
-    for col in ["decaf", "blend", "single_origin", "available_ground", "has_reviews"]:
-        if col in product_df.columns:
-            product_df[col] = product_df[col].fillna(False).astype(bool)
-
-    return product_df
-
-@st.cache_data
-def load_reviews():
-    try:
-        reviews_df = pd.read_excel(REVIEWS_PATH, sheet_name=REVIEWS_SHEET)
-    except:
-        return pd.DataFrame()
-
-    reviews_df["product_name"] = reviews_df["product_name"].astype(str)
-    reviews_df["sentiment"] = reviews_df["sentiment"].astype(str).str.lower()
-
-    return reviews_df
-
-products = load_products()
-reviews = load_reviews()
-
-# Matching Algorithm 
-
-# Points awarded for matching certain criterea
-VALUE_WEIGHT = 2.0
-
-def apply_filters(df, survey_results):
-    filtered = df.copy()
-
-    # Decaf or Caff
-    if survey_results["caffeine"] == "Decaf 😌":
-        filtered = filtered[filtered["decaf"] == True]
-    else: 
-        filtered = filtered[filtered["decaf"] == False]
-
-    # Roast Level
-    if survey_results["roast"] != "No preference / I'm not sure":
-        filtered = filtered[
-            filtered["roast_type"].str.contains(survey_results["roast"], case=False, na=False)
-        ]
-
-    # Ground or Whole 
-    if survey_results["ground"] == "Pre-ground (no)":
-        filtered = filtered[filtered["available_ground"] == True]
-
-    return filtered
-
-def score_products(df, survey_results):
-    df = df.copy()
-    df["score"] = 0.0
-    df["reason"] = ""
-
-    roast_pref_points = survey_results.get("roast_pref_points", 3)
-
-    # Roast match
-    if survey_results["roast"] != "No preference / I'm not sure":
-        ROAST_POINTS = survey_results["roast_pref_points"] / (survey_results["roast_pref_points"] + survey_results["cost_pref_points"]) # Get points from survey
-        print("ROAST_POINTS inside Roast match function:", ROAST_POINTS)
-        mask = df["roast_type"].str.contains(survey_results["roast"], case=False, na=False)
-        df.loc[mask, "score"] += roast_pref_points
-        df.loc[mask, "reason"] += f"Roast match (+{roast_pref_points}). "
-
-    # Cheaper per oz gets slight boost
-    if df["price_per_oz"].notna().any():
-        VALUE_WEIGHT = survey_results["cost_pref_points"] / (survey_results["roast_pref_points"] + survey_results["cost_pref_points"]) # Get points from survey
-        max_p = df["price_per_oz"].max()
-        min_p = df["price_per_oz"].min()
-        if max_p > min_p:
-            value_score = (max_p - df["price_per_oz"]) / (max_p - min_p)
-            value_bonus = VALUE_WEIGHT * value_score
-
-            df["score"] += value_bonus
-
-            df.loc[value_bonus > 0, "reason"] += (
-                "Good value (+" 
-                + value_bonus[value_bonus > 0].round(2).astype(str)
-                + "). "
-            )
-
-    return df.sort_values("score", ascending=False)
-
+products_df = load_products()
+feature_table = load_feature_table(products_df)
 
 # Set the website so the starting state is the survey page
 if "step" not in st.session_state:
@@ -360,46 +283,129 @@ if st.session_state["step"] == "survey":
     
     with st.form("survey_form"):
 
-        #Caffeine content 
+        #Caffeine content - Boolean True if decaf 
         st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
-        q1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
+        a1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
 
-        #Roast preference
-        st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
-        q2 = st.radio("",["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility = "collapsed")
+        #Origin Preference - Boolean True if single origin
+        st.markdown("<div class='survey-question'>Are you only interested in single origin beans?</div>", unsafe_allow_html=True)
+        a2 = st.radio("",["Single origin only", "No preference"], label_visibility = "collapsed")
 
-        #Ground or Whole
-        st.markdown("<div class='survey-question'>Ground or whole beans (do you have a coffee grinder)?</div>", unsafe_allow_html=True)
-        q3 = st.radio("",["Whole beans (yes)", "Pre-ground (no)"], label_visibility = "collapsed")
-        
+        #Ground or Whole - Boolean True is ground required    
+        st.markdown("<div class='survey-question'>Ground or whole beans (do you have a grinder)?</div>", unsafe_allow_html=True)
+        a3 = st.radio("Ground", ["Whole beans (yes)", "Pre-ground (no)"], label_visibility="collapsed")
+    
+        #Roast preference - importance of weight (float) and string 
+        col_q4, col_s4 = st.columns([1, 1])
+        with col_q4:
+            st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
+            a4 = st.radio("Roast", ["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility="collapsed")
+        with col_s4:
+            st.markdown("<div class='slider-question'>How important is roast for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            a5 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
+
+        #Price Importance - weight (float)
+        col_q5, col_s5 = st.columns([1, 1])
+        with col_q5:
+            st.markdown("<div class='survey-question'>How important is a lower price for your match? </div>", unsafe_allow_html=True)  
+        with col_s5:
+            st.markdown("<div class='slider-question'>Price Importance (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            a6 = st.slider("Price importance", 1, 5, 5, label_visibility="collapsed")
+
+        #Popular Importance - weight (float)
+        col_q6, col_s6 = st.columns([1, 1])
+        with col_q6:
+            st.markdown("<div class='survey-question'>How important is it that your match is popular (highly reviewed)? </div>", unsafe_allow_html=True)
+        with col_s6:
+            st.markdown("<div class='slider-question'>Popularity Importance (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            a7 = st.slider("Popularity importance", 1, 5, 3, label_visibility="collapsed")
+
+        #make sure to convert weight to float when putting it into the class
+
         submitted = st.form_submit_button("Find your match!")
         if submitted:
-            survey_results = {"caffeine": q1, "roast": q2, "ground": q3,}
-            st.session_state["survey_results"] = survey_results
-            filtered = apply_filters(products, survey_results)
-            st.session_state["scored"] = score_products(filtered, survey_results)
+            
+            # redefine survey responses 
+            if a1 == 'Decaf 😌':
+                a1 = True
+            else:
+                al = False
+
+            if a2 == 'Single origin only':
+                a2 = True
+            else:
+                a2 = False
+            
+            if a3 == 'Pre-ground (no)':
+                a3 = True
+            else:
+                a3 = False
+            
+            # create user preferences 
+            survey_results = UserPreferences(
+                # roast_type= a4,
+                decaf= a1,
+                ground_required= a3,
+                single_origin_preference= a2,
+                roast_weight= float(a5),
+                price_weight= float(a6),
+                popularity_weight= float(a7) 
+            )
+            
+            recommendations = recommend_products(
+            feature_table=feature_table,
+            products_df=products_df,
+            preferences=survey_results,
+            top_n=5,  # could make a UI for how many matches the user wants to see 
+            )
+            
+            st.session_state["survey_results"] = recommendations 
             st.session_state["step"] = "results"
             st.rerun()
 
+# max_price_per_oz should be a float that the user can input
+
+#  survey_results = {
+#                 "caffeine": q1,
+#                 "roast": q2,
+#                 "roast_pref_points": q4,
+#                 "ground": q3,
+#                 "grind_pref_points": q5,
+#             }
+
+
 # Results Page!
+
 if st.session_state["step"] == "results":
     st.set_page_config(page_title="Match Results")
-    scored = st.session_state.get("scored")
-    if scored.empty:
-        st.warning("No products match your filters :(")
-    else:
-        #st.set_page_config(page_title="Match Results", layout="wide")
-        st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
+    
+    survey_results = st.session_state.get("survey_results")
 
-        #Top 3 (for now)
-        top_3 = scored.head(3)
-        match = 0
+    # if survey_results.empty:
+    #     st.warning("No products match your filters :(")
+    if False:
+        pass
+    else:
+        st.set_page_config(page_title="Match Results", layout="wide")
+        st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
         
         # Display each match
-        for idx, row in top_3.iterrows():
-            st.markdown(f"""
-            <div class='results-box'>
-                <h3>{row['product_name']}</h3>
-                <p><b>Score:</b> {row['score']:.2f}</p>
-            </div>
-            """, unsafe_allow_html=True)
+        for rank, rec in enumerate(survey_results):
+            match += 1
+            result_html = (
+                f"<div class='results-box'>"                          # open parent
+                    f"<div class='result-sub-box'>"                   # open child 1
+                        f"<span class='sub-box-label'>Match #{rank}</span>"
+                        f"<span class='sub-box-value'>{rec.product_name }</span>"
+                    f"</div>"                                         # close child 1
+                    f"<div class='result-sub-box'>"                   # open child 2
+                        f"<span class='sub-box-label'>Match Score</span>"
+                        f"<span class='sub-box-value'>{rec.score:.2f}/5</span>"
+                    f"</div>"                                         # close child 2
+                    f"<div class='result-sub-box'>"                   # open child 3
+                        f"<span class='sub-box-label'>Price per oz</span>"
+                        f"<span class='sub-box-value'>${rec.match_reasons}</span>"
+                    f"</div>"                                         # close child 3
+                f"</div>"                                             # close parent
+            )
+            st.markdown(result_html, unsafe_allow_html=True)

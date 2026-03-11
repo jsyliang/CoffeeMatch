@@ -305,12 +305,20 @@ if st.session_state["step"] == "survey":
             a5 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
 
         #Price Importance - weight (float)
-        st.markdown("<div class='slider-question'>How important is a lower price for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
-        a6 = st.slider("Price importance", 1, 5, 5, label_visibility="collapsed")
+        col_q5, col_s5 = st.columns([1, 1])
+        with col_q5:
+            st.markdown("<div class='survey-question'>How important is a lower price for your match? </div>", unsafe_allow_html=True)  
+        with col_s5:
+            st.markdown("<div class='slider-question'>Price Importance (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            a6 = st.slider("Price importance", 1, 5, 5, label_visibility="collapsed")
 
         #Popular Importance - weight (float)
-        st.markdown("<div class='slider-question'>How important is it that your match is popular (highly reviewed)? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
-        a7 = st.slider("Popularity importance", 1, 5, 3, label_visibility="collapsed")
+        col_q6, col_s6 = st.columns([1, 1])
+        with col_q6:
+            st.markdown("<div class='survey-question'>How important is it that your match is popular (highly reviewed)? </div>", unsafe_allow_html=True)
+        with col_s6:
+            st.markdown("<div class='slider-question'>Popularity Importance (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+            a7 = st.slider("Popularity importance", 1, 5, 3, label_visibility="collapsed")
 
         #make sure to convert weight to float when putting it into the class
 
@@ -335,7 +343,7 @@ if st.session_state["step"] == "survey":
             
             # create user preferences 
             survey_results = UserPreferences(
-                roast_type= a4,
+                # roast_type= a4,
                 decaf= a1,
                 ground_required= a3,
                 single_origin_preference= a2,
@@ -373,8 +381,10 @@ if st.session_state["step"] == "results":
     
     survey_results = st.session_state.get("survey_results")
 
-    if survey_results.empty:
-        st.warning("No products match your filters :(")
+    # if survey_results.empty:
+    #     st.warning("No products match your filters :(")
+    if False:
+        pass
     else:
         st.set_page_config(page_title="Match Results", layout="wide")
         st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)

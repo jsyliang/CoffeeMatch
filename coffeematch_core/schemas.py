@@ -8,11 +8,12 @@ serve as a shared contract between backend modules and the Streamlit UI.
 
 # pylint: disable=too-many-instance-attributes
 
+from __future__ import annotations
 from dataclasses import dataclass, field
-from typing import List, Optional
 
 
 PRODUCT_REQUIRED_COLUMNS = [
+    "product_key",
     "roaster",
     "product_name",
     "origin",
@@ -69,12 +70,12 @@ class UserPreferences:
         Relative weight for popularity/review-based ranking.
     """
 
-    roast_type: Optional[str] = None
-    max_price_per_oz: Optional[float] = None
-    decaf: Optional[bool] = None
-    ground_required: Optional[bool] = None
-    single_origin_preference: Optional[bool] = None
-    blend_preference: Optional[bool] = None
+    roast_type: str | None = None
+    max_price_per_oz: float | None = None
+    decaf: bool | None = None
+    ground_required: bool | None = None
+    single_origin_preference: bool | None = None
+    blend_preference: bool | None = None
     roast_weight: float = 0.45
     price_weight: float = 0.35
     popularity_weight: float = 0.20
@@ -97,20 +98,28 @@ class Recommendation:
     """
     One recommendation returned by the recommendation engine.
     """
+
     product_key: str
     roaster: str
     product_name: str
-    origin: Optional[str]
-    roast_type: Optional[str]
-    decaf: Optional[bool]
-    blend: Optional[bool]
-    single_origin: Optional[bool]
-    available_ground: Optional[bool]
-    reference_price_per_oz: Optional[float]
-    score: float
-    match_reasons: List[str] = field(default_factory=list)
-    available_sizes: List[SizeOption] = field(default_factory=list)
-    total_reviews: Optional[int] = None
-    heart_percentage: Optional[float] = None
-    has_reviews: Optional[bool] = None
-    url: Optional[str] = None
+    origin: str | None
+    roast_type: str | None
+    decaf: bool | None
+    blend: bool | None
+    single_origin: bool | None
+    available_ground: bool | None
+
+    reference_price_per_oz: float | None
+    reference_size_label: str | None = None
+    reference_size_oz: float | None = None
+    reference_price_numeric: float | None = None
+    reference_size_tier: str | None = None
+
+    score: float = 0.0
+    match_reasons: list[str] = field(default_factory=list)
+    available_sizes: list[SizeOption] = field(default_factory=list)
+
+    total_reviews: int | None = None
+    heart_percentage: float | None = None
+    has_reviews: bool | None = None
+    url: str | None = None

@@ -308,19 +308,22 @@ def apply_filters(df, survey_results):
 
 def score_products(df, survey_results):
     df = df.copy()
-    df["score"] = 0
+    df["score"] = 0.0
     df["reason"] = ""
 
     roast_pref_points = survey_results.get("roast_pref_points", 3)
 
     # Roast match
     if survey_results["roast"] != "No preference / I'm not sure":
+        ROAST_POINTS = survey_results["roast_pref_points"] / (survey_results["roast_pref_points"] + survey_results["cost_pref_points"]) # Get points from survey
+        print("ROAST_POINTS inside Roast match function:", ROAST_POINTS)
         mask = df["roast_type"].str.contains(survey_results["roast"], case=False, na=False)
         df.loc[mask, "score"] += roast_pref_points
         df.loc[mask, "reason"] += f"Roast match (+{roast_pref_points}). "
 
     # Cheaper per oz gets slight boost
     if df["price_per_oz"].notna().any():
+        VALUE_WEIGHT = survey_results["cost_pref_points"] / (survey_results["roast_pref_points"] + survey_results["cost_pref_points"]) # Get points from survey
         max_p = df["price_per_oz"].max()
         min_p = df["price_per_oz"].min()
         if max_p > min_p:
@@ -351,57 +354,27 @@ if "step" not in st.session_state:
 
 # Survey Page 
 if st.session_state["step"] == "survey":
-    
     st.set_page_config(page_title="Coffee Match", layout="wide")
     st.markdown("<div class='page-title'>Coffee Match</div>",unsafe_allow_html=True)
     st.markdown("<div class='page-subtitle'>☕ Find the Washington Bean of your Dreams ☕</div>",unsafe_allow_html=True)
     
     with st.form("survey_form"):
 
-        # Caffeine
+        #Caffeine content 
         st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
-        q1 = st.radio("", ["Caffeinated!⚡", "Decaf 😌"], label_visibility="collapsed")
+        q1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
 
-        st.markdown("<div class='survey-row-divider'></div>", unsafe_allow_html=True)
+        #Roast preference
+        st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
+        q2 = st.radio("",["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility = "collapsed")
 
-        # Roast Level
-        col_q2, col_s2 = st.columns([1, 1])
-        with col_q2:
-            st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
-            q2 = st.radio("Roast", ["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility="collapsed")
-        with col_s2:
-            st.markdown("<div class='slider-question'>How important is roast for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
-            q4 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
-
-        st.markdown("<div class='survey-row-divider'></div>", unsafe_allow_html=True)
-
-        # Ground/Whole
-        col_q3, col_s3 = st.columns([1, 1])
-        with col_q3:
-            st.markdown("<div class='survey-question'>Ground or whole beans (do you have a grinder)?</div>", unsafe_allow_html=True)
-            q3 = st.radio("Ground", ["Whole beans (yes)", "Pre-ground (no)"], label_visibility="collapsed")
-        with col_s3:
-            st.markdown("<div class='slider-question'>How important is ground status for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
-            q5 = st.slider("Ground importance", 1, 5, 2, label_visibility="collapsed")
-
-        st.markdown("<div class='survey-row-divider'></div>", unsafe_allow_html=True)
-
+        #Ground or Whole
+        st.markdown("<div class='survey-question'>Ground or whole beans (do you have a coffee grinder)?</div>", unsafe_allow_html=True)
+        q3 = st.radio("",["Whole beans (yes)", "Pre-ground (no)"], label_visibility = "collapsed")
+        
         submitted = st.form_submit_button("Find your match!")
-
-        # make sure that after when the user submits, the data is in the cals form UserPreferences and then we apply the filters 
-        # and scoring to get the results page to display the matches based on the survey results.
-        # then the class recommendations can be used to display the results in a nice format 
-        # (with the reason for the score and all that fun stuff)
-       
         if submitted:
-
-            survey_results = {
-                "caffeine": q1,
-                "roast": q2,
-                "roast_pref_points": q4,
-                "ground": q3,
-                "grind_pref_points": q5,
-            }
+            survey_results = {"caffeine": q1, "roast": q2, "ground": q3,}
             st.session_state["survey_results"] = survey_results
             filtered = apply_filters(products, survey_results)
             st.session_state["scored"] = score_products(filtered, survey_results)
@@ -415,7 +388,7 @@ if st.session_state["step"] == "results":
     if scored.empty:
         st.warning("No products match your filters :(")
     else:
-        st.set_page_config(page_title="Match Results", layout="wide")
+        #st.set_page_config(page_title="Match Results", layout="wide")
         st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
 
         #Top 3 (for now)
@@ -424,21 +397,9 @@ if st.session_state["step"] == "results":
         
         # Display each match
         for idx, row in top_3.iterrows():
-            match += 1
-            result_html = (
-                f"<div class='results-box'>"                          # open parent
-                    f"<div class='result-sub-box'>"                   # open child 1
-                        f"<span class='sub-box-label'>Match #{match}</span>"
-                        f"<span class='sub-box-value'>{row['product_name']}</span>"
-                    f"</div>"                                         # close child 1
-                    f"<div class='result-sub-box'>"                   # open child 2
-                        f"<span class='sub-box-label'>Match Score</span>"
-                        f"<span class='sub-box-value'>{row['score']:.2f}/5</span>"
-                    f"</div>"                                         # close child 2
-                    f"<div class='result-sub-box'>"                   # open child 3
-                        f"<span class='sub-box-label'>Price per oz</span>"
-                        f"<span class='sub-box-value'>${row['price_per_oz']:.2f}</span>"
-                    f"</div>"                                         # close child 3
-                f"</div>"                                             # close parent
-            )
-            st.markdown(result_html, unsafe_allow_html=True)
+            st.markdown(f"""
+            <div class='results-box'>
+                <h3>{row['product_name']}</h3>
+                <p><b>Score:</b> {row['score']:.2f}</p>
+            </div>
+            """, unsafe_allow_html=True)

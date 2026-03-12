@@ -2,8 +2,12 @@
 inspected caffes where specific coffees may be found. More elegent and automated
 string methods could eliminate the need for hard coding some caffes such as 
 CAFFE LADRO for "Ladro Roasting. Output file is address_out.csv a table of 
-caffes to sample coffees and product_information_archive.csv which is a table 
-of products using product_key as defined by scripts/prepare_data.py"""
+caffes to sample coffees and product_information.csv which is a table 
+of products using product_key as defined by scripts/prepare_data.py. We kept
+the input file as Product_Information_archive.xlsx - vs. 
+Product_Information.xlsx because the latter seems more likely to be changed
+than the former and any adjustment to this input file - especially one that 
+introduces another roastery - will cause the program to fail."""
 ################################################################################
 from sodapy import Socrata
 import pandas as pd
@@ -78,7 +82,7 @@ def county_api_call(list_of_roasteries):
         # is within a data and present IN single record f'strng check.
         try:
             query = f"""SELECT *
-                 WHERE inspection_date BETWEEN '2024-10-01' AND '2026-01-30'
+                 WHERE inspection_date BETWEEN '2025-01-02T00:00:00.000' AND '2026-01-02T00:00:00.000'
                  AND name IN ({check})
                  ORDER BY
                      name
@@ -131,4 +135,4 @@ new_products['product_key']=new_products["roaster"].astype(str).str.strip() + " 
 new_products=new_products[['product_key','search_name','cafe_name',
                            'cafe_address', 'cafe_city',	'zip_code',
                                'longitude','latitude']]
-new_products.to_csv('data/processed/product_information_archive.csv', index=False)
+new_products.to_csv('data/processed/product_information.csv', index=False)

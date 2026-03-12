@@ -15,7 +15,7 @@ function call.
 Some assistance from exceptions_in_python_key.ipynb workbook."""
 
 import unittest
-from load import run_edge_tests
+from scripts.load import run_edge_tests
 
 
 ##########################################################

@@ -42,6 +42,15 @@ REVIEW_REQUIRED_COLUMNS = [
     "tasting_notes",
 ]
 
+PRODUCT_INFO_REQUIRED_COLUMNS = [
+    "product_key",
+    "cafe_name",
+    "cafe_address",
+    "cafe_city",
+    "zip_code",
+    "longitude",
+    "latitude",
+]
 
 @dataclass
 class UserPreferences:
@@ -51,7 +60,7 @@ class UserPreferences:
     Attributes
     ----------
     roast_type : Optional[str]
-        Preferred roast type, such as 'Light', 'Medium', or 'Dark'.
+        Preferred roast type, such as 'Light', 'Medium', 'Dark', or 'No Preference'.
     max_price_per_oz : Optional[float]
         Maximum acceptable price per ounce. Use None if no limit is set.
     decaf : Optional[bool]
@@ -123,3 +132,14 @@ class Recommendation:
     heart_percentage: float | None = None
     has_reviews: bool | None = None
     url: str | None = None
+
+    tasting_notes: list[str] = field(default_factory=list)
+    review_texts: list[str] = field(default_factory=list)
+
+    cafe_name: str | None = None
+    cafe_address: str | None = None
+    cafe_city: str | None = None
+    state: str | None = None
+    zip_code: str | None = None
+    longitude: float | None = None
+    latitude: float | None = None

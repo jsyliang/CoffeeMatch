@@ -166,19 +166,13 @@ def get_roast_preference_columns(roast_type: str | None) -> list[str]:
 
     normalized = roast_type.strip().lower()
 
+    if normalized == "no preference":
+        return []
+
     mapping = {
         "light": ["roast_light"],
-        "light roast": ["roast_light"],
-        "light-medium": ["roast_light", "roast_medium"],
-        "light medium": ["roast_light", "roast_medium"],
-        "light-medium roast": ["roast_light", "roast_medium"],
         "medium": ["roast_medium"],
-        "medium roast": ["roast_medium"],
-        "medium-dark": ["roast_medium", "roast_dark"],
-        "medium dark": ["roast_medium", "roast_dark"],
-        "medium-dark roast": ["roast_medium", "roast_dark"],
         "dark": ["roast_dark"],
-        "dark roast": ["roast_dark"],
     }
 
     return mapping.get(normalized, [])
@@ -207,7 +201,7 @@ def compute_roast_match_scores(feature_table: pd.DataFrame,
 
     preferred_columns = get_roast_preference_columns(preferences.roast_type)
     if not preferred_columns:
-        return pd.Series(0.0, index=feature_table.index, dtype=float)
+        return pd.Series(1.0, index=feature_table.index, dtype=float)
 
     roast_match = feature_table[preferred_columns].max(axis=1).astype(float)
     return roast_match

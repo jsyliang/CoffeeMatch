@@ -1,20 +1,25 @@
-name: CI
+name: continuous_int
 
 on:
   push:
     branches:
       - main
-      - '**'
   pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  run_test:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash -el {0}
 
     steps:
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
         uses: actions/setup-python@v5

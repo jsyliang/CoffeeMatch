@@ -2,38 +2,15 @@
 inspected caffes where specific coffees may be found. More elegent and automated
 string methods could eliminate the need for hard coding some caffes such as 
 CAFFE LADRO for "Ladro Roasting. Output file is address_out.csv a table of 
-caffes to sample coffees and product_information.csv which is a table 
-of products using product_key as defined by scripts/prepare_data.py. We kept
-the input file as Product_Information_archive.xlsx - vs. 
-Product_Information.xlsx because the latter seems more likely to be changed
-than the former and any adjustment to this input file - especially one that 
-introduces another roastery - will cause the program to fail."""
+caffes to sample coffees and product_information_archive.csv which is a table 
+of products using product_key as defined by scripts/prepare_data.py"""
 ################################################################################
-from sodapy import Socrata
 import pandas as pd
+from sodapy import Socrata
+# pylint: disable=E0401
+from scripts.load import load_products
 
 PRODUCTS_PATH = "data/raw/Product_Information_archive.xlsx"
-
-def load_products():
-    """This is lifted from the draft app.y streamlit test that uploads and 
-    generates a list of products. This was used to keep imput file formats 
-    comparable"""
-    df = pd.read_excel(PRODUCTS_PATH)
-
-    df["tags_clean"] = df["tags"].fillna("").apply(
-        lambda x: [t.strip().lower() for t in str(x).split(",") if t.strip()]
-    )
-
-    df["roast_type"] = df["roast_type"].fillna("Unknown")
-    df["origin"] = df["origin"].fillna("Unspecified")
-
-    df["price_numeric"] = pd.to_numeric(df["price_numeric"], errors="coerce")
-    df["price_per_oz"] = pd.to_numeric(df["price_per_oz"], errors="coerce")
-
-    for col in ["decaf", "blend", "single_origin", "available_ground", "has_reviews"]:
-        if col in df.columns:
-            df[col] = df[col].fillna(False).astype(bool)
-    return df
 
 def freq_roasters(df):
     """ This function takes the products df of coffees produced by app.py and 
@@ -82,7 +59,7 @@ def county_api_call(list_of_roasteries):
         # is within a data and present IN single record f'strng check.
         try:
             query = f"""SELECT *
-                 WHERE inspection_date BETWEEN '2025-01-02T00:00:00.000' AND '2026-01-02T00:00:00.000'
+                 WHERE inspection_date BETWEEN '2024-10-01' AND '2026-01-30'
                  AND name IN ({check})
                  ORDER BY
                      name
@@ -122,17 +99,24 @@ def cafe_override(df):
         raise ValueError("WA roasters file has changed.")
     return cafes
 
-products = load_products()
-df_roaster=freq_roasters(products)
-cafes=cafe_override(df_roaster)
-api_results=county_api_call(cafes)
-address_out=pd.concat([df_roaster,api_results],axis=1) #combines dfs side by side
-address_out.to_csv('data/processed/address_out.csv', index=False)
-new_products=pd.merge(products, address_out, on="roaster", how="left")
-# from scripts/prepare_data.py
-right=new_products["product_name"].astype(str).str.strip()
-new_products['product_key']=new_products["roaster"].astype(str).str.strip() + " | " +right
-new_products=new_products[['product_key','search_name','cafe_name',
-                           'cafe_address', 'cafe_city',	'zip_code',
-                               'longitude','latitude']]
-new_products.to_csv('data/processed/product_information.csv', index=False)
+
+def main():
+    """This is an empty main that calls all the functions when run
+    from the terminal as python3 address.py"""
+    products = load_products(PRODUCTS_PATH)
+    df_roaster=freq_roasters(products)
+    cafes=cafe_override(df_roaster)
+    api_results=county_api_call(cafes)
+    address_out=pd.concat([df_roaster,api_results],axis=1) #combines dfs side by side
+    address_out.to_csv('data/processed/address_out.csv', index=False)
+    new_products=pd.merge(products, address_out, on="roaster", how="left")
+    # from scripts/prepare_data.py
+    right=new_products["product_name"].astype(str).str.strip()
+    new_products['product_key']=new_products["roaster"].astype(str).str.strip() + " | " +right
+    new_products=new_products[['product_key','search_name','cafe_name',
+                               'cafe_address', 'cafe_city',	'zip_code',
+                                   'longitude','latitude']]
+    new_products.to_csv('data/processed/product_information_archive.csv', index=False)
+
+if __name__ == "__main__": #when the file run from wsl command this is true and main() will run
+    main()

@@ -19,7 +19,10 @@ from __future__ import annotations
 import math
 import pandas as pd
 
-from .schemas import Recommendation, SizeOption, UserPreferences
+from .schemas import (
+    Recommendation, UserPreferences, 
+    SizeOption, CafeLocation, ReviewData
+)
 
 
 RECOMMENDATION_REQUIRED_COLUMNS = (
@@ -346,6 +349,108 @@ def build_size_options(products_df: pd.DataFrame) -> dict[str, list[SizeOption]]
 
     return size_options_by_product
 
+def is_washington_zip(zip_code: str | None) -> bool:
+    """Return True if the ZIP code falls within Washington state range."""
+    if zip_code is None:
+        return False
+
+    try:
+        zip_int = int(zip_code)
+    except (ValueError, TypeError):
+        return False
+
+    return 98000 <= zip_int <= 99499
+    
+
+def build_product_info_lookup(product_info_df: pd.DataFrame) -> dict[str, CafeLocation]:
+    """
+    Build a lookup table of cafe location information by product key.
+
+    Parameters
+    ----------
+    product_info_df : pd.DataFrame
+        Dataset containing cafe location information associated
+        with coffee products.
+
+    Returns
+    -------
+    dict[str, CafeLocation]
+        Mapping from product_key to a CafeLocation object containing
+        cafe name, address, city, state, zip code, coordinates, and
+        optional Google Maps URL.
+    """
+    product_info_lookup: dict[str, CafeLocation] = {}
+
+    for _, row in product_info_df.iterrows():
+        product_key = str(row["product_key"])
+
+        cafe_name = None if pd.isna(row.get("cafe_name")) else str(row.get("cafe_name"))
+        cafe_address = None if pd.isna(row.get("cafe_address")) else str(row.get("cafe_address"))
+        cafe_city = None if pd.isna(row.get("cafe_city")) else str(row.get("cafe_city"))
+        zip_code = None if pd.isna(row.get("zip_code")) else str(row.get("zip_code"))
+        longitude = None if pd.isna(row.get("longitude")) else float(row.get("longitude"))
+        latitude = None if pd.isna(row.get("latitude")) else float(row.get("latitude"))
+
+        state = "WA" if is_washington_zip(zip_code) else None
+
+        google_maps_url = None
+        if latitude is not None and longitude is not None:
+            google_maps_url = f"https://www.google.com/maps?q={latitude},{longitude}"
+
+        product_info_lookup[product_key] = CafeLocation(
+            cafe_name=cafe_name,
+            cafe_address=cafe_address,
+            cafe_city=cafe_city,
+            state=state,
+            zip_code=zip_code,
+            longitude=longitude,
+            latitude=latitude,
+            google_maps_url=google_maps_url,
+        )
+
+    return product_info_lookup
+
+
+def build_reviews_lookup(reviews_df: pd.DataFrame) -> dict[str, ReviewData]:
+    """
+    Build a lookup table of review information by product name.
+
+    Parameters
+    ----------
+    reviews_df : pd.DataFrame
+        Cleaned reviews dataset containing tasting notes and review
+        text associated with each product.
+
+    Returns
+    -------
+    dict[str, ReviewData]
+        Mapping from product_name to a ReviewData object containing
+        aggregated tasting notes and review texts for that product.
+    """
+    reviews_lookup: dict[str, ReviewData] = {}
+
+    for product_name, group in reviews_df.groupby("product_name"):
+        tasting_notes = (
+            group["tasting_notes"]
+            .dropna()
+            .astype(str)
+            .tolist()
+        )
+
+        review_texts = (
+            group["review_text"]
+            .dropna()
+            .astype(str)
+            .tolist()
+        )
+
+        reviews_lookup[str(product_name)] = ReviewData(
+            tasting_notes=tasting_notes,
+            review_texts=review_texts,
+        )
+
+    return reviews_lookup
+
 
 def build_match_reasons(
     row: pd.Series,
@@ -402,29 +507,46 @@ def build_match_reasons(
     return reasons[:3]
 
 
-def build_recommendation_objects(scored_df: pd.DataFrame,
+def build_recommendation_objects(
+    scored_df: pd.DataFrame,
     size_options_by_product: dict[str, list[SizeOption]],
-) -> list[Recommendation]:
+    reviews_lookup: dict[str, ReviewData],
+    product_info_lookup: dict[str, CafeLocation],
+    ) -> list[Recommendation]:
     """
-    Convert scored rows into Recommendation dataclass objects.
+    Convert scored product rows into Recommendation dataclass objects.
 
     Parameters
     ----------
     scored_df : pd.DataFrame
-        Sorted scored product-level feature table.
+        Sorted product-level feature table containing computed scores
+        and metadata for recommended products.
+
     size_options_by_product : dict[str, list[SizeOption]]
         Mapping from product_key to available size options.
+
+    reviews_lookup : dict[str, ReviewData]
+        Mapping from product_name to ReviewData containing tasting
+        notes and review texts for that product.
+
+    product_info_lookup : dict[str, CafeLocation]
+        Mapping from product_key to CafeLocation containing cafe
+        location details associated with a product.
 
     Returns
     -------
     list[Recommendation]
-        Final recommendation objects for the UI.
+        Final recommendation objects ready for consumption by the UI.
     """
 
     recommendations: list[Recommendation] = []
 
     for _, row in scored_df.iterrows():
         product_key = str(row["product_key"])
+        product_name = str(row["product_name"])
+
+        review_data = reviews_lookup.get(product_name, ReviewData())
+        cafe_location = product_info_lookup.get(product_key)
 
         recommendation = Recommendation(
             product_key=product_key,
@@ -484,7 +606,10 @@ def build_recommendation_objects(scored_df: pd.DataFrame,
                 else float(row["heart_percentage"])
             ),
             has_reviews=None if pd.isna(row["has_reviews"]) else bool(row["has_reviews"]),
-            url=None if pd.isna(row["url"]) else str(row["url"]),
+
+            tasting_notes=review_data.tasting_notes,
+            review_texts=review_data.review_texts,
+            cafe_location=cafe_location,
         )
 
         recommendations.append(recommendation)
@@ -495,6 +620,8 @@ def build_recommendation_objects(scored_df: pd.DataFrame,
 def recommend_products(
     feature_table: pd.DataFrame,
     products_df: pd.DataFrame,
+    reviews_df: pd.DataFrame,
+    product_info_df: pd.DataFrame,
     preferences: UserPreferences,
     top_n: int = 5,
 ) -> list[Recommendation]:
@@ -504,20 +631,41 @@ def recommend_products(
     Parameters
     ----------
     feature_table : pd.DataFrame
-        Product-level feature table from feature_engineering.py.
+        Product-level feature table generated in feature_engineering.py.
+        Each row represents a unique product with engineered features
+        used for scoring and ranking.
+
     products_df : pd.DataFrame
         Size-level processed products dataset used to build available
-        size options for the UI.
+        size options for the UI. This table may contain multiple rows
+        per product (one per bag size).
+
+    reviews_df : pd.DataFrame
+        Cleaned reviews dataset containing tasting notes and review
+        text associated with each product.
+
+    product_info_df : pd.DataFrame
+        Cafe/location dataset providing cafe name, address, city,
+        zip code, and geographic coordinates associated with a product.
+
     preferences : UserPreferences
-        User selections from the UI.
+        User selections captured from the UI, including roast preference,
+        price sensitivity, grind options, grind format availability,
+        and other filters used during scoring.
+
     top_n : int, default=5
         Number of recommendations to return.
 
     Returns
     -------
     list[Recommendation]
-        Ranked recommendation objects.
+        Ranked recommendation objects containing product metadata,
+        available size options, match reasons, aggregated review
+        information, and optional cafe location details for UI display.
     """
+    reviews_lookup = build_reviews_lookup(reviews_df)
+    product_info_lookup = build_product_info_lookup(product_info_df)
+
     validate_recommendation_columns(feature_table)
     validate_size_option_columns(products_df)
 
@@ -536,4 +684,9 @@ def recommend_products(
 
     size_options_by_product = build_size_options(products_df)
 
-    return build_recommendation_objects(scored_df, size_options_by_product)
+    return build_recommendation_objects(
+    scored_df,
+    size_options_by_product,
+    reviews_lookup,
+    product_info_lookup,
+    )

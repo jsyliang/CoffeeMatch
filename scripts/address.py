@@ -7,7 +7,6 @@ of products using product_key as defined by scripts/prepare_data.py"""
 ################################################################################
 import pandas as pd
 from sodapy import Socrata
-# pylint: disable=E0401
 from scripts.load import load_products
 
 PRODUCTS_PATH = "data/raw/Product_Information_archive.xlsx"

@@ -18,5 +18,7 @@ dependencies:
   # Streamlit stack
   - streamlit>=1.18
   - altair>=4.2,<5
+  - pip:
+    - coverage==7.13
 
 

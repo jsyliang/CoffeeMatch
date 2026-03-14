@@ -9,12 +9,17 @@ data stored in data/processed/.
 from pathlib import Path
 import pandas as pd
 
-from .schemas import PRODUCT_REQUIRED_COLUMNS, REVIEW_REQUIRED_COLUMNS
+from .schemas import (
+    PRODUCT_REQUIRED_COLUMNS,
+    REVIEW_REQUIRED_COLUMNS,
+    PRODUCT_INFO_REQUIRED_COLUMNS,
+)
 
 
 DATA_DIR = Path("data/processed")
 PRODUCTS_FILE = DATA_DIR / "products_clean.csv"
 REVIEWS_FILE = DATA_DIR / "reviews_clean.csv"
+PRODUCT_INFO_FILE = DATA_DIR / "product_information.csv"
 
 
 def validate_required_columns(
@@ -124,12 +129,28 @@ def load_reviews(file_path: Path | str = REVIEWS_FILE) -> pd.DataFrame:
     return reviews
 
 
+def load_product_info(file_path: Path | str = PRODUCT_INFO_FILE) -> pd.DataFrame:
+    """Load and validate product cafe/location information."""
+    
+    path = _check_file_exists(file_path)
+    product_info = pd.read_csv(path, na_values=["No_cafe_identified_in_King"])
+
+    validate_required_columns(
+        df=product_info,
+        required_columns=PRODUCT_INFO_REQUIRED_COLUMNS,
+        dataset_name="Product Information",
+    )
+
+    return product_info
+
+
 def load_datasets(
     products_path: Path | str = PRODUCTS_FILE,
     reviews_path: Path | str = REVIEWS_FILE,
-) -> tuple[pd.DataFrame, pd.DataFrame]:
+    product_info_path: Path | str = PRODUCT_INFO_FILE,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """
-    Load both processed CoffeeMatch datasets.
+    Load processed CoffeeMatch datasets.
 
     Parameters
     ----------
@@ -137,12 +158,15 @@ def load_datasets(
         Path to the processed products CSV.
     reviews_path : Path | str, default=REVIEWS_FILE
         Path to the processed reviews CSV.
+    product_info_path : Path | str, default=PRODUCT_INFO_FILE
+        Path to the product cafe/location information CSV.
 
     Returns
     -------
-    tuple[pd.DataFrame, pd.DataFrame]
-        Products DataFrame and reviews DataFrame.
+    tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]
+        Products DataFrame, reviews DataFrame, and product information DataFrame.
     """
     products = load_products(products_path)
     reviews = load_reviews(reviews_path)
-    return products, reviews
+    product_info = load_product_info(product_info_path)
+    return products, reviews, product_info

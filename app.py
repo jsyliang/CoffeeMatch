@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from pathlib import Path
+from coffeematch_core.data_loader import load_datasets
 from coffeematch_core.schemas import UserPreferences
 from coffeematch_core.feature_engineering import build_feature_table
 from coffeematch_core.recommendation_engine import recommend_products
@@ -249,10 +250,9 @@ st.markdown("""
 #If you call the function again with the same arguments, Streamlit returns the cached result instead of re-running the function.
 #This helps speed things up and keep things responsive
 @st.cache_data
-def load_products() -> pd.DataFrame:
+def load_data() -> pd.DataFrame:
     """Load the cleaned products dataset."""
-    data_path = Path("data/processed/products_clean.csv")
-    return pd.read_csv(data_path)
+    return load_datasets()
 
 
 @st.cache_data
@@ -261,7 +261,7 @@ def load_feature_table(products_df: pd.DataFrame) -> pd.DataFrame:
     return build_feature_table(products_df)
 
 
-products_df = load_products()
+products_df, reviews_df, product_info_df = load_data()
 feature_table = load_feature_table(products_df)
 
 # Set the website so the starting state is the survey page
@@ -343,7 +343,7 @@ if st.session_state["step"] == "survey":
             
             # create user preferences 
             survey_results = UserPreferences(
-                # roast_type= a4,
+                roast_type= a4,
                 decaf= a1,
                 ground_required= a3,
                 single_origin_preference= a2,
@@ -351,12 +351,14 @@ if st.session_state["step"] == "survey":
                 price_weight= float(a6),
                 popularity_weight= float(a7) 
             )
-            
+
             recommendations = recommend_products(
-            feature_table=feature_table,
-            products_df=products_df,
-            preferences=survey_results,
-            top_n=5,  # could make a UI for how many matches the user wants to see 
+                feature_table=feature_table,
+                products_df=products_df,
+                reviews_df=reviews_df,
+                product_info_df=product_info_df,
+                preferences=survey_results,
+                top_n=5, # could make a UI for how many matches the user wants to see 
             )
             
             st.session_state["survey_results"] = recommendations 
@@ -390,7 +392,7 @@ if st.session_state["step"] == "results":
         st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
         
         # Display each match
-        for rank, rec in enumerate(survey_results):
+        for rank, rec in enumerate(survey_results, start=1):
             result_html = (
                 f"<div class='results-box'>"                          # open parent
                     f"<div class='result-sub-box'>"                   # open child 1

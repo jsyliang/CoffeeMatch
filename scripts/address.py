@@ -59,7 +59,7 @@ def county_api_call(list_of_roasteries):
         # is within a data and present IN single record f'strng check.
         try:
             query = f"""SELECT *
-                 WHERE inspection_date BETWEEN '2024-10-01' AND '2026-01-30'
+                 WHERE inspection_date BETWEEN '2025-01-02T00:00:00.000' AND '2026-01-02T00:00:00.000'
                  AND name IN ({check})
                  ORDER BY
                      name

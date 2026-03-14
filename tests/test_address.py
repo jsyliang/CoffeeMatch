@@ -5,7 +5,7 @@ into disorganization and three oneshot tests to confirm correct
 output of a successsuccessful full API call and an unsuccessful
  one, and finally the total number of coffees from load.py."""
 
-#note that the 80% of load.py not "covered" as coverage, are 
+#note that the 80% of load.py not "covered" as coverage, are
 #actually meant to trigger tests in test_load.py.
 
 import unittest
@@ -13,7 +13,6 @@ import numpy as np
 import pandas as pd
 
 from scripts.address import cafe_override, freq_roasters, county_api_call
-# pylint: disable=E0401
 from scripts.load import load_products
 
 

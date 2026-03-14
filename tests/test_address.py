@@ -12,7 +12,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from address import cafe_override, freq_roasters, county_api_call
+from scripts.address import cafe_override, freq_roasters, county_api_call
 # pylint: disable=E0401
 from scripts.load import load_products
 

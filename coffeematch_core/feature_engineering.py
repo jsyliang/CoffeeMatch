@@ -41,7 +41,7 @@ from __future__ import annotations
 import math
 import pandas as pd
 
-from .schemas import PRODUCT_REQUIRED_COLUMNS
+from .schemas import PRODUCT_REQUIRED_COLUMNS, SIZE_OPTION_REQUIRED_COLUMNS
 
 STANDARD_MIN_OZ = 10
 STANDARD_MAX_OZ = 16
@@ -352,12 +352,8 @@ def build_reference_features(reference_rows: pd.DataFrame) -> pd.DataFrame:
         Product-level reference features keyed by product_key.
     """
     reference_features = reference_rows[
-        [
-            "product_key",
-            "size",
-            "size_oz",
-            "price_numeric",
-            "price_per_oz",
+        SIZE_OPTION_REQUIRED_COLUMNS
+        + [
             "size_tier",
             "reference_adjustment_factor",
             "reference_price_per_oz",

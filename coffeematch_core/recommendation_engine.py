@@ -20,25 +20,13 @@ import math
 import pandas as pd
 
 from .schemas import (
-    Recommendation, UserPreferences, 
-    SizeOption, CafeLocation, ReviewData
+    Recommendation, UserPreferences,
+    SizeOption, CafeLocation, ReviewData,
+    PRODUCT_REQUIRED_COLUMNS, SIZE_OPTION_REQUIRED_COLUMNS
 )
 
 
-RECOMMENDATION_REQUIRED_COLUMNS = (
-    "product_key",
-    "roaster",
-    "product_name",
-    "origin",
-    "roast_type",
-    "decaf",
-    "blend",
-    "single_origin",
-    "available_ground",
-    "url",
-    "has_reviews",
-    "total_reviews",
-    "heart_percentage",
+RECOMMENDATION_REQUIRED_COLUMNS = tuple(PRODUCT_REQUIRED_COLUMNS) + (
     "roast_light",
     "roast_medium",
     "roast_dark",
@@ -50,14 +38,6 @@ RECOMMENDATION_REQUIRED_COLUMNS = (
     "reference_size_tier",
     "value_signal",
     "review_strength",
-)
-
-SIZE_OPTION_REQUIRED_COLUMNS = (
-    "product_key",
-    "size",
-    "size_oz",
-    "price_numeric",
-    "price_per_oz",
 )
 
 
@@ -360,7 +340,7 @@ def is_washington_zip(zip_code: str | None) -> bool:
         return False
 
     return 98000 <= zip_int <= 99499
-    
+
 
 def build_product_info_lookup(product_info_df: pd.DataFrame) -> dict[str, CafeLocation]:
     """
@@ -617,6 +597,7 @@ def build_recommendation_objects(
     return recommendations
 
 
+# pylint: disable-next=too-many-arguments,too-many-positional-arguments
 def recommend_products(
     feature_table: pd.DataFrame,
     products_df: pd.DataFrame,

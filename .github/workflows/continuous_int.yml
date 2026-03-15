@@ -12,12 +12,7 @@ jobs:
   run_test:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        shell: bash -el {0}
-
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v6
 
@@ -46,9 +41,9 @@ jobs:
           path: |
             coverage.xml
             htmlcov/
+
       - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v5
-              with:
-                files: coverage.xml
-                token: ${{ secrets.CODECOV_TOKEN }}
-  
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}

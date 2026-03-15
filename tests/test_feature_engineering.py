@@ -1,10 +1,14 @@
 import pandas as pd
+import math
 import pytest
 
 from coffeematch_core.feature_engineering import (
     classify_size_tier,
     compute_adjustment_factors,
     encode_roast_membership,
+    build_feature_table,
+    validate_feature_columns,
+    select_reference_rows
 )
 
 
@@ -161,3 +165,103 @@ def test_compute_adjustment_factors_defaults_invalid_nonstandard_tiers_to_one(
 
     assert result["mid_bulk"] == 1.0
     assert result["large_bulk"] == 1.0
+
+
+def test_build_feature_table_returns_expected_product_level_features():
+    """It should build product-level features with normalized reference pricing."""
+    products_df = pd.DataFrame(
+        {
+            "product_key": ["p1", "p1", "p2"],
+            "roaster": ["Roaster A", "Roaster A", "Roaster B"],
+            "product_name": ["Coffee A", "Coffee A", "Coffee B"],
+            "origin": ["Ethiopia", "Ethiopia", "Colombia"],
+            "roast_type": ["Light Roast", "Light Roast", "Dark Roast"],
+            "size": ["10 oz", "24 oz", "12 oz"],
+            "size_oz": [10, 24, 12],
+            "price_numeric": [18.0, 36.0, 20.0],
+            "price_per_oz": [1.8, 1.5, 20.0 / 12.0],
+            "hearts": [10, 10, 5],
+            "total_reviews": [4, 4, 2],
+            "heart_percentage": [0.75, 0.75, 0.5],
+            "has_reviews": [True, True, True],
+            "decaf": [False, False, False],
+            "blend": [False, False, True],
+            "single_origin": [True, True, False],
+            "available_ground": [True, True, False],
+            "url": ["url-a", "url-a", "url-b"],
+        }
+    )
+
+    result = build_feature_table(products_df)
+
+    assert list(result["product_key"]) == ["p1", "p2"]
+
+    coffee_a = result[result["product_key"] == "p1"].iloc[0]
+    coffee_b = result[result["product_key"] == "p2"].iloc[0]
+
+    # product aggregation
+    assert coffee_a["num_sizes"] == 2
+    assert coffee_a["min_size_oz"] == 10
+    assert coffee_a["max_size_oz"] == 24
+
+    # roast membership aggregation
+    assert coffee_a["roast_light"] == 1
+    assert coffee_a["roast_medium"] == 0
+    assert coffee_a["roast_dark"] == 0
+
+    assert coffee_b["roast_light"] == 0
+    assert coffee_b["roast_dark"] == 1
+
+    # reference row selection:
+    # p1 should choose the standard size (10 oz) over the 24 oz bag
+    assert coffee_a["reference_size_label"] == "10 oz"
+    assert coffee_a["reference_size_oz"] == 10
+    assert coffee_a["reference_size_tier"] == "standard"
+
+    # derived metrics
+    assert coffee_a["review_volume_log"] == pytest.approx(math.log1p(4))
+    assert coffee_b["review_volume_log"] == pytest.approx(math.log1p(2))
+
+    assert coffee_a["value_signal"] > 0
+    assert coffee_a["review_strength"] == pytest.approx(0.75 * math.log1p(4))
+
+
+def test_validate_feature_columns_raises_for_missing_columns():
+    """It should raise a clear error when required columns are missing."""
+    products_df = pd.DataFrame({"product_key": ["p1"]})
+
+    with pytest.raises(
+        ValueError,
+        match="missing required feature-engineering columns",
+    ):
+        validate_feature_columns(products_df)
+
+
+def test_select_reference_rows_uses_nonstandard_fallback_order():
+    """It should prefer mid-bulk, then large-bulk, then smallest available fallback."""
+    products_df = pd.DataFrame(
+        {
+            "product_key": ["p1", "p1", "p2", "p2", "p3", "p3"],
+            "size": ["32 oz", "24 oz", "96 oz", "80 oz", "20 oz", "8 oz"],
+            "size_oz": [32, 24, 96, 80, 20, 8],
+            "price_per_oz": [1.2, 1.3, 0.8, 0.9, 1.4, 1.8],
+            "size_tier": [
+                "mid_bulk",
+                "mid_bulk",
+                "large_bulk",
+                "large_bulk",
+                "other",
+                "other",
+            ],
+        }
+    )
+
+    result = select_reference_rows(products_df)
+
+    p1 = result[result["product_key"] == "p1"].iloc[0]
+    p2 = result[result["product_key"] == "p2"].iloc[0]
+    p3 = result[result["product_key"] == "p3"].iloc[0]
+
+    assert p1["size_oz"] == 24
+    assert p2["size_oz"] == 80
+    assert p3["size_oz"] == 8

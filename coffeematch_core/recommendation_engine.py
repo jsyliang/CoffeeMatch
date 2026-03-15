@@ -207,7 +207,7 @@ def min_max_scale(values: pd.Series) -> pd.Series:
     pd.Series
         Scaled values.
     """
-    clean_values = values.fillna(0).astype(float)
+    clean_values = values.astype(float).fillna(0)
     min_value = clean_values.min()
     max_value = clean_values.max()
 

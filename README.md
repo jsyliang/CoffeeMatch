@@ -1,4 +1,7 @@
 # Coffee Match
+---
+[![CI](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml/badge.svg)](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml)
+[![codecov](https://codecov.io/gh/jsyliang/CoffeeMatch/branch/main/graph/badge.svg)](https://codecov.io/gh/jsyliang/CoffeeMatch)
 
 A coffee profile tool that connects people’s preferences to local Washington roasters.
 
@@ -73,8 +76,3 @@ https://kingcounty.gov/en/dept/dph/health-safety/food-safety/search-restaurant-s
 2. Washington Department of Revenue API business address lookup, “. . . cannot be queried using the Socrata Open Data API” https://dev.socrata.com/foundry/data.wa.gov/4wur-kfnr.
 
 ---
-
-### Badges for CI status and code coverage
-
-[![CI](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml/badge.svg)](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml)
-[![codecov](https://codecov.io/gh/jsyliang/CoffeeMatch/branch/main/graph/badge.svg)](https://codecov.io/gh/jsyliang/CoffeeMatch)

@@ -1,5 +1,6 @@
-import pandas as pd
+# pylint: disable=missing-module-docstring, missing-function-docstring
 import math
+import pandas as pd
 import pytest
 
 from coffeematch_core.feature_engineering import (

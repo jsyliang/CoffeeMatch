@@ -21,7 +21,7 @@ st.markdown("""
 
             /*Page Titles*/
             .page-title {
-                font-size: 116px;
+                font-size: 96px;
                 font-family: 'Brush Script MT', cursive, sans-serif;
                 color: #a0522d;
                 text-align: center;
@@ -35,7 +35,7 @@ st.markdown("""
                 color: #a0522d;
                 font-family: 'Brush Script MT', cursive, sans-serif;
                 text-align: center;
-                margin-bottom: 1.5rem;
+                margin-bottom: 2.5rem;
                 margin-top: 0;
             }
 
@@ -44,7 +44,11 @@ st.markdown("""
             background-color: #ffe4b5 !important;
             }
 
-            /* Align slider vertically to center of its column */
+            .stForm > div:first-child {
+            padding-top: 30px;
+            }
+
+            /*Align slider vertically to center of its column*/
             [data-testid="stSlider"] {
                 margin-top: auto;
                 margin-bottom: auto;
@@ -56,7 +60,7 @@ st.markdown("""
                 align-items: center !important;  /* vertically center column contents */
             }
 
-            /* Visual divider between question rows */
+            /*Visual divider between question rows*/
             .survey-row-divider {
                 border-top: 1px solid #c49a6c;
                 margin: 1rem 0;
@@ -187,6 +191,25 @@ st.markdown("""
                 font-weight: bold;
             }
 
+            /* Submit Button */
+            div.stFormSubmitButton {
+            display: flex;
+            justify-content: center;
+            }
+ 
+            div.stFormSubmitButton > button {
+            background-color: #D6859C;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 30px;
+            }
+
+            div.stFormSubmitButton > button:hover {
+                background-color: #BF4064;
+                color: white;
+            }
+
             /* Results Box*/
             .results-box {
             display: flex;
@@ -279,50 +302,95 @@ if "step" not in st.session_state:
 if st.session_state["step"] == "survey":
     st.set_page_config(page_title="Coffee Match", layout="wide")
     st.markdown("<div class='page-title'>Coffee Match</div>",unsafe_allow_html=True)
-    st.markdown("<div class='page-subtitle'>☕ Find the Washington Bean of your Dreams ☕</div>",unsafe_allow_html=True)
+    st.markdown("<div class='page-subtitle'>Find the Washington Bean of your Dreams</div>",unsafe_allow_html=True)
     
     with st.form("survey_form"):
 
-        #Caffeine content - Boolean True if decaf 
-        st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
-        a1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
+        # Header Qs
+        col_q1, col_s1 = st.columns([1, 1])
+        
+        with col_q1:
+            st.markdown("<div class='slider-question'>"
+                        "<i style='font-size:30px; color: #a0522d; white-space: pre;'>"
+                        "☕   ☕   ☕   Coffee Questions   ☕   ☕   ☕"
+                        "</i>"
+                        "<br><br>"
+                        "</div>", 
+                        unsafe_allow_html=True)
+        
+        with col_s1:
+            st.markdown("<div class='slider-question'>"
+                        "<i style='font-size:30px; white-space: pre;'>"
+                        "♥    ♥    ♥    Match Maker Weights    ♥    ♥    ♥"
+                        "</i>"
+                        "<br><br>"
+                        "</div>", 
+                        unsafe_allow_html=True)
+        
 
-        #Origin Preference - Boolean True if single origin
-        st.markdown("<div class='survey-question'>Are you only interested in single origin beans?</div>", unsafe_allow_html=True)
-        a2 = st.radio("",["Single origin only", "No preference"], label_visibility = "collapsed")
-
-        #Ground or Whole - Boolean True is ground required    
-        st.markdown("<div class='survey-question'>Ground or whole beans (do you have a grinder)?</div>", unsafe_allow_html=True)
-        a3 = st.radio("Ground", ["Whole beans (yes)", "Pre-ground (no)"], label_visibility="collapsed")
-    
-        #Roast preference - importance of weight (float) and string 
-        col_q4, col_s4 = st.columns([1, 1])
-        with col_q4:
-            st.markdown("<div class='survey-question'>What's your roast preference?</div>", unsafe_allow_html=True)
-            a4 = st.radio("Roast", ["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility="collapsed")
-        with col_s4:
-            st.markdown("<div class='slider-question'>How important is roast for your match? (1 = least, 5 = most)</div>", unsafe_allow_html=True)
-            a5 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
-
-        #Price Importance - weight (float)
-        col_q5, col_s5 = st.columns([1, 1])
-        with col_q5:
-            st.markdown("<div class='survey-question'>How important is a lower price for your match? </div>", unsafe_allow_html=True)  
-        with col_s5:
-            st.markdown("<div class='slider-question'>Price Importance (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+        #Origin Preference - Boolean True if single origin, also weights for price in 2nd column 
+        col_q2, col_s2 = st.columns([1, 1])
+        
+        with col_q2:
+            st.markdown("<div class='survey-question'>"
+                        "Are you only interested in single origin beans?"
+                        "</div>",
+                        unsafe_allow_html=True)
+            a2 = st.radio("",["Single origin only", "No preference"], label_visibility = "collapsed")
+       
+        with col_s2:
+            st.markdown("<div class='slider-question'>"
+                        "Importance of lower price (1 = least, 5 = most)"
+                        "</div>", 
+                        unsafe_allow_html=True)
             a6 = st.slider("Price importance", 1, 5, 5, label_visibility="collapsed")
 
-        #Popular Importance - weight (float)
-        col_q6, col_s6 = st.columns([1, 1])
-        with col_q6:
-            st.markdown("<div class='survey-question'>How important is it that your match is popular (highly reviewed)? </div>", unsafe_allow_html=True)
-        with col_s6:
-            st.markdown("<div class='slider-question'>Popularity Importance (1 = least, 5 = most)</div>", unsafe_allow_html=True)
+        #Ground or Whole - Boolean True is ground required, also popularity weights in second column  
+        col_q3, col_s3 = st.columns([1, 1])
+        
+        with col_q3:
+            st.markdown("<div class='survey-question'>"
+                        "Ground or whole beans (do you have a grinder)?"
+                        "</div>", 
+                        unsafe_allow_html=True)
+            a3 = st.radio("", ["Whole beans (yes)", "Pre-ground (no)"], label_visibility="collapsed")
+        
+        with col_s3:
+            st.markdown("<div class='slider-question'>"
+                        "Importance of product popularity (1 = least, 5 = most)"
+                        "</div>", 
+                        unsafe_allow_html=True)
             a7 = st.slider("Popularity importance", 1, 5, 3, label_visibility="collapsed")
 
-        #make sure to convert weight to float when putting it into the class
+        #Roast preference - importance of weight (float) and string 
+        col_q4, col_s4 = st.columns([1, 1])
+        
+        with col_q4:
+            st.markdown("<div class='survey-question'>"
+                        "What's your roast preference?"
+                        "</div>", 
+                        unsafe_allow_html=True)
+            a4 = st.radio("Roast", ["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility="collapsed")
 
-        submitted = st.form_submit_button("Find your match!")
+        with col_s4:
+            st.markdown("<div class='slider-question'>"
+                        "Importance of roast preference (1 = least, 5 = most)"
+                        "</div>", 
+                        unsafe_allow_html=True)
+            a5 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
+
+        #Caffeine content - Boolean True if decaf 
+        col_q5, col_s5 = st.columns([1, 1])
+        
+        with col_q5:
+            st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
+            a1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
+        
+        with col_s5:
+            st.markdown("", unsafe_allow_html=True) # Empty 
+
+
+        submitted = st.form_submit_button("Find your matches!")
         if submitted:
             
             # redefine survey responses 
@@ -365,17 +433,6 @@ if st.session_state["step"] == "survey":
             st.session_state["step"] = "results"
             st.rerun()
 
-# max_price_per_oz should be a float that the user can input
-
-#  survey_results = {
-#                 "caffeine": q1,
-#                 "roast": q2,
-#                 "roast_pref_points": q4,
-#                 "ground": q3,
-#                 "grind_pref_points": q5,
-#             }
-
-
 # Results Page!
 
 if st.session_state["step"] == "results":
@@ -393,20 +450,45 @@ if st.session_state["step"] == "results":
         
         # Display each match
         for rank, rec in enumerate(survey_results, start=1):
+
+            #Preload a few strings to avoid doing stuff in the html
+            if rec.cafe_location and rec.cafe_location.cafe_address and rec.cafe_location.google_maps_url:
+                cafe_info = (
+                    f"{rec.cafe_location.cafe_name}<br>"
+                    f"<span style='font-size:12px;'>"
+                    f"<a href='{rec.cafe_location.google_maps_url}' target='_blank'>{rec.cafe_location.cafe_address}</a>"
+                    f"</span>"
+                )
+            elif rec.cafe_location and rec.cafe_location.cafe_name:
+                cafe_info = rec.cafe_location.cafe_name
+            else:
+                cafe_info = "No cafes for this product"
+                    
+            sizes_str = ', '.join(f"{s.size} (${s.price_numeric:.2f})" for s in rec.available_sizes)
+            tasting_str = ', '.join(dict.fromkeys(str(t) for t in rec.tasting_notes))
+            rec.score = rec.score * 100
+
+            #Html code 
             result_html = (
                 f"<div class='results-box'>"                          # open parent
                     f"<div class='result-sub-box'>"                   # open child 1
-                        f"<span class='sub-box-label'>Match #{rank}</span>"
-                        f"<span class='sub-box-value'>{rec.product_name}</span>"
+                        f"<span class='sub-box-value' style='font-size:24px; color:#BF4064;'>{rec.product_name} <br> "
+                        f"<span style='font-size:14px; color:#D6859C;'>{rec.roast_type}</span><br>"
+                        f"<span style='font-size:14px; color:#D6859C;'>Roaster: {rec.roaster}</span><br>"
+                        f"<span style='font-size:14px; color:#D6859C;'>Notes: {tasting_str}</span></span>"
                     f"</div>"                                         # close child 1
-                    f"<div class='result-sub-box'>"                   # open child 2
-                        f"<span class='sub-box-label'>Match Score</span>"
-                        f"<span class='sub-box-value'>{rec.score:.2f}/5</span>"
+                    f"<div class='result-sub-box'>"                   # open child 2  #D6859C
+                        f"<span class='sub-box-label'><u>Match Score</u></span>"
+                        f"<span class='sub-box-value'>{rec.score:.0f}%</span>"
                     f"</div>"                                         # close child 2
                     f"<div class='result-sub-box'>"                   # open child 3
-                        f"<span class='sub-box-label'>Price per oz</span>"
-                        f"<span class='sub-box-value'>${rec.match_reasons}</span>"
+                        f"<span class='sub-box-label'><u>Products</u></span>"
+                        f"<span class='sub-box-value'>{sizes_str}</span>"
                     f"</div>"                                         # close child 3
+                    f"<div class='result-sub-box'>"                   # open child 4
+                        f"<span class='sub-box-label'><u>Try Before you Buy</u></span>"
+                        f"<span class='sub-box-value'>{cafe_info}</span>"
+                    f"</div>"                                         # close child 4
                 f"</div>"                                             # close parent
             )
             st.markdown(result_html, unsafe_allow_html=True)

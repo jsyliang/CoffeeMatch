@@ -76,7 +76,5 @@ https://kingcounty.gov/en/dept/dph/health-safety/food-safety/search-restaurant-s
 
 ### Badges for CI status and code coverage
 
-# CoffeeMatch
-
 [![CI](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml/badge.svg)](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml)
 [![codecov](https://codecov.io/gh/jsyliang/CoffeeMatch/branch/main/graph/badge.svg)](https://codecov.io/gh/jsyliang/CoffeeMatch)

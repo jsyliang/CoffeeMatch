@@ -1,10 +1,8 @@
 # pylint: disable=missing-module-docstring, missing-function-docstring
-from pathlib import Path
-
 import pandas as pd
 import pytest
 
-import scripts.prepare_data as prepare_data
+from scripts import prepare_data
 
 
 def test_ensure_directories_creates_processed_dir(tmp_path, monkeypatch):

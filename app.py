@@ -315,7 +315,7 @@ st.markdown("""
 st.markdown("""
 <style>
 .stSlider [data-baseweb=slider]{
-width: 50%;
+width: 70%;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -349,7 +349,7 @@ if st.session_state["step"] == "survey":
         "<span style='font-size:118px'>Coffee Match</span></div>",
         unsafe_allow_html=True)
     st.markdown(
-        "<div class='page-subtitle sparkle subtitle'>"
+        "<div class='page-subtitle sparkle-subtitle'>"
         "Find the Washington Bean of your Dreams</div>",
         unsafe_allow_html=True)
 
@@ -523,7 +523,7 @@ if st.session_state["step"] == "results":
         elif loc and loc.cafe_name:
             cafe_info = loc.cafe_name
         else:
-            cafe_info = "No cafes for this product"
+            cafe_info = "No cafe information availble :("
 
         sizes_str = ', '.join(
             f"{s.size} (${s.price_numeric:.2f})"
@@ -531,44 +531,49 @@ if st.session_state["step"] == "results":
         tasting_str = ', '.join(
             dict.fromkeys(
                 str(t) for t in rec.tasting_notes))
+        tasting_str = tasting_str.lower()
         rec.score = rec.score * 100
 
         # Html code
-    result_html = (
-            f"<div class='results-box'>" #open parent
-            f"<div class='result-sub-box'>" #open product box
+        result_html = (
+            f"<div class='results-box'>"
+            f"<div class='result-sub-box'>"
+            f"<span class='sub-box-label'"
+            f" style='color:#BF4064;"
+            f" font-size:1.6rem;'"
+            f" margin:0;'>"
+            f"Match #{rank}</span>"
             f"<span class='sub-box-value'"
-            f" style='font-size:24px; color:#BF4064;'>"
-            f"{rec.product_name}<br>"
-            f"<span style='font-size:14px;"
-            f" color:#D6859C;'>"
-            f"{rec.roast_type}</span><br>"
-            f"<span style='font-size:14px;"
-            f" color:#D6859C;'>"
-            f"Roaster: {rec.roaster}</span><br>"
-            f"<span style='font-size:14px;"
-            f" color:#D6859C;'>"
-            f"Notes: {tasting_str}</span></span>"
-            f"</div>" #close product box
-            f"<div class='result-sub-box'>" #open score box
+            f" style='font-size:22px;"
+            f" color:#BF4064;'>"
+            f"{rec.product_name}</span>"
+            f"<span style='font-size:13px;"
+            f" color:#D6859C;"
+            f" line-height:1.4;'>"
+            f"{rec.roast_type} · {rec.roaster}<br>"
+            f"notes of {tasting_str}</span>"
+            f"</div>"
+            f"<div class='result-sub-box'>"
             f"<span class='sub-box-label'>"
             f"<u>Match Score</u></span>"
-            f"<span class='sub-box-value'>"
+            f"<span class='sub-box-value'"
+            f" style='font-size:28px;"
+            f" color:#BF4064;'>"
             f"{rec.score:.0f}%</span>"
-            f"</div>" #close score box
-            f"<div class='result-sub-box'>" #open size/price box
+            f"</div>"
+            f"<div class='result-sub-box'>"
             f"<span class='sub-box-label'>"
             f"<u>Products</u></span>"
             f"<span class='sub-box-value'>"
             f"{sizes_str}</span>"
-            f"</div>" #close size/price box
-            f"<div class='result-sub-box'>" #open cafe info box
+            f"</div>"
+            f"<div class='result-sub-box'>"
             f"<span class='sub-box-label'>"
             f"<u>Try Before you Buy</u></span>"
             f"<span class='sub-box-value'>"
             f"{cafe_info}</span>"
-            f"</div>" #close cafe info box
-            f"</div>" #close parent
+            f"</div>"
+            f"</div>"
         )
 
-    st.markdown(result_html, unsafe_allow_html=True)
+        st.markdown(result_html, unsafe_allow_html=True)

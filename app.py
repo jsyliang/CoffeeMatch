@@ -1,17 +1,47 @@
+#Pylint ignore statements
+#pylint: disable=undefined-loop-variable,invalid-name,redefined-outer-name
+
+#why were these ignored? (for instructors)
+
+#undefined-loop-variable: not true as out loop wouldnt function.
+#The loop variable comes from an external module
+
+#invalid-name: wanted an uppercase name for cafe_info, which is not a constant
+
+#redefined-outer-name: this came from another module and was
+#being imported into here, not redefined
+
+"""
+CoffeeMatch Streamlit UI
+
+Calls back end functions to 
+provide matches and match information
+to the user. 
+
+Consists of:
+
+Survey page: UI for user to fill out 
+information which is sent to backend 
+
+Results page: displays information on 
+matches found for the user
+"""
+
 import streamlit as st
 import pandas as pd
-from pathlib import Path
 from coffeematch_core.data_loader import load_datasets
 from coffeematch_core.schemas import UserPreferences
 from coffeematch_core.feature_engineering import build_feature_table
 from coffeematch_core.recommendation_engine import recommend_products
 
-# Paths to data 
+
+# Paths to data
 PRODUCTS_PATH = "data/raw/Product_Information.xlsx"
 REVIEWS_PATH = "data/raw/Reviews_and_Tasting_Notes.xlsx"
 REVIEWS_SHEET = "Reviews with Tasting Notes"
 
-# Set up styling for use in the website 
+
+# Set up styling for use in the website
 st.markdown("""
         <style>
             /*Page Background Colors*/
@@ -192,23 +222,19 @@ st.markdown("""
             }
 
             /* Submit Button */
-            div.stFormSubmitButton {
-            display: flex;
-            justify-content: center;
+            .stForm [data-testid="baseButton-secondary"] {
+                float: right !important;
+                margin-left: auto !important;
+                display: block !important;
             }
  
             div.stFormSubmitButton > button {
-            background-color: #D6859C;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 30px;
-            }
-
-            div.stFormSubmitButton > button:hover {
-                background-color: #BF4064;
-                color: white;
-            }
+                background-color: #D6859C !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 20px !important;
+                padding: 10px 30px !important;
+            }   
 
             /* Results Box*/
             .results-box {
@@ -264,51 +290,74 @@ st.markdown("""
                 color: #a0522d;
             }
 
+            /* Sparkles!!!*/
+            @keyframes sparkle {
+                0%, 100% { text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #D6859C, 0 0 40px #D6859C; }
+                25% { text-shadow: 0 0 2px #fff, 0 0 8px #fff, 0 0 14px #BF4064, 0 0 30px #BF4064; }
+                50% { text-shadow: 0 0 6px #fff, 0 0 15px #fff, 0 0 22px #D6859C, 0 0 50px #D6859C; }
+                75% { text-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 16px #BF4064, 0 0 35px #BF4064; }
+            }
+
+            .sparkle-title {
+                animation: sparkle 3s ease-in-out infinite;
+            }
+
+            .sparkle-subtitle {
+                animation: sparkle 4s ease-in-out infinite;
+                animation-delay: 0.5s;
+            }
+
         </style>
         """, unsafe_allow_html=True)
 
+
+#Slider streamlit markdown for width
+st.markdown("""
+<style>
+.stSlider [data-baseweb=slider]{
+width: 50%;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 # Data Loading (load out datasets and store for later use)
-#st.cache is a Streamlit decorator that caches the output of a function.
-#When you call a function decorated with @st.cache_data, Streamlit stores its result.
-#If you call the function again with the same arguments, Streamlit returns the cached result instead of re-running the function.
-#This helps speed things up and keep things responsive
 @st.cache_data
 def load_data() -> pd.DataFrame:
     """Load the cleaned products dataset."""
     return load_datasets()
-
 
 @st.cache_data
 def load_feature_table(products_df: pd.DataFrame) -> pd.DataFrame:
     """Build the product-level feature table once per app session."""
     return build_feature_table(products_df)
 
-
 products_df, reviews_df, product_info_df = load_data()
 feature_table = load_feature_table(products_df)
+
 
 # Set the website so the starting state is the survey page
 if "step" not in st.session_state:
     st.session_state["step"] = "survey"
 
 
-# What are states? 
-# Basically the "state of the website". Changes will be stored,
-# but if we don't switch from one state to the next for example
-# our survey and results page would be displayed on top of eachother.
-# we use st.rerun() to stop the current script and rerun with out updated state 
-
-# Survey Page 
+# Survey Page
 if st.session_state["step"] == "survey":
     st.set_page_config(page_title="Coffee Match", layout="wide")
-    st.markdown("<div class='page-title'>Coffee Match</div>",unsafe_allow_html=True)
-    st.markdown("<div class='page-subtitle'>Find the Washington Bean of your Dreams</div>",unsafe_allow_html=True)
-    
+    st.markdown(
+        "<div class='page-title sparkle-title'>"
+        "<span style='font-size:118px'>Coffee Match</span></div>",
+        unsafe_allow_html=True)
+    st.markdown(
+        "<div class='page-subtitle sparkle subtitle'>"
+        "Find the Washington Bean of your Dreams</div>",
+        unsafe_allow_html=True)
+
     with st.form("survey_form"):
 
         # Header Qs
         col_q1, col_s1 = st.columns([1, 1])
-        
+
         with col_q1:
             st.markdown("<div class='slider-question'>"
                         "<i style='font-size:30px; color: #a0522d; white-space: pre;'>"
@@ -317,7 +366,7 @@ if st.session_state["step"] == "survey":
                         "<br><br>"
                         "</div>", 
                         unsafe_allow_html=True)
-        
+
         with col_s1:
             st.markdown("<div class='slider-question'>"
                         "<i style='font-size:30px; white-space: pre;'>"
@@ -326,98 +375,109 @@ if st.session_state["step"] == "survey":
                         "<br><br>"
                         "</div>", 
                         unsafe_allow_html=True)
-        
 
-        #Origin Preference - Boolean True if single origin, also weights for price in 2nd column 
+        # Origin Preference
         col_q2, col_s2 = st.columns([1, 1])
-        
+
         with col_q2:
             st.markdown("<div class='survey-question'>"
                         "Are you only interested in single origin beans?"
                         "</div>",
                         unsafe_allow_html=True)
-            a2 = st.radio("",["Single origin only", "No preference"], label_visibility = "collapsed")
-       
+            a2 = st.radio(
+                "", ["%ingle origin only", "No preference"],
+                label_visibility="collapsed")
+
         with col_s2:
             st.markdown("<div class='slider-question'>"
                         "Importance of lower price (1 = least, 5 = most)"
                         "</div>", 
                         unsafe_allow_html=True)
-            a6 = st.slider("Price importance", 1, 5, 5, label_visibility="collapsed")
+            a6 = st.slider(
+                "Price importance", 1, 5, 5,
+                label_visibility="collapsed")
 
-        #Ground or Whole - Boolean True is ground required, also popularity weights in second column  
+        # Ground or Whole
         col_q3, col_s3 = st.columns([1, 1])
-        
+
         with col_q3:
             st.markdown("<div class='survey-question'>"
                         "Ground or whole beans (do you have a grinder)?"
                         "</div>", 
                         unsafe_allow_html=True)
-            a3 = st.radio("", ["Whole beans (yes)", "Pre-ground (no)"], label_visibility="collapsed")
-        
+            a3 = st.radio(
+                "", ["Whole beans (yes)", "Pre-ground (no)"],
+                label_visibility="collapsed")
+
         with col_s3:
             st.markdown("<div class='slider-question'>"
                         "Importance of product popularity (1 = least, 5 = most)"
                         "</div>", 
                         unsafe_allow_html=True)
-            a7 = st.slider("Popularity importance", 1, 5, 3, label_visibility="collapsed")
+            a7 = st.slider(
+                "Popularity importance", 1, 5, 3,
+                label_visibility="collapsed")
 
-        #Roast preference - importance of weight (float) and string 
+        # Roast preference
         col_q4, col_s4 = st.columns([1, 1])
-        
+
         with col_q4:
             st.markdown("<div class='survey-question'>"
                         "What's your roast preference?"
                         "</div>", 
                         unsafe_allow_html=True)
-            a4 = st.radio("Roast", ["Light", "Medium", "Dark", "No preference / I'm not sure"], label_visibility="collapsed")
+            a4 = st.radio(
+                "Roast",
+                ["Light", "Medium", "Dark",
+                 "No preference / I'm not sure"],
+                label_visibility="collapsed")
 
         with col_s4:
             st.markdown("<div class='slider-question'>"
                         "Importance of roast preference (1 = least, 5 = most)"
                         "</div>", 
                         unsafe_allow_html=True)
-            a5 = st.slider("Roast importance", 1, 5, 3, label_visibility="collapsed")
+            a5 = st.slider(
+                "Roast importance", 1, 5, 3,
+                label_visibility="collapsed")
 
-        #Caffeine content - Boolean True if decaf 
+        # Caffeine content - Boolean True if decaf
         col_q5, col_s5 = st.columns([1, 1])
-        
+
         with col_q5:
-            st.markdown("<div class='survey-question'>Are you looking for a caffeinated or decaf coffee?</div>", unsafe_allow_html=True)
-            a1 = st.radio("",["Caffeinated! 🤩", "Decaf 😌"], label_visibility = "collapsed")
-        
-        with col_s5:
-            st.markdown("", unsafe_allow_html=True) # Empty 
+            st.markdown(
+                "<div class='survey-question'>"
+                "Are you looking for a caffeinated"
+                " or decaf coffee?</div>",
+                unsafe_allow_html=True)
+            a1 = st.radio(
+                "", ["Caffeinated! 🤩", "Decaf 😌"],
+                label_visibility="collapsed")
 
+        st.markdown("<br>", unsafe_allow_html=True)
 
-        submitted = st.form_submit_button("Find your matches!")
+        # Submission button
+        _, col_center, _ = st.columns([2, 1, 2])
+
+        with col_center:
+            submitted = st.form_submit_button("Find your match!", use_container_width=True)
+
         if submitted:
-            
-            # redefine survey responses 
-            if a1 == 'Decaf 😌':
-                a1 = True
-            else:
-                a1 = False
 
-            if a2 == 'Single origin only':
-                a2 = True
-            else:
-                a2 = False
-            
-            if a3 == 'Pre-ground (no)':
-                a3 = True
-            else:
-                a3 = False
-            
-            # create user preferences 
+            # redefine survey responses
+            a1 = a1 == 'Decaf 😌'
+            a2 = a2 == 'Single origin only'
+            a3 = a3 == 'Pre-ground (no)'
+
+            # create user preferences
             survey_results = UserPreferences(
-                roast_type= a4,
-                decaf= a1,
-                ground_required= a3,
-                single_origin_preference= a2,
-                roast_weight= float(a5),
-                price_weight= float(a6),
-                popularity_weight= float(a7) 
+                roast_type=a4,
+                decaf=a1,
+                ground_required=a3,
+                single_origin_preference=a2,
+                roast_weight=float(a5),
+                price_weight=float(a6),
+                popularity_weight=float(a7)
             )
 
             recommendations = recommend_products(
@@ -426,69 +486,89 @@ if st.session_state["step"] == "survey":
                 reviews_df=reviews_df,
                 product_info_df=product_info_df,
                 preferences=survey_results,
-                top_n=5, # could make a UI for how many matches the user wants to see 
+                top_n=5,
             )
-            
-            st.session_state["survey_results"] = recommendations 
+
+            st.session_state["survey_results"] = recommendations
             st.session_state["step"] = "results"
             st.rerun()
 
-# Results Page!
 
+# Results Page!
 if st.session_state["step"] == "results":
-    st.set_page_config(page_title="Match Results")
-    
+    st.set_page_config(
+        page_title="Match Results", layout="wide")
+
     survey_results = st.session_state.get("survey_results")
 
-    # if survey_results.empty:
-    #     st.warning("No products match your filters :(")
-    if False:
-        pass
-    else:
-        st.set_page_config(page_title="Match Results", layout="wide")
-        st.markdown("<div class='page-title'>💕 Here are your coffee matches! 💕</div>", unsafe_allow_html=True)
-        
-        # Display each match
-        for rank, rec in enumerate(survey_results, start=1):
+    st.markdown(
+        "<div class='page-title'>"
+        "💕 Here are your coffee matches! 💕</div>",
+        unsafe_allow_html=True)
 
-            #Preload a few strings to avoid doing stuff in the html
-            if rec.cafe_location and rec.cafe_location.cafe_address and rec.cafe_location.google_maps_url:
-                cafe_info = (
-                    f"{rec.cafe_location.cafe_name}<br>"
-                    f"<span style='font-size:12px;'>"
-                    f"<a href='{rec.cafe_location.google_maps_url}' target='_blank'>{rec.cafe_location.cafe_address}</a>"
-                    f"</span>"
-                )
-            elif rec.cafe_location and rec.cafe_location.cafe_name:
-                cafe_info = rec.cafe_location.cafe_name
-            else:
-                cafe_info = "No cafes for this product"
-                    
-            sizes_str = ', '.join(f"{s.size} (${s.price_numeric:.2f})" for s in rec.available_sizes)
-            tasting_str = ', '.join(dict.fromkeys(str(t) for t in rec.tasting_notes))
-            rec.score = rec.score * 100
+    # Display each match
+    for rank, rec in enumerate(survey_results, start=1):
 
-            #Html code 
-            result_html = (
-                f"<div class='results-box'>"                          # open parent
-                    f"<div class='result-sub-box'>"                   # open child 1
-                        f"<span class='sub-box-value' style='font-size:24px; color:#BF4064;'>{rec.product_name} <br> "
-                        f"<span style='font-size:14px; color:#D6859C;'>{rec.roast_type}</span><br>"
-                        f"<span style='font-size:14px; color:#D6859C;'>Roaster: {rec.roaster}</span><br>"
-                        f"<span style='font-size:14px; color:#D6859C;'>Notes: {tasting_str}</span></span>"
-                    f"</div>"                                         # close child 1
-                    f"<div class='result-sub-box'>"                   # open child 2  #D6859C
-                        f"<span class='sub-box-label'><u>Match Score</u></span>"
-                        f"<span class='sub-box-value'>{rec.score:.0f}%</span>"
-                    f"</div>"                                         # close child 2
-                    f"<div class='result-sub-box'>"                   # open child 3
-                        f"<span class='sub-box-label'><u>Products</u></span>"
-                        f"<span class='sub-box-value'>{sizes_str}</span>"
-                    f"</div>"                                         # close child 3
-                    f"<div class='result-sub-box'>"                   # open child 4
-                        f"<span class='sub-box-label'><u>Try Before you Buy</u></span>"
-                        f"<span class='sub-box-value'>{cafe_info}</span>"
-                    f"</div>"                                         # close child 4
-                f"</div>"                                             # close parent
+        # Preload a few strings to avoid doing stuff in the html
+        loc = rec.cafe_location
+        if loc and loc.cafe_address and loc.google_maps_url:
+            cafe_info = (
+                f"{loc.cafe_name}<br>"
+                f"<span style='font-size:12px;'>"
+                f"<a href='{loc.google_maps_url}'"
+                f" target='_blank'>"
+                f"{loc.cafe_address}</a>"
+                f"</span>"
             )
-            st.markdown(result_html, unsafe_allow_html=True)
+        elif loc and loc.cafe_name:
+            cafe_info = loc.cafe_name
+        else:
+            cafe_info = "No cafes for this product"
+
+        sizes_str = ', '.join(
+            f"{s.size} (${s.price_numeric:.2f})"
+            for s in rec.available_sizes)
+        tasting_str = ', '.join(
+            dict.fromkeys(
+                str(t) for t in rec.tasting_notes))
+        rec.score = rec.score * 100
+
+        # Html code
+    result_html = (
+            f"<div class='results-box'>" #open parent
+            f"<div class='result-sub-box'>" #open product box
+            f"<span class='sub-box-value'"
+            f" style='font-size:24px; color:#BF4064;'>"
+            f"{rec.product_name}<br>"
+            f"<span style='font-size:14px;"
+            f" color:#D6859C;'>"
+            f"{rec.roast_type}</span><br>"
+            f"<span style='font-size:14px;"
+            f" color:#D6859C;'>"
+            f"Roaster: {rec.roaster}</span><br>"
+            f"<span style='font-size:14px;"
+            f" color:#D6859C;'>"
+            f"Notes: {tasting_str}</span></span>"
+            f"</div>" #close product box
+            f"<div class='result-sub-box'>" #open score box
+            f"<span class='sub-box-label'>"
+            f"<u>Match Score</u></span>"
+            f"<span class='sub-box-value'>"
+            f"{rec.score:.0f}%</span>"
+            f"</div>" #close score box
+            f"<div class='result-sub-box'>" #open size/price box
+            f"<span class='sub-box-label'>"
+            f"<u>Products</u></span>"
+            f"<span class='sub-box-value'>"
+            f"{sizes_str}</span>"
+            f"</div>" #close size/price box
+            f"<div class='result-sub-box'>" #open cafe info box
+            f"<span class='sub-box-label'>"
+            f"<u>Try Before you Buy</u></span>"
+            f"<span class='sub-box-value'>"
+            f"{cafe_info}</span>"
+            f"</div>" #close cafe info box
+            f"</div>" #close parent
+        )
+
+    st.markdown(result_html, unsafe_allow_html=True)

@@ -52,6 +52,14 @@ PRODUCT_INFO_REQUIRED_COLUMNS = [
     "latitude",
 ]
 
+SIZE_OPTION_REQUIRED_COLUMNS = [
+    "product_key",
+    "size",
+    "size_oz",
+    "price_numeric",
+    "price_per_oz",
+]
+
 @dataclass
 class UserPreferences:
     """
@@ -120,6 +128,10 @@ class CafeLocation:
 
 @dataclass
 class ReviewData:
+    """
+    Review information associated with a coffee product.
+    """
+
     tasting_notes: list[str] = field(default_factory=list)
     review_texts: list[str] = field(default_factory=list)
 

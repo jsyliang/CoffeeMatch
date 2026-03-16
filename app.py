@@ -254,6 +254,39 @@ st.markdown("""
             border-radius: 12px;
             }
 
+            /* Tooltip for match score */
+            .score-tooltip {
+                position: relative;
+                display: inline-block;
+                cursor: help;
+            }
+
+            .score-tooltip .score-tooltip-text {
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.2s ease-in-out;
+                position: absolute;
+                z-index: 999;
+                bottom: 125%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 260px;
+                background-color: #6B3920;
+                color: #fff7ef;
+                text-align: left;
+                border-radius: 10px;
+                padding: 10px 12px;
+                font-size: 14px;
+                line-height: 1.4;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                white-space: normal;
+            }
+
+            .score-tooltip:hover .score-tooltip-text {
+                visibility: visible;
+                opacity: 1;
+            }
+
             [data-testid="stMarkdownContainer"] {
                 width: 100%;
             }
@@ -534,6 +567,13 @@ if st.session_state["step"] == "results":
         tasting_str = tasting_str.lower()
         rec.score = rec.score * 100
 
+        if rec.match_reasons:
+            match_reason_tooltip = "<br>".join(
+                f"• {reason}" for reason in rec.match_reasons
+            )
+        else:
+            match_reason_tooltip = "No match reason available."
+
         # Html code
         result_html = (
             f"<div class='results-box'>"
@@ -556,10 +596,14 @@ if st.session_state["step"] == "results":
             f"<div class='result-sub-box'>"
             f"<span class='sub-box-label'>"
             f"<u>Match Score</u></span>"
-            f"<span class='sub-box-value'"
+            f"<span class='sub-box-value score-tooltip'"
             f" style='font-size:28px;"
             f" color:#BF4064;'>"
-            f"{rec.score:.0f}%</span>"
+            f"{rec.score:.0f}%"
+            f"<span class='score-tooltip-text'>"
+            f"{match_reason_tooltip}"
+            f"</span>"
+            f"</span>"
             f"</div>"
             f"<div class='result-sub-box'>"
             f"<span class='sub-box-label'>"

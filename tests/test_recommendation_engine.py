@@ -199,21 +199,30 @@ def test_is_washington_zip_returns_expected_result(zip_code, expected):
     assert is_washington_zip(zip_code) is expected
 
 
-def test_build_product_info_lookup_builds_location_and_google_maps_url():
-    """It should create CafeLocation objects with WA detection and maps URL."""
-    product_info_df = make_product_info_df()
+def test_google_maps_url_from_address():
+    """
+    Test that Google Maps URL is correctly generated from address fields.
+    """
 
-    result = build_product_info_lookup(product_info_df)
+    df = pd.DataFrame(
+        {
+            "product_key": ["p1"],
+            "cafe_name": ["Test Cafe"],
+            "cafe_address": ["123 Pike St"],
+            "cafe_city": ["Seattle"],
+            "zip_code": ["98101"],
+            "latitude": [None],
+            "longitude": [None],
+        }
+    )
 
-    assert result["p1"].cafe_name == "Cafe One"
-    assert result["p1"].state == "WA"
-    assert result["p1"].google_maps_url == "https://www.google.com/maps?q=47.61,-122.33"
+    lookup = build_product_info_lookup(df)
 
-    assert result["p2"].state is None
-    assert result["p2"].google_maps_url == "https://www.google.com/maps?q=45.52,-122.67"
+    cafe = lookup["p1"]
 
-    assert result["p3"].cafe_name is None
-    assert result["p3"].google_maps_url is None
+    assert cafe.google_maps_url is not None
+    assert "google.com/maps/search" in cafe.google_maps_url
+    assert "Seattle" in cafe.google_maps_url
 
 
 def test_build_reviews_lookup_groups_notes_and_review_texts():

@@ -1,0 +1,13 @@
+# googlemaps
+altair==4.2.2
+coverage==7.13.4
+matplotlib==3.10.8
+numpy==2.4.2
+openpyxl==3.1.5
+pandas==3.0.1
+pytest==9.0.2
+pytest-cov==7.0.0
+pylint==4.0.5
+seaborn==0.13.2
+sodapy==2.2.0
+streamlit==1.18.0

@@ -1,6 +1,7 @@
 """This script summarizes information from surveys for our presentation.
 It creates three seaborn charts after creating aggregating long-files via
-pivot type tables. """
+pivot type tables. It was not put through test because the survey was
+a non repeat event."""
 
 import os
 
@@ -9,24 +10,24 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 #remove prior files
-NEW=0
+new=0
 try:
     os.remove("all_factors_selection.png")
 # pylint: disable=W0702
 except:
-    NEW=NEW+1
+    new=new+1
 
 try:
     os.remove("top3_factors_selection.png")
 # pylint: disable=W0702
 except:
-    NEW=NEW+1
+    new=new+1
 
 try:
     os.remove("optional_survey_questions_preference.png")
 # pylint: disable=W0702
 except:
-    NEW=NEW+1
+    new=new+1
 
 def chart_list(dataframe):
     """This function takes the groupby output of drink_frequency_binary
@@ -133,4 +134,4 @@ sns.barplot(chart_df3, y="drink_frequency_binary",
 plt.title("Elected responses (qty) vs proportion drinking coffee daily")
 ax_c.set(xlabel=None, ylabel=None)
 fig_c.savefig('optional_survey_questions_preference.png')
-print(3," charts made ",3-NEW," charts replaced")
+print(3," charts made ",3-new," charts replaced")

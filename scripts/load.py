@@ -1,14 +1,20 @@
-"""The load.py file can be used to load Product_Information.xlsx by
-calling upon the run_edge_tests(PATH) function where PATH is the path to 
-an xlsx file. For use in project the run_edge_tests function returns a
-dataframe of product information. However, for the edge tests we use an
-unassigned function call.
+"""This script doesnt feed the primary pipeline except through
+its use in the address.py script. It has two primary purposes:
 
-The test file test_edge contains 16 edge tests which work in conjuction
-with this file. Sometimes strings are converted to NaNs when uploaded,
-so we raise TypeErrors for strings and NaNs in columns.
+1-for testing use calling upon the run_edge_tests(PATH).
+for the edge tests we use an unassigned function call.
 
-The first function, load_products, was taken from the draft app.py file."""
+The test file test_edge contains 16 edge tests which work in 
+conjunction with this file. Sometimes strings are converted to 
+NaNs when uploaded, so we raise TypeErrors for strings and 
+NaNs in columns.
+
+2- for and occasional loading of the input file 
+Product_Information.xlsx via load_products(product_path) def.
+Such as by address.py to compare and seek API results. 
+
+The first function, load_products, was taken from the original demo
+draft app.py file written by Alvin"""
 
 import pandas as pd
 

@@ -15,6 +15,7 @@ Design principles
 """
 
 from __future__ import annotations
+from urllib.parse import quote_plus
 
 import math
 import pandas as pd
@@ -387,7 +388,17 @@ def build_product_info_lookup(product_info_df: pd.DataFrame) -> dict[str, CafeLo
         state = "WA" if is_washington_zip(zip_code) else None
 
         google_maps_url = None
-        if latitude is not None and longitude is not None:
+
+        address_parts = [cafe_name, cafe_address, cafe_city, state, zip_code]
+        address_parts = [part.strip() for part in address_parts if part and str(part).strip()]
+
+        if address_parts:
+            full_address = ", ".join(address_parts)
+            google_maps_url = (
+                "https://www.google.com/maps/search/?api=1&query="
+                f"{quote_plus(full_address)}"
+            )
+        elif latitude is not None and longitude is not None:
             google_maps_url = f"https://www.google.com/maps?q={latitude},{longitude}"
 
         product_info_lookup[product_key] = CafeLocation(

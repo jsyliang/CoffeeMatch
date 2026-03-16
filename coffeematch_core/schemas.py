@@ -6,7 +6,7 @@ review data, user preference inputs, and recommendation outputs. They
 serve as a shared contract between backend modules and the Streamlit UI.
 """
 
-# pylint: disable=too-many-instance-attributes
+# pylint: disable=too-many-instance-attributes, duplicate-code
 
 from __future__ import annotations
 from dataclasses import dataclass, field

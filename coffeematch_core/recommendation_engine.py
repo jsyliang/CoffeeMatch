@@ -22,11 +22,24 @@ import pandas as pd
 from .schemas import (
     Recommendation, UserPreferences,
     SizeOption, CafeLocation, ReviewData,
-    PRODUCT_REQUIRED_COLUMNS, SIZE_OPTION_REQUIRED_COLUMNS
+    SIZE_OPTION_REQUIRED_COLUMNS
 )
 
 
-RECOMMENDATION_REQUIRED_COLUMNS = tuple(PRODUCT_REQUIRED_COLUMNS) + (
+RECOMMENDATION_REQUIRED_COLUMNS = (
+    "product_key",
+    "roaster",
+    "product_name",
+    "origin",
+    "roast_type",
+    "decaf",
+    "blend",
+    "single_origin",
+    "available_ground",
+    "url",
+    "has_reviews",
+    "total_reviews",
+    "heart_percentage",
     "roast_light",
     "roast_medium",
     "roast_dark",

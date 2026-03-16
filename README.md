@@ -60,7 +60,7 @@ The project will produce:
 
 ### Supporting Data Sources
 
-1. Class survey of about 50 people.
+1. Survey of about 50 people, largely sourced from the class.
 /assets/survey
 https://docs.google.com/forms/d/1an5dfDEH4OAza_Z0BzkKt5Qr7qmnjg3V2XM2tcnHINw/closedform
 

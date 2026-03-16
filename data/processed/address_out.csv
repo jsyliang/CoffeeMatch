@@ -1,15 +1,15 @@
 roaster,no_of_roasters,search_name,cafe_name,cafe_address,cafe_city,zip_code,longitude,latitude
 Anchorhead Coffee,14,'ANCHORHEAD COFFEE',ANCHORHEAD COFFEE,1600 7TH AVE STE #105,SEATTLE,98101,-122.3346300000,47.6133330000
-Blossom Coffee Roasters,41,'Blossom Coffee Roasters',No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King
-Caffe Vita,24,'CAFFE VITA',CAFFE VITA,4301 FREMONT AVE N ,SEATTLE,98103,-122.3503072524,47.6591054340
-Camber Coffee,26,'Camber Coffee',No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King
-Kuma Coffee Roasters,6,'Kuma Coffee',No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King
+Blossom Coffee Roasters,41,'Blossom Coffee Roasters',ANU RANA'S HEALTHY KITCHEN,17610 99th Ave SW #4682,VASHON,98070,-122.46110370769264,47.44971878988124
+Caffe Vita,24,'CAFFE VITA',CAFFE VITA,4301 FREMONT AVE N,SEATTLE,98103,-122.3503072524,47.6591054340
+Camber Coffee,26,'Camber Coffee',COYLE'S BAKESHOP,8300 Greenwood Ave N,SEATTLE,98103,-122.3549858477629,47.689317496054635
+Kuma Coffee Roasters,6,'Kuma Coffee',ARTEMIS COFFEE,5507 17th Ave NW,SEATTLE,98107,-122.37946162456461,47.67048316557547
 Ladro Roasting,8,'CAFFE LADRO',CAFFE LADRO,333 108TH AVE NE STE 175,BELLEVUE,98004,-122.1966550267,47.6134913051
 Olympia Coffee Roasting Co,27,'OLYMPIA COFFEE',OLYMPIA COFFEE,4824 RAINIER AVE S,SEATTLE,98118,-122.2852491300,47.5587829100
 Olympia Coffee Roasting Co.,16,'OLYMPIA COFFEE',OLYMPIA COFFEE,4824 RAINIER AVE S,SEATTLE,98118,-122.2852491300,47.5587829100
 Seven Coffee Roasters,10,'SEVEN COFFEE ROASTERS MARKET & CAFE',SEVEN COFFEE ROASTERS MARKET & CAFE,2007 NE RAVENNA BL,Seattle,98105,-122.3060754504,47.6690894585
 Stamp Act Coffee,27,'LITTLE JAYE',LITTLE JAYE,309 S CLOVERDALE ST #A4,SEATTLE,98108,-122.3325207500,47.5246903700
-Tony's Coffee,13,'Tony's Coffee',No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King
-Tonys Coffee,23,'Tonys Coffee',No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King,No_cafe_identified_in_King
-Victrola,3,'VICTROLA COFFEE',VICTROLA COFFEE,3215 BEACON AVE S ,SEATTLE,98144,-122.3093023920,47.5745959838
-Victrola Coffee Roasters,10,'VICTROLA COFFEE',VICTROLA COFFEE,3215 BEACON AVE S ,SEATTLE,98144,-122.3093023920,47.5745959838
+Tony's Coffee,13,'Tony's Coffee',AROSA CAFE,3121 E Madison St,SEATTLE,98112,-122.29184253173186,47.62638148056635
+Tonys Coffee,23,'Tonys Coffee',AROSA CAFE,3121 E Madison St,SEATTLE,98112,-122.29184253173186,47.62638148056635
+Victrola,3,'VICTROLA COFFEE',VICTROLA COFFEE,3215 BEACON AVE S,SEATTLE,98144,-122.3093023920,47.5745959838
+Victrola Coffee Roasters,10,'VICTROLA COFFEE',VICTROLA COFFEE,3215 BEACON AVE S,SEATTLE,98144,-122.3093023920,47.5745959838

@@ -6,7 +6,7 @@ review data, user preference inputs, and recommendation outputs. They
 serve as a shared contract between backend modules and the Streamlit UI.
 """
 
-# pylint: disable=too-many-instance-attributes
+# pylint: disable=too-many-instance-attributes, duplicate-code
 
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -50,6 +50,14 @@ PRODUCT_INFO_REQUIRED_COLUMNS = [
     "zip_code",
     "longitude",
     "latitude",
+]
+
+SIZE_OPTION_REQUIRED_COLUMNS = [
+    "product_key",
+    "size",
+    "size_oz",
+    "price_numeric",
+    "price_per_oz",
 ]
 
 @dataclass
@@ -120,6 +128,10 @@ class CafeLocation:
 
 @dataclass
 class ReviewData:
+    """
+    Review information associated with a coffee product.
+    """
+
     tasting_notes: list[str] = field(default_factory=list)
     review_texts: list[str] = field(default_factory=list)
 

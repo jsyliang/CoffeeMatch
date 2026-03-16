@@ -1,4 +1,7 @@
 # Coffee Match
+---
+[![CI](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml/badge.svg)](https://github.com/jsyliang/CoffeeMatch/actions/workflows/continuous_int.yml)
+[![codecov](https://codecov.io/gh/jsyliang/CoffeeMatch/branch/main/graph/badge.svg)](https://codecov.io/gh/jsyliang/CoffeeMatch)
 
 A coffee profile tool that connects people’s preferences to local Washington roasters.
 

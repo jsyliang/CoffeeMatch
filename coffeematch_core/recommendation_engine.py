@@ -20,8 +20,9 @@ import math
 import pandas as pd
 
 from .schemas import (
-    Recommendation, UserPreferences, 
-    SizeOption, CafeLocation, ReviewData
+    Recommendation, UserPreferences,
+    SizeOption, CafeLocation, ReviewData,
+    SIZE_OPTION_REQUIRED_COLUMNS
 )
 
 
@@ -50,14 +51,6 @@ RECOMMENDATION_REQUIRED_COLUMNS = (
     "reference_size_tier",
     "value_signal",
     "review_strength",
-)
-
-SIZE_OPTION_REQUIRED_COLUMNS = (
-    "product_key",
-    "size",
-    "size_oz",
-    "price_numeric",
-    "price_per_oz",
 )
 
 
@@ -227,7 +220,7 @@ def min_max_scale(values: pd.Series) -> pd.Series:
     pd.Series
         Scaled values.
     """
-    clean_values = values.fillna(0).astype(float)
+    clean_values = values.astype(float).fillna(0)
     min_value = clean_values.min()
     max_value = clean_values.max()
 
@@ -360,7 +353,7 @@ def is_washington_zip(zip_code: str | None) -> bool:
         return False
 
     return 98000 <= zip_int <= 99499
-    
+
 
 def build_product_info_lookup(product_info_df: pd.DataFrame) -> dict[str, CafeLocation]:
     """
@@ -617,6 +610,7 @@ def build_recommendation_objects(
     return recommendations
 
 
+# pylint: disable-next=too-many-arguments,too-many-positional-arguments
 def recommend_products(
     feature_table: pd.DataFrame,
     products_df: pd.DataFrame,

@@ -15,8 +15,14 @@ dependencies:
   - seaborn
   - sodapy=2.2.0
 
+  # Testing
+  - pytest
+  - pytest-cov
+
   # Streamlit stack
   - streamlit>=1.18
   - altair>=4.2,<5
+  - pip:
+    - coverage==7.13
 
 

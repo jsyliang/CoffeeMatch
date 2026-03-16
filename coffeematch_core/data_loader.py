@@ -130,8 +130,7 @@ def load_reviews(file_path: Path | str = REVIEWS_FILE) -> pd.DataFrame:
 
 
 def load_product_info(file_path: Path | str = PRODUCT_INFO_FILE) -> pd.DataFrame:
-    """Load and validate product cafe/location information."""
-    
+    """Load and validate product cafe/location information."""    
     path = _check_file_exists(file_path)
     product_info = pd.read_csv(path, na_values=["No_cafe_identified_in_King"])
 

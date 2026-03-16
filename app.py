@@ -315,7 +315,7 @@ st.markdown("""
 st.markdown("""
 <style>
 .stSlider [data-baseweb=slider]{
-width: 70%;
+width: 75%;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -385,7 +385,7 @@ if st.session_state["step"] == "survey":
                         "</div>",
                         unsafe_allow_html=True)
             a2 = st.radio(
-                "", ["%ingle origin only", "No preference"],
+                "", ["Single origin only", "No preference"],
                 label_visibility="collapsed")
 
         with col_s2:
